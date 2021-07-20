@@ -4,8 +4,8 @@ Renderer::Renderer(int width = 800, int height = 600) : _width(width), _height(h
 
 Color getImpactColorLambert(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)
 {
-	const Material mat = obj->getMaterial(impact);
-	const Vector n = obj->getNormal(impact, ray.origin).vector;
+	const Material mat = obj.getMaterial(impact);
+	const Vector n = obj.getNormal(impact, ray.origin).vector;
 	Color sum = mat.ka * scene.getAmbient();
 
 	for (Light* l : scene.getLights())
