@@ -59,6 +59,17 @@ Color operator*(const Color& lhs, const Color& rhs) {
 	return c;
 }
 
+Color operator+(const Color& lhs, const Color& rhs)
+{
+	Color c;
+
+	c[0] = clamp(lhs[0] + rhs[0], 0.0f, 1.0f);
+	c[1] = clamp(lhs[1] + rhs[1], 0.0f, 1.0f);
+	c[2] = clamp(lhs[2] + rhs[2], 0.0f, 1.0f);
+
+	return c;
+}
+
 Color operator*(const Color& lhs, const float& rhs) {
 	Color c;
 
