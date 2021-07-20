@@ -1,0 +1,6 @@
+[submodule "Raytracing\\vendor\\glfw"]
+	path = Raytracing\\vendor\\glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "Raytracing/vendor/glfw"]
+	path = Raytracing/vendor/glfw
+	url = https://github.com/glfw/glfw.git
