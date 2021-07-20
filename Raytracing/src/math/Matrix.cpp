@@ -18,7 +18,7 @@ void Matrix::copy(const Matrix& m) {
 }
 
 Matrix Matrix::inverse() const {
-	Matrix a = *this;
+	const Matrix& a = *this;
 	Matrix m;
 
 	m(0, 0) = a(1, 1) * a(2, 2) * a(3, 3)
@@ -133,7 +133,7 @@ Matrix Matrix::inverse() const {
 		- a(0, 1) * a(1, 0) * a(2, 2)
 		- a(0, 0) * a(1, 2) * a(2, 1);
 
-	float det = a(0, 0) * m(0, 0)
+	const float det = a(0, 0) * m(0, 0)
 		+ a(1, 0) * m(0, 1)
 		+ a(2, 0) * m(0, 2)
 		+ a(3, 0) * m(0, 3);
@@ -163,8 +163,8 @@ Matrix operator*(const Matrix& lhs, const Matrix& rhs) {
 	return m;
 }
 
-Vector operator*(const Matrix& lhs, const Point& rhs) {
-	Vector v;
+Point operator*(const Matrix& lhs, const Point& rhs) {
+	Point v;
 
 	for (int i = 0; i < 3; ++i)
 		v[i] = lhs(i, 0) * rhs[0] + lhs(i, 1) * rhs[1] + lhs(i, 2) * rhs[2] + lhs(i, 3);
@@ -172,8 +172,8 @@ Vector operator*(const Matrix& lhs, const Point& rhs) {
 	return v;
 }
 
-Vector operator*(const Point& lhs, const Matrix& rhs) {
-	Vector v;
+Point operator*(const Point& lhs, const Matrix& rhs) {
+	Point v;
 
 	for (int i = 0; i < 3; ++i)
 		v[i] = lhs[0] * rhs(0, i) + lhs[1] * rhs(1, i) + lhs[2] * rhs(2, i) + rhs(3, i);

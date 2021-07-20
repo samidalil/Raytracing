@@ -11,3 +11,7 @@ Ray& Ray::operator=(const Ray& r) {
 	this->vector = r.vector;
 	return (*this);
 }
+
+Ray Ray::normalized() const {
+	return Ray(this->origin, this->vector.normalized());
+}

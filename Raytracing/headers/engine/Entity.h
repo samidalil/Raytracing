@@ -1,18 +1,15 @@
 #ifndef RT_ENTITY_H
 #define RT_ENTITY_H
 
+#include <iostream>
+#include "Ray.h"
 #include "../math/Matrix.h"
 #include "../math/Vector.h"
-#include "Ray.h"
-#include <iostream>
 
 class Entity {
 private:
 	Matrix _trans;
 	Matrix _transInv;
-public:
-	Entity() = default;
-	Entity(Vector position, Vector rotation, float scale);
 
 	void rotate(Vector angles);
 	void rotateX(float deg);
@@ -21,6 +18,11 @@ public:
 	void scale(float factor);
 	void translate(float x, float y, float z);
 	void translate(Vector translation);
+public:
+	Entity() = default;
+	Entity(Vector position, Vector rotation, float scale);
+
+	void apply(Vector position, Vector rotation, float scale);
 
 	Point localToGlobal(const Point& p) const;
 	Vector localToGlobal(const Vector& v) const;

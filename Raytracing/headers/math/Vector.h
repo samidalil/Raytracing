@@ -14,6 +14,8 @@ public:
 
 	float norm() const;
 	Vector normalized() const;
+
+	static Vector reflect(const Vector& v, const Vector& n);
 };
 
 #endif

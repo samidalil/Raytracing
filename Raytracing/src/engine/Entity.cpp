@@ -1,15 +1,15 @@
 #include "../../headers/engine/Entity.h"
 
 Entity::Entity(Vector position, Vector rotation, float scale) {
-	this->translate(position);
 	this->rotate(rotation);
+	this->translate(position);
 	this->scale(scale);
 }
 
 void Entity::rotate(Vector angles) {
-	this->rotateX(angles[0]);
 	this->rotateY(angles[1]);
 	this->rotateZ(angles[2]);
+	this->rotateX(angles[0]);
 }
 
 void Entity::rotateX(float deg) {
@@ -27,8 +27,8 @@ void Entity::rotateX(float deg) {
 
 void Entity::rotateY(float deg) {
 	Matrix m;
-	float c = cos(deg);
-	float s = sin(deg);
+	const float c = cos(deg);
+	const float s = sin(deg);
 	m(0, 0) = c;
 	m(0, 2) = s;
 	m(2, 0) = -s;
@@ -40,8 +40,8 @@ void Entity::rotateY(float deg) {
 
 void Entity::rotateZ(float deg) {
 	Matrix m;
-	float c = cos(deg);
-	float s = sin(deg);
+	const float c = cos(deg);
+	const float s = sin(deg);
 	m(0, 0) = c;
 	m(0, 1) = -s;
 	m(1, 0) = s;
@@ -75,11 +75,19 @@ void Entity::translate(Vector translation) {
 	this->translate(translation[0], translation[1], translation[2]);
 }
 
+void Entity::apply(Vector position, Vector rotation, float scale) {
+	this->_trans = Matrix();
+
+	this->rotate(rotation);
+	this->translate(position);
+	this->scale(scale);
+}
+
 Point Entity::localToGlobal(const Point& p) const {
-	return this->_transInv * p;
+	return this->_trans * p;
 }
 Vector Entity::localToGlobal(const Vector& v) const {
-	return this->_transInv * v;
+	return this->_trans * v;
 }
 
 Ray Entity::localToGlobal(const Ray& r) const {
@@ -87,11 +95,11 @@ Ray Entity::localToGlobal(const Ray& r) const {
 }
 
 Point Entity::globalToLocal(const Point& p) const {
-	return this->_trans * p;
+	return this->_transInv * p;
 }
 
 Vector Entity::globalToLocal(const Vector& v) const {
-	return this->_trans * v;
+	return this->_transInv * v;
 }
 
 Ray Entity::globalToLocal(const Ray& r) const {

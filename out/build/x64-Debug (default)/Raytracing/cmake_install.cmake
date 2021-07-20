@@ -1,8 +1,8 @@
-# Install script for directory: D:/Projects/C++/Raytracing/Raytracing
+# Install script for directory: D:/Raytracing/Raytracing
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "D:/Projects/C++/Raytracing/out/install/x64-Debug (default)")
+  set(CMAKE_INSTALL_PREFIX "D:/Raytracing/out/install/x64-Debug (default)")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

@@ -25,8 +25,13 @@ float Vector::norm() const {
 }
 
 Vector Vector::normalized() const {
-	float norm = this->norm();
+	const float norm = this->norm();
 
-	if (norm == 0) return Vector(*this);
+	if (norm == 0) return (*this);
 	return (*this) / norm;
+}
+
+Vector Vector::reflect(const Vector& v, const Vector& n)
+{
+	return v - n * (2 * Vector::dot(v, n));
 }

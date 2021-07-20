@@ -2,7 +2,7 @@
 #define RT_RAY_H
 
 #include "../math/Point.h"
-#include "../math/Vector.h";
+#include "../math/Vector.h"
 
 class Ray {
 public:
@@ -13,6 +13,8 @@ public:
 	Ray(const Point& p, const Vector& v);
 	Ray(const Ray& r);
 	Ray& operator=(const Ray& r);
+
+	Ray normalized() const;
 };
 
 #endif

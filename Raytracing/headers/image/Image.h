@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <string>
+#include "../texture/Color.h"
 
 class Image {
 private:
@@ -38,6 +39,8 @@ public:
 	inline int getHeight() const { return _height; }
 	inline int getChannels() const { return _channels; }
 	inline size_t getSize() const { return _size; }
+
+	Image& setColor(int x, int y, const Color& c);
 
 	uint8_t operator()(int x, int y, int c) const;
 	uint8_t& operator()(int x, int y, int c);

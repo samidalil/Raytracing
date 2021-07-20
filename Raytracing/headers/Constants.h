@@ -4,6 +4,6 @@
 #include <string>
 
 // A cause de problèmes de chemins relatifs, nous utilisons un chemin absolu
-const std::string projectDir = "D:\\Projects\\C++\\Raytracing\\";
+const std::string projectDir = "D:\\Raytracing\\";
 
 #endif

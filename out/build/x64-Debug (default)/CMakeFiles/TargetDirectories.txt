@@ -1,5 +1,5 @@
-D:/Projects/C++/Raytracing/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
-D:/Projects/C++/Raytracing/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir
-D:/Projects/C++/Raytracing/out/build/x64-Debug (default)/Raytracing/CMakeFiles/Raytracing.dir
-D:/Projects/C++/Raytracing/out/build/x64-Debug (default)/Raytracing/CMakeFiles/edit_cache.dir
-D:/Projects/C++/Raytracing/out/build/x64-Debug (default)/Raytracing/CMakeFiles/rebuild_cache.dir
+D:/Raytracing/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
+D:/Raytracing/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir
+D:/Raytracing/out/build/x64-Debug (default)/Raytracing/CMakeFiles/Raytracing.dir
+D:/Raytracing/out/build/x64-Debug (default)/Raytracing/CMakeFiles/edit_cache.dir
+D:/Raytracing/out/build/x64-Debug (default)/Raytracing/CMakeFiles/rebuild_cache.dir

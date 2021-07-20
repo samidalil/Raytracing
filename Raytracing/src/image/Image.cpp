@@ -72,6 +72,17 @@ void Image::destroy()
 	else delete[] _data;
 }
 
+Image& Image::setColor(int x, int y, const Color& c)
+{
+	int index = (y * this->_width + x) * this->_channels;
+
+	this->_data[index] = c[0] * 255.f;
+	this->_data[index + 1] = c[1] * 255.f;
+	this->_data[index + 2] = c[2] * 255.f;
+
+	return (*this);
+}
+
 uint8_t Image::operator()(int x, int y, int c) const
 {
 	return _data[(y * _width + x) * _channels + c];

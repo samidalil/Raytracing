@@ -1,9 +1,9 @@
 #ifndef RT_MATRIX_H
 #define RT_MATRIX_H
 
+#include <iostream>
 #include "Point.h"
 #include "Vector.h"
-#include <iostream>
 
 class Matrix {
 private:
@@ -23,8 +23,8 @@ public:
 	float operator()(int x, int y) const;
 
 	friend Matrix operator*(const Matrix& lhs, const Matrix& rhs);
-	friend Vector operator*(const Matrix& lhs, const Point& rhs);
-	friend Vector operator*(const Point& lhs, const Matrix& rhs);
+	friend Point operator*(const Matrix& lhs, const Point& rhs);
+	friend Point operator*(const Point& lhs, const Matrix& rhs);
 	friend Vector operator*(const Matrix& lhs, const Vector& rhs);
 	friend Vector operator*(const Vector& lhs, const Matrix& rhs);
 
