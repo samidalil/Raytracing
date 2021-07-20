@@ -1,8 +1,8 @@
 #include "../../headers/engine/Renderer.h"
 
-Renderer::Renderer(int width = 800, int height = 600) : _width(width), _height(height) {}
+Renderer::Renderer(int width = 800, int height = 600) : _width(width), _height(height), _illuminationModel(Illumination::PHONG) {}
 
-Color getImpactColor(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)
+Color getImpactColorLambert(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)
 {
 	const Material mat = obj.getMaterial(impact);
 	const Vector n = obj.getNormal(impact, ray.origin).vector;
@@ -13,13 +13,53 @@ Color getImpactColor(const Ray& ray, const Object& obj, const Point& impact, con
 		const Vector r = l->getVectorToLight(impact);
 		const float nToRAngle = Vector::dot(n, r);
 		const float rToNAngle = Vector::dot(ray.vector, Vector::reflect(r, n));
-		
+
 		if (nToRAngle >= 0) sum += mat.kd * l->id * nToRAngle;
 		if (rToNAngle >= 0) sum += mat.ks * l->is * pow(rToNAngle, mat.shininess);
 	}
 
 	return sum;
 }
+
+Color getImpactColorPhong(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)
+{
+	Ray n = obj.getNormal(impact, ray.origin);
+	Color ka = obj.getMaterial(impact).ka;
+	Color kd = obj.getMaterial(impact).kd;
+	Color ks = obj.getMaterial(impact).ks;
+	Color ia = scene.getAmbient();
+	Color lambert = obj.getMaterial(impact).ka;
+	float shiny = obj.getMaterial(impact).shininess;
+	Color ambiant = ka * ia;
+	Color diffuse(0, 0, 0);
+	Color specular(0, 0, 0);
+
+	for (Light* l : scene.getLights())
+	{
+		Vector lightDir = l->getVectorToLight(impact);
+		float cosTheta = Vector::dot(lightDir, n.vector);
+		if (cosTheta < 0) cosTheta = 0;
+		diffuse += (kd * l->id) * cosTheta;
+
+		Vector sym = lightDir - 2 * (Vector::dot(lightDir, n.vector)) * n.vector;
+		float cosBeta = (Vector::dot(sym, ray.vector));
+		float specVal = pow(Vector::dot(ray.vector, sym), shiny);
+
+		if (specVal < 0) specVal = 0;
+		specular += (ks * l->is) * cosBeta * specVal;
+	}
+
+
+
+
+	return ambiant + diffuse + specular;
+}
+Color getImpactColorUnlit(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)
+{
+	const Material mat = obj.getMaterial(impact);
+	return mat.ka * scene.getAmbient();
+}
+
 
 Image Renderer::render(Scene scene, Camera camera) const {
 	Image image(this->_width, this->_height, 3);
@@ -37,10 +77,29 @@ Image Renderer::render(Scene scene, Camera camera) const {
 			Point p;
 			Object* o = scene.closestIntersected(r, p);
 
-			if (o) image.setColor(x, inversedY, getImpactColor(r, *o, p, scene));
+			if (o) {
+				switch (_illuminationModel)
+				{
+				case Illumination::UNLIT:
+					image.setColor(x, inversedY, getImpactColorUnlit(r, *o, p, scene)); break;
+				case Illumination::LAMBERT:
+					image.setColor(x, inversedY, getImpactColorLambert(r, *o, p, scene)); break;
+
+				case Illumination::PHONG:
+					image.setColor(x, inversedY, getImpactColorPhong(r, *o, p, scene)); break;
+
+				default:
+					break;
+				}
+			}
 			else image.setColor(x, inversedY, background);
 		}
 	}
 
 	return image;
+}
+
+void Renderer::setIlluminationModel(Illumination illu)
+{
+	_illuminationModel = illu;
 }

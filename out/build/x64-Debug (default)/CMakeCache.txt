@@ -292,10 +292,10 @@ Glad_BINARY_DIR:STATIC=D:/Dev/GPUdev/ESGI/Raytracing/out/build/x64-Debug (defaul
 Glad_SOURCE_DIR:STATIC=D:/Dev/GPUdev/ESGI/Raytracing/Raytracing/vendor/glad
 
 //Value Computed by CMake
-Raytracing_BINARY_DIR:STATIC=D:/Dev/GPUdev/ESGI/Raytracing/out/build/x64-Debug (default)/Raytracing
+Raytracing_BINARY_DIR:STATIC=D:/Dev/GPUdev/ESGI/Raytracing/out/build/x64-Debug (default)
 
 //Value Computed by CMake
-Raytracing_SOURCE_DIR:STATIC=D:/Dev/GPUdev/ESGI/Raytracing/Raytracing
+Raytracing_SOURCE_DIR:STATIC=D:/Dev/GPUdev/ESGI/Raytracing
 
 //Use MSVC runtime library DLL
 USE_MSVC_RUNTIME_LIBRARY_DLL:BOOL=ON

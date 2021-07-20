@@ -2,7 +2,7 @@
 # project specific logic here.
 #
 cmake_minimum_required (VERSION 3.8)
-project(Raytracing)
+
 
 # Add source to this project's executable
 add_executable (Raytracing
@@ -17,15 +17,15 @@ add_executable (Raytracing
 	"src/ui/window.cpp"
 	)
 
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw")
+
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui")
-set(DEPENDENCIES_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/vendor/stb/")
-target_include_directories(Raytracing PUBLIC  ${DEPENDENCIES_HEADERS} )
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw")
+
+
 target_link_libraries(Raytracing PUBLIC
 		glfw
 		glad
         imgui
  )
-
 # TODO: Add tests and install targets if needed.
