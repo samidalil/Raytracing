@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Dev\GPUdev\ESGI\RayZ\CMakeFiles\2c143aa4c9bdbbd60fd7151a7b03e685\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{4362BB8F-3D1A-3D1F-97C5-77691C0F7EA5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
