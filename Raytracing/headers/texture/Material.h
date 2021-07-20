@@ -14,8 +14,8 @@ public:
 	float shininess;
 	Image texture;
 
-
-	Material(Color ambient, Color diffuse, Color specular, float shininess);
+	Material();
+	Material(Color ambient, Color diffuse, Color specular, float shininess, Image texture);
 	Material(const Material& m);
 	Material& operator=(const Material& m);
 };

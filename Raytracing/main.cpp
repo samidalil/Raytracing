@@ -44,8 +44,8 @@ void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char
 {
 	Scene scene(
 		{
-			new Sphere({ 0, 0, -5 }, { 0, 0, 0 }, 1),
-			new Sphere({ 1.2, 1, -17 }, { 0, 0, 0 }, 1.4)
+			new Sphere({ 0, 0, -5 }, { 0, 0, 0 }, 1, Material({ 1, 1, 1 }, { 0.2, 0.2, 0.2 }, { 0.7, 0.7, 0.7 }, 0.7, Image("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\sample.jpg"))),
+			new Sphere({ 1.2, 1, -17 }, { 0, 0, 0 }, 1.4, Material({ 1, 1, 1 }, { 0.2, 0.2, 0.2 }, { 0.7, 0.7, 0.7 }, 0.7, Image("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\sample.jpg")))
 		},
 		{
 			new Light({ 50, 5, 0 }, {}, { 1, 1, 1 }, { 0.6, 0.6, 0.6 })

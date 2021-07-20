@@ -83,9 +83,13 @@ Image& Image::setColor(int x, int y, const Color& c)
 	return (*this);
 }
 
-Color Image::getColor(int u, int v) const
+Color Image::getColor(float u, float v) const
 {
-	int index = (v * this->_width + u) * this->_channels;
+	int w = int( u * this->_width ) ;
+	int h = int( v * this->_height ) ;
+
+	int index = h + (w * this->_width) * this->_channels;
+
 	return Color(this->_data[index], this->_data[index + 1], this->_data[index + 2]);
 }
 

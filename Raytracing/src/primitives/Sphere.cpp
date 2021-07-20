@@ -1,7 +1,7 @@
 #define PI 3.151492
 #include "../../headers/primitives/Sphere.h"
 
-Sphere::Sphere(Vector position, Vector rotation, float scale) : Object(position, rotation, scale) {}
+Sphere::Sphere(Vector position, Vector rotation, float scale, Material material) : Object(position, rotation, scale, material) {}
 
 bool Sphere::intersect(const Ray& ray, Point& impact) const {
 	const Ray localRay = this->globalToLocal(ray);
@@ -58,7 +58,12 @@ Ray Sphere::getNormal(const Point& impact, const Point& observator) const
 Point Sphere::getTextureCoordinates(const Point& p) const
 {
 	Point coord = globalToLocal(p);
+	Point lp = globalToLocal(p);
+	float rho = std::sqrt(Point::dot(lp,lp));
+	float theta = std::atan2(lp[1], lp[0]);
+	float sigma = std::acos(lp[2] / rho);
+	float x = -theta / (2 * PI) + 0.5;
+	float y = sigma / PI;
+	return Point(x, y, 0);
 
-	return Point((-std::atan2(coord[1], coord[0]) / (2 * PI)) + 0.5,
-		0.5 - (std::asin(coord[2]) / PI), 0);
 }

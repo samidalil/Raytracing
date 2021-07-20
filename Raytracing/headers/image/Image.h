@@ -41,7 +41,7 @@ public:
 	inline size_t getSize() const { return _size; }
 
 	Image& setColor(int x, int y, const Color& c);
-	Color getColor(int u, int v) const;
+	Color getColor(float u, float v) const;
 
 	uint8_t operator()(int x, int y, int c) const;
 	uint8_t& operator()(int x, int y, int c);

@@ -1,10 +1,15 @@
 #include "../../headers/texture/Material.h"
 
-Material::Material(Color ambient, Color diffuse, Color specular, float shiny) :
+Material::Material() : shininess(0.5f)
+{
+}
+
+Material::Material(Color ambient, Color diffuse, Color specular, float shiny, Image tex) :
 	ka(ambient),
 	kd(diffuse),
 	ks(specular),
-	shininess(shiny)
+	shininess(shiny),
+	texture(tex)
 {}
 
 Material::Material(const Material& m) {
