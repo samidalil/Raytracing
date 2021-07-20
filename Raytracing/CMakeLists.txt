@@ -12,9 +12,7 @@ add_executable (Raytracing
 	"src/texture/Color.cpp" "src/texture/Material.cpp"
 	"src/engine/Ray.cpp" "src/engine/Entity.cpp" "src/engine/Object.cpp" "src/engine/Light.cpp" "src/engine/Camera.cpp" "src/engine/Scene.cpp" "src/engine/Renderer.cpp"
 	"src/primitives/Sphere.cpp"
-	"src/ui/ImGUI_context.cpp"
-	"src/ui/OpenGL_context.cpp"
-	"src/ui/window.cpp"
+	"src/ui/ImGUI_context.cpp" "src/ui/OpenGL_context.cpp" "src/ui/window.cpp"
 	)
 
 

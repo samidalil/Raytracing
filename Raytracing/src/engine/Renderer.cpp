@@ -2,7 +2,7 @@
 
 Renderer::Renderer(int width = 800, int height = 600) : _width(width), _height(height), _illuminationModel(Illumination::PHONG) {}
 
-Color getImpactColor(const Ray& ray, const Object* obj, const Point& impact, const Scene& scene)
+Color getImpactColorLambert(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)
 {
 	const Material mat = obj->getMaterial(impact);
 	const Vector n = obj->getNormal(impact, ray.origin).vector;
@@ -77,7 +77,7 @@ Image Renderer::render(Scene scene, Camera camera) const {
 			Point impact;
 			Object* closest = scene.closestIntersected(cameraRay, impact);
 
-			if (closest) image.setColor(x, inversedY, getImpactColor(cameraRay, closest, impact, scene));
+			if (closest) image.setColor(x, inversedY, getImpactColorLambert(cameraRay, *closest, impact, scene));
 			else image.setColor(x, inversedY, background);
 		}
 	}
