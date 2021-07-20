@@ -19,6 +19,7 @@ public:
 	virtual bool intersect(const Ray& ray, Point& impact) const = 0;
 	virtual Material getMaterial(const Point& impact) const;
 	virtual Ray getNormal(const Point& impact, const Point& observator) const = 0;
+	virtual Point getTextureCoordinates(const Point& p)  const = 0;
 };
 
 #endif

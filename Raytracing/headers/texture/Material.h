@@ -2,6 +2,7 @@
 #define RT_MATERIAL_H
 
 #include "Color.h"
+#include "../image/Image.h"
 
 class Material {
 private:
@@ -11,6 +12,8 @@ public:
 	Color kd;
 	Color ks;
 	float shininess;
+	Image texture;
+
 
 	Material(Color ambient, Color diffuse, Color specular, float shininess);
 	Material(const Material& m);

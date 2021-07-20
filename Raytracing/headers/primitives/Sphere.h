@@ -13,6 +13,7 @@ public:
 
 	bool intersect(const Ray& ray, Point& impact) const override;
 	Ray getNormal(const Point& impact, const Point& observator) const override;
+	virtual Point getTextureCoordinates(const Point& p)  const override;
 };
 
 #endif

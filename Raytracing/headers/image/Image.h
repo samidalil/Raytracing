@@ -1,4 +1,4 @@
-#ifndef RT_IMAGE_H
+ï»¿#ifndef RT_IMAGE_H
 #define RT_IMAGE_H
 
 #include <stdint.h>
@@ -7,8 +7,8 @@
 
 class Image {
 private:
-	// Cette variable indique qu'il faut libérer
-	// la mémoire de l'image du côté de la lib stbi
+	// Cette variable indique qu'il faut libÃ©er
+	// la mÃ©moire de l'image du cîŒ¤ãƒ»de la lib stbi
 	bool _loaded = false;
 
 	// Longueur, hauteur et nombre de canaux de l'image
@@ -16,13 +16,13 @@ private:
 	int _height;
 	int _channels;
 
-	// Taille totale de l'image, utilisée pour vérifier que les index
-	// d'accès au tableau de données ne dépassent pas de sa taille
+	// Taille totale de l'image, utilisÃ© pour vÃ©ifier que les index
+	// d'accÃ© au tableau de donnÃ©s ne dÃ©assent pas de sa taille
 	size_t _size;
 
-	// Tableau des données de l'image
-	// Pour accéder au canal n du pixel de coordonnées (x, y),
-	// on accède à la case (y * _width + x) * _channels + c
+	// Tableau des donnÃ©s de l'image
+	// Pour accÃ©er au canal n du pixel de coordonnÃ©s (x, y),
+	// on accÃ©e ãƒ»la case (y * _width + x) * _channels + c
 	uint8_t* _data = NULL;
 
 	void copy(const Image& original);
@@ -41,6 +41,7 @@ public:
 	inline size_t getSize() const { return _size; }
 
 	Image& setColor(int x, int y, const Color& c);
+	Color getColor(int u, int v) const;
 
 	uint8_t operator()(int x, int y, int c) const;
 	uint8_t& operator()(int x, int y, int c);

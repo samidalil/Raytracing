@@ -139,7 +139,7 @@ void render_callback() {
 	ImGui::InputFloat("height", &img_height);
 	ImGui::InputTextWithHint("Enter save path", "path", path, IM_ARRAYSIZE(path));
 
-	if (ImGui::Button("-- RENDER --")) render_to_jpg_func(img_width, img_height, Illumination::PHONG, path, name);
+	if (ImGui::Button("-- RENDER --")) render_to_jpg_func(img_width, img_height, Illumination::LAMBERT, path, name);
 	ImGui::End();
 
 

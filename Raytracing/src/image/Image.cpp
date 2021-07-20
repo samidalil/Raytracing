@@ -24,7 +24,7 @@ Image::Image(const std::string& fileName) : _loaded(true)
 	_size = _width * _height * _channels;
 }
 
-// Constructeur d'image vide à des dimensions et nombre de canaux donnés
+// Constructeur d'image vide Edes dimensions et nombre de canaux donnés
 Image::Image(int width, int height, int channels) :
 	_width(width),
 	_height(height),
@@ -81,6 +81,12 @@ Image& Image::setColor(int x, int y, const Color& c)
 	this->_data[index + 2] = c[2] * 255.f;
 
 	return (*this);
+}
+
+Color Image::getColor(int u, int v) const
+{
+	int index = (v * this->_width + u) * this->_channels;
+	return Color(this->_data[index], this->_data[index + 1], this->_data[index + 2]);
 }
 
 uint8_t Image::operator()(int x, int y, int c) const

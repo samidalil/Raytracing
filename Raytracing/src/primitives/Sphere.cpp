@@ -1,3 +1,4 @@
+#define PI 3.151492
 #include "../../headers/primitives/Sphere.h"
 
 Sphere::Sphere(Vector position, Vector rotation, float scale) : Object(position, rotation, scale) {}
@@ -52,4 +53,12 @@ Ray Sphere::getNormal(const Point& impact, const Point& observator) const
 	const float distance = p[0] * p[0] + p[1] * p[1] + p[2] * p[2];
 
 	return Ray(impact, (distance < 1 ? -1 : 1) * Vector(i[0], i[1], i[2]).normalized());
+}
+
+Point Sphere::getTextureCoordinates(const Point& p) const
+{
+	Point coord = globalToLocal(p);
+
+	return Point((-std::atan2(coord[1], coord[0]) / (2 * PI)) + 0.5,
+		0.5 - (std::asin(coord[2]) / PI), 0);
 }
