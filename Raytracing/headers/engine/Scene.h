@@ -14,9 +14,13 @@ private:
 	std::list<Light*> _lights;
 	Color _background;
 	Color _ambient;
+
+	void copy(const Scene& s);
 public:
 	Scene(const std::list<Object*>& objects, const std::list<Light*>& lights);
 	Scene(const std::list<Object*>& objects, const std::list<Light*>& lights, Color background, Color ambient);
+	Scene(const Scene& s);
+	Scene& operator=(const Scene& s);
 
 	Object* closestIntersected(const Ray& ray, Point& impact) const;
 

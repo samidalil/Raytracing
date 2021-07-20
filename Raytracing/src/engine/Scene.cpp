@@ -14,18 +14,36 @@ Scene::Scene(const std::list<Object*>& objects, const std::list<Light*>& lights,
 	_ambient(ambient)
 {}
 
+Scene::Scene(const Scene& s) {
+	this->copy(s);
+}
+
+Scene& Scene::operator=(const Scene& s) {
+	this->copy(s);
+	return (*this);
+}
+
+void Scene::copy(const Scene& s) {
+	this->_objects = s._objects;
+	this->_lights = s._lights;
+	this->_background = s._background;
+	this->_ambient = s._ambient;
+}
+
 Object* Scene::closestIntersected(const Ray& ray, Point& impact) const {
 	float minDistance = FLT_MAX;
 	float distance;
+	Point p;
 	Object* closest = nullptr;
 
-	for (Object* object : this->_objects)
-		if (object->intersect(ray, impact)) {
-			distance = Vector(ray.origin - impact).norm();
+	for (Object* o : this->_objects)
+		if (o->intersect(ray, p)) {
+			distance = Vector(ray.origin - p).norm();
 
 			if (distance < minDistance) {
 				minDistance = distance;
-				closest = object;
+				closest = o;
+				impact = p;
 			}
 		}
 

@@ -8,6 +8,15 @@ Material::Material(Color ambient, Color diffuse, Color specular, float shiny) :
 {}
 
 Material::Material(const Material& m) {
+	this->copy(m);
+}
+
+Material& Material::operator=(const Material& m) {
+	this->copy(m);
+	return (*this);
+}
+
+void Material::copy(const Material& m) {
 	this->ka = m.ka;
 	this->kd = m.kd;
 	this->ks = m.ks;

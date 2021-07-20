@@ -12,11 +12,11 @@ Point::Point(float x, float y, float z) {
 	this->_tab[2] = z;
 }
 Point::Point(const Point& v) {
-	copy(v);
+	this->copy(v);
 }
 
 Point& Point::operator=(const Point& v) {
-	copy(v);
+	this->copy(v);
 	return (*this);
 }
 

@@ -11,18 +11,22 @@ private:
 	Matrix _trans;
 	Matrix _transInv;
 
-	void rotate(Vector angles);
+	void rotate(const Vector& angles);
 	void rotateX(float deg);
 	void rotateY(float deg);
 	void rotateZ(float deg);
 	void scale(float factor);
 	void translate(float x, float y, float z);
-	void translate(Vector translation);
+	void translate(const Vector& translation);
+protected:
+	virtual void copy(const Entity& e);
 public:
 	Entity() = default;
-	Entity(Vector position, Vector rotation, float scale);
+	Entity(const Vector& position, const Vector& rotation, float scale);
+	Entity(const Entity& e);
+	Entity& operator=(const Entity& e);
 
-	void apply(Vector position, Vector rotation, float scale);
+	void apply(const Vector& position, const Vector& rotation, float scale);
 
 	Point localToGlobal(const Point& p) const;
 	Vector localToGlobal(const Vector& v) const;

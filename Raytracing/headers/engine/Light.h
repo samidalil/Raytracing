@@ -8,12 +8,16 @@
 #include "../texture/Color.h"
 
 class Light : public Entity {
+private:
+	void copy(const Light& l);
 public:
 	Color id;
 	Color is;
 
 	Light(Color diffuse, Color specular);
 	Light(Vector position, Vector rotation, Color diffuse, Color specular);
+	Light(const Light& l);
+	Light& operator=(const Light& l);
 	
 	Ray getRayToLight(const Point& p) const;
 	Ray getRayFromLight(const Point& p) const;

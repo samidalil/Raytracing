@@ -1,12 +1,26 @@
 #include "../../headers/engine/Entity.h"
 
-Entity::Entity(Vector position, Vector rotation, float scale) {
+Entity::Entity(const Vector& position, const Vector& rotation, float scale) {
+	this->scale(scale);
 	this->rotate(rotation);
 	this->translate(position);
-	this->scale(scale);
 }
 
-void Entity::rotate(Vector angles) {
+Entity::Entity(const Entity& e) {
+	this->copy(e);
+}
+
+Entity& Entity::operator=(const Entity& e) {
+	this->copy(e);
+	return (*this);
+}
+
+void Entity::copy(const Entity& e) {
+	this->_trans = e._trans;
+	this->_transInv = e._transInv;
+}
+
+void Entity::rotate(const Vector& angles) {
 	this->rotateY(angles[1]);
 	this->rotateZ(angles[2]);
 	this->rotateX(angles[0]);
@@ -71,11 +85,11 @@ void Entity::translate(float x, float y, float z) {
 	this->_transInv = this->_trans.inverse();
 }
 
-void Entity::translate(Vector translation) {
+void Entity::translate(const Vector& translation) {
 	this->translate(translation[0], translation[1], translation[2]);
 }
 
-void Entity::apply(Vector position, Vector rotation, float scale) {
+void Entity::apply(const Vector& position, const Vector& rotation, float scale) {
 	this->_trans = Matrix();
 
 	this->rotate(rotation);

@@ -8,6 +8,22 @@ Light::Light(Vector position, Vector rotation, Color diffuse, Color specular) :
 	is(specular)
 {}
 
+Light::Light(const Light& l) {
+	this->copy(l);
+}
+
+Light& Light::operator=(const Light& l) {
+	this->copy(l);
+	return (*this);
+}
+
+
+void Light::copy(const Light& l) {
+	Entity::copy(l);
+	this->id = l.id;
+	this->is = l.is;
+}
+
 Ray Light::getRayToLight(const Point& p) const {
 	return Ray(p, this->getVectorToLight(p));
 }
