@@ -5,11 +5,12 @@
 #include "../engine/Ray.h"
 #include "../math/Point.h"
 #include "../math/Vector.h"
+#include "../texture/Material.h"
 
 class Plane : public Object {
 public:
 	Plane() = default;
-	Plane(Vector position, Vector rotation, float scale);
+	Plane(Vector position, Vector rotation, float scale, Material material);
 
 	bool intersect(const Ray& ray, Point& impact) const override;
 	Ray getNormal(const Point& impact, const Point& observator) const override;

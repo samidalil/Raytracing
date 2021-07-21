@@ -14,7 +14,7 @@ float Cube::interSide(const Ray& r, int dim, float offset) const
 	return t;
 }
 
-Cube::Cube(Vector position, Vector rotation, float scale) : Object(position, rotation, scale)
+Cube::Cube(Vector position, Vector rotation, float scale, Material material) : Object(position, rotation, scale, material)
 {
 }
 

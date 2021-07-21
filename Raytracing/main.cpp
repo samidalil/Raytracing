@@ -32,6 +32,7 @@
 #include "headers/engine/Camera.h"
 #include "headers/engine/Scene.h"
 #include "headers/engine/Renderer.h"
+#include "headers/texture/Material.h"
 #include "headers/primitives/Plane.h"
 #include "headers/primitives/Cube.h"
 #include "imgui.h"
@@ -43,12 +44,16 @@ using namespace std;
 
 void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char* directory, const char* filename)
 {
+	Material blue({ 0, 0, 0.8f }, { 0, 0, 0.5f }, { 1, 1, 1 }, 0.5f);
+	Material red({ 0.8f, 0, 0 }, { 0.5f, 0, 0 }, { 1, 1, 1}, 0.5f);
+	Material green({ 0, 0.8f, 0 }, { 0, 1.f, 0 }, { 1,1 , 1 }, 1.f);
+	Material m({ 0, 0, 0.8f }, { 0, 0, 0.5f }, { 1, 1, 1 }, 0.2f);
 	Scene scene(
 		{
-			new Sphere({ 0, -2, -20 }, { 0, 0, 0 }, 1),
-			new Sphere({ 0, 1, -25 }, { 0, 0, 0 }, 1),
-			new Cube({ 2, 0, -40 }, { 0, 2, 0.5f }, 1),
-			new Plane({ 0, 0, -50 }, { 0, 0, 0 }, 1),
+			new Sphere({ 0, -2, -20 }, { 0, 0, 0 }, 1, blue),
+			new Sphere({ 0, 1, -25 }, { 0, 0, 0 }, 1, red),
+			new Cube({ 2, 0, -40 }, { 0, 2, 0.5f }, 1, green),
+			new Plane({ 0, 0, -50 }, { 0, 0, 0 }, 1, m )
 		},
 		{
 			new Light({ 0, -10, -20}, {0,1,0.5f}, { 1, 1, 1 }, { 0.6, 0.6, 0.6 })

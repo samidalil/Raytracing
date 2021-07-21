@@ -10,8 +10,9 @@
 class Object : public Entity {
 private:
 	void copy(const Object& o);
+	Material _material;
 public:
-	Object(const Vector& position, const Vector& rotation, float scale);
+	Object(const Vector& position, const Vector& rotation, float scale, Material material);
 	Object(const Object& o);
 	Object& operator=(const Object& o);
 

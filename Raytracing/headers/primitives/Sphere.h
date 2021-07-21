@@ -5,11 +5,12 @@
 #include "../engine/Ray.h"
 #include "../math/Point.h"
 #include "../math/Vector.h"
+#include "../texture/Material.h"
 
 class Sphere : public Object {
 public:
 	Sphere() = default;
-	Sphere(Vector position, Vector rotation, float scale);
+	Sphere(Vector position, Vector rotation, float scale, Material material);
 
 	bool intersect(const Ray& ray, Point& impact) const override;
 	Ray getNormal(const Point& impact, const Point& observator) const override;

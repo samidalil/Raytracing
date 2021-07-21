@@ -1,6 +1,6 @@
 #include "../../headers/primitives/Plane.h"
 
-Plane::Plane(Vector position, Vector rotation, float scale) : Object(position, rotation, scale)
+Plane::Plane(Vector position, Vector rotation, float scale, Material material) : Object(position, rotation, scale, material)
 {
 }
 
