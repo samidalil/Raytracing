@@ -42,13 +42,14 @@ using namespace std;
 
 void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char* directory, const char* filename)
 {
+	Image img("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\sample.jpg");
 	Scene scene(
 		{
-			new Sphere({ 0, 0, -5 }, { 0, 0, 0 }, 1, Material({ 1, 1, 1 }, { 0.2, 0.2, 0.2 }, { 0.7, 0.7, 0.7 }, 0.7, Image("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\sample.jpg"))),
-			new Sphere({ 1.2, 1, -17 }, { 0, 0, 0 }, 1.4, Material({ 1, 1, 1 }, { 0.2, 0.2, 0.2 }, { 0.7, 0.7, 0.7 }, 0.7, Image("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\sample.jpg")))
+			new Sphere({ 0, 0, -5 }, { 0, 0, 0 }, 1, Material({ 1, 1, 1 }, { 0.2, 0.2, 0.2 }, { 0.7, 0.7, 0.7 }, 0.7, img)),
+			new Sphere({ 1.2f, 2, -5 }, { 0, 0, 0 }, 1.4, Material({ 1, 1, 1 }, { 0.2f, 0.2f, 0.2f }, { 0.9f, 0.9f, 0.9f }, 0.5f, img))
 		},
 		{
-			new Light({ 50, 5, 0 }, {}, { 1, 1, 1 }, { 0.6, 0.6, 0.6 })
+			new Light({ 50, 5, 0 }, {0.3f,0.5f,0.9f}, { 1, 1, 1 }, { 0.6f, 0.6f, 0.6f })
 		},
 		{ 0.3, 0.3, 0.3 },
 		{ 0.5, 0.2, 0.3 }

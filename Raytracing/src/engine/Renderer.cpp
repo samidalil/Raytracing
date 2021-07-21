@@ -19,7 +19,7 @@ Color getImpactColorLambert(const Ray& ray, const Object& obj, const Point& impa
 		if (nToRAngle >= 0) sum += mat.kd * l->id * nToRAngle;
 		if (rToNAngle >= 0) sum += mat.ks * l->is * pow(rToNAngle, mat.shininess);
 	}
- 	return sum * texColor;
+ 	return texColor;
 }
 
 Color getImpactColorPhong(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)

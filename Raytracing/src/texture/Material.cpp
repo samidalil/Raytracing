@@ -26,4 +26,5 @@ void Material::copy(const Material& m) {
 	this->kd = m.kd;
 	this->ks = m.ks;
 	this->shininess = m.shininess;
+	this->texture = m.texture;
 }
