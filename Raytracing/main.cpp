@@ -33,6 +33,7 @@
 #include "headers/engine/Scene.h"
 #include "headers/engine/Renderer.h"
 #include "headers/primitives/Plane.h"
+#include "headers/primitives/Cube.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -47,6 +48,7 @@ void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char
 		{
 			new Sphere({ 0, -2, -20 }, { 0, 0, 0 }, 1),
 			new Sphere({ 0, 1, -25 }, { 0, 0, 0 }, 1),
+			new Cube({ 2, 0, -40 }, { 0, 2, 0.5f }, 1),
 			new Plane({ 0, 0, -50 }, { 0, 0, 0 }, 1),
 		},
 		{
