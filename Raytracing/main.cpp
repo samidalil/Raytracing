@@ -44,11 +44,11 @@ void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char
 {
 	Scene scene(
 		{
-			new Sphere({ 0, 0, -5 }, { 0, 0, 0 }, 1),
-			new Sphere({ 1.2, 1, -17 }, { 0, 0, 0 }, 1.4)
+			new Sphere({ 0, -2, -20 }, { 0, 0, 0 }, 1),
+			new Sphere({ 0, 1, -25 }, { 0, 0, 0 }, 1)
 		},
 		{
-			new Light({ 50, 5, 0 }, {}, { 1, 1, 1 }, { 0.6, 0.6, 0.6 })
+			new Light({ 0, -10, -20}, {0,1,0.5f}, { 1, 1, 1 }, { 0.6, 0.6, 0.6 })
 		},
 		{ 0.3, 0.3, 0.3 },
 		{ 0.5, 0.2, 0.3 }
