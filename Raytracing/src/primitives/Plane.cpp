@@ -23,3 +23,14 @@ Ray Plane::getNormal(const Point& impact, const Point& observator) const
     if (lo[2] < 0)z = -1;
     return localToGlobal(Ray(lp, Vector(0, 0, z))).normalized();
 }
+
+Point Plane::getTextureCoordinates(const Point& p) const
+{
+    Point coord = globalToLocal(p);
+    float x = coord[0] - (int)coord[0];
+    x += (x < 0);
+    float y = coord[1] - (int)coord[1];
+    y += (y < 0);
+
+    return Point(x, y, 0);
+}

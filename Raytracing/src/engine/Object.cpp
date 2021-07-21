@@ -1,7 +1,7 @@
 #include "../../headers/engine/Object.h"
 
 
-Object::Object(const Vector& position, const Vector& rotation, float scale, Material m) : Entity(position, rotation, scale), material(m) {}
+Object::Object(const Vector& position, const Vector& rotation, float scale) : Entity(position, rotation, scale) {}
 
 
 
@@ -22,5 +22,5 @@ void Object::copy(const Object& o) {
 
 Material Object::getMaterial(const Point& impact) const{
 
-	return this->material;
+	return Material({ 0.8f,0.1f, 0.5f }, { 0.5f,0.2f,0.3f }, {1,1,1}, 5);
 }

@@ -1,16 +1,12 @@
 #include "../../headers/texture/Material.h"
 
-Material::Material() : shininess(0.5f)
-{
-}
+Material::Material() : shininess(0.5f){}
 
-Material::Material(Color ambient, Color diffuse, Color specular, float shiny, Image tex) :
+Material::Material(Color ambient, Color diffuse, Color specular, float shiny) :
 	ka(ambient),
 	kd(diffuse),
 	ks(specular),
-	shininess(shiny),
-	texture(tex)
-{}
+	shininess(shiny) {}
 
 Material::Material(const Material& m) {
 	this->copy(m);
@@ -26,5 +22,4 @@ void Material::copy(const Material& m) {
 	this->kd = m.kd;
 	this->ks = m.ks;
 	this->shininess = m.shininess;
-	this->texture = m.texture;
 }

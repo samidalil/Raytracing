@@ -11,8 +11,7 @@ class Object : public Entity {
 private:
 	void copy(const Object& o);
 public:
-	Material material;
-	Object(const Vector& position, const Vector& rotation, float scale, Material mat);
+	Object(const Vector& position, const Vector& rotation, float scale);
 	Object(const Object& o);
 	Object& operator=(const Object& o);
 

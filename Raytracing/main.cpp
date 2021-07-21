@@ -43,7 +43,6 @@ using namespace std;
 
 void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char* directory, const char* filename)
 {
-	Image img("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\sample.jpg");
 	Scene scene(
 		{
 			new Sphere({ 0, -2, -20 }, { 0, 0, 0 }, 1),

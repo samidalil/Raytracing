@@ -5,8 +5,6 @@ Renderer::Renderer(int width = 800, int height = 600) : _width(width), _height(h
 Color getImpactColorLambert(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)
 {
 	const Material mat = obj.getMaterial(impact);
-	Point uv = obj.getTextureCoordinates(impact);
-	Color texColor = mat.texture.getColor(uv[0], uv[1]);
 	const Vector n = obj.getNormal(impact, ray.origin).vector;
 	Color sum = mat.ka * scene.getAmbient();
 
@@ -19,7 +17,7 @@ Color getImpactColorLambert(const Ray& ray, const Object& obj, const Point& impa
 		if (nToRAngle >= 0) sum += mat.kd * l->id * nToRAngle;
 		if (rToNAngle >= 0) sum += mat.ks * l->is * pow(rToNAngle, mat.shininess);
 	}
- 	return texColor;
+ 	return sum;
 }
 
 Color getImpactColorPhong(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)

@@ -1,7 +1,7 @@
 #define PI 3.151492
 #include "../../headers/primitives/Sphere.h"
 
-Sphere::Sphere(Vector position, Vector rotation, float scale, Material material) : Object(position, rotation, scale, material) {}
+Sphere::Sphere(Vector position, Vector rotation, float scale) : Object(position, rotation, scale) {}
 
 bool Sphere::intersect(const Ray& ray, Point& impact) const {
 	const Ray localRay = this->globalToLocal(ray);
