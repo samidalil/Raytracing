@@ -32,7 +32,7 @@
 #include "headers/engine/Camera.h"
 #include "headers/engine/Scene.h"
 #include "headers/engine/Renderer.h"
-
+#include "headers/primitives/Plane.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -45,11 +45,12 @@ void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char
 	Image img("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\sample.jpg");
 	Scene scene(
 		{
-			new Sphere({ 0, 0, -5 }, { 0, 0, 0 }, 1, Material({ 1, 1, 1 }, { 0.2, 0.2, 0.2 }, { 0.7, 0.7, 0.7 }, 0.7, img)),
-			new Sphere({ 1.2f, 2, -5 }, { 0, 0, 0 }, 1.4, Material({ 1, 1, 1 }, { 0.2f, 0.2f, 0.2f }, { 0.9f, 0.9f, 0.9f }, 0.5f, img))
+			new Sphere({ 0, -2, -20 }, { 0, 0, 0 }, 1),
+			new Sphere({ 0, 1, -25 }, { 0, 0, 0 }, 1),
+			new Plane({ 0, 0, -50 }, { 0, 0, 0 }, 1),
 		},
 		{
-			new Light({ 50, 5, 0 }, {0.3f,0.5f,0.9f}, { 1, 1, 1 }, { 0.6f, 0.6f, 0.6f })
+			new Light({ 0, -10, -20}, {0,1,0.5f}, { 1, 1, 1 }, { 0.6, 0.6, 0.6 })
 		},
 		{ 0.3, 0.3, 0.3 },
 		{ 0.5, 0.2, 0.3 }
