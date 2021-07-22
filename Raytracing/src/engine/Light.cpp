@@ -1,8 +1,10 @@
 #include "../../headers/engine/Light.h"
 
-Light::Light(Color diffuse, Color specular) : Entity(), id(diffuse), is(specular) {}
+Light::Light() : Entity(), id(Color::white), is(Color::white) {}
 
-Light::Light(Vector position, Vector rotation, Color diffuse, Color specular) :
+Light::Light(const Color& diffuse, const Color& specular) : Entity(), id(diffuse), is(specular) {}
+
+Light::Light(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular) :
 	Entity(position, rotation, 1),
 	id(diffuse),
 	is(specular)
@@ -16,7 +18,6 @@ Light& Light::operator=(const Light& l) {
 	this->copy(l);
 	return (*this);
 }
-
 
 void Light::copy(const Light& l) {
 	Entity::copy(l);
@@ -33,13 +34,9 @@ Ray Light::getRayFromLight(const Point& p) const {
 }
 
 Vector Light::getVectorToLight(const Point& p) const {
-	Point position = this->localToGlobal(Point());
-
-	return Vector(position - p).normalized();
+	return Vector(this->localToGlobal(Point()) - p).normalized();
 }
 
 Vector Light::getVectorFromLight(const Point& p) const {
-	Point position = this->localToGlobal(Point());
-
-	return Vector(p - position).normalized();
+	return Vector(p - this->localToGlobal(Point())).normalized();
 }

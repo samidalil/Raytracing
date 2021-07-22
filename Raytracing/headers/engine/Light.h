@@ -6,6 +6,7 @@
 #include "../math/Vector.h";
 #include "../math/Point.h";
 #include "../texture/Color.h"
+#include "../texture/Material.h"
 
 class Light : public Entity {
 private:
@@ -14,8 +15,9 @@ public:
 	Color id;
 	Color is;
 
-	Light(Color diffuse, Color specular);
-	Light(Vector position, Vector rotation, Color diffuse, Color specular);
+	Light();
+	Light(const Color& diffuse, const Color& specular);
+	Light(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular);
 	Light(const Light& l);
 	Light& operator=(const Light& l);
 	
@@ -23,6 +25,9 @@ public:
 	Ray getRayFromLight(const Point& p) const;
 	Vector getVectorToLight(const Point& p) const;
 	Vector getVectorFromLight(const Point& p) const;
+
+	virtual Color getIlluminationLambert(const Point& impact, const Vector& normal, const Ray& ray, const Material& mat) const = 0;
+	virtual Color getIlluminationPhong(const Point& impact, const Vector& normal, const Ray& ray, const Material& mat) const = 0;
 };
 
 #endif

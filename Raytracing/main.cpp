@@ -28,13 +28,14 @@
 #include "headers/Constants.h"
 #include "headers/image/Image.h"
 #include "headers/primitives/Sphere.h"
-#include "headers/engine/Light.h"
 #include "headers/engine/Camera.h"
 #include "headers/engine/Scene.h"
 #include "headers/engine/Renderer.h"
 #include "headers/texture/Material.h"
 #include "headers/primitives/Plane.h"
 #include "headers/primitives/Cube.h"
+#include "headers/lights/AmbientLight.h"
+
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -42,18 +43,39 @@
 
 using namespace std;
 
-void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char* directory, const char* filename)
+int main()
+{
+	auto material = std::make_shared<Material>(Color::white, Color::white, Color::white, 1);
+	auto img = std::make_shared<Image>("D:\\Raytracing\\texture.jpg");
+	material->texture = img;
+	auto cube = std::make_shared<Cube>(Vector(0, 0, -14), Vector(0.2, -0.2, 0), 1, material);
+	auto light = std::make_shared<AmbientLight>(Vector(2, 2, -4), Vector(0, 0, 0), Color::white, Color::white);
+
+	Scene scene(Color::black, Color::white * 0.4);
+	Camera camera(10);
+	Renderer renderer(800, 800);
+
+	scene.add(cube);
+	scene.add(light);
+
+	Image image = renderer.render(scene, camera);
+
+	image.save("D:\\Raytracing\\result.jpg");
+}
+
+/*void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char* directory, const char* filename)
 {
 	Material blue({ 0, 0, 0.8f }, { 0, 0, 0.5f }, { 1, 1, 1 }, 0.5f);
-	Material red({ 0.8f, 0, 0 }, { 0.5f, 0, 0 }, { 1, 1, 1}, 0.5f);
+	Material red({ 0.8f, 0, 0 }, { 0.5f, 0, 0 }, { 1, 1, 1 }, 0.5f);
 	Material green({ 0, 0.8f, 0 }, { 0, 1.f, 0 }, { 1,1 , 1 }, 1.f);
 	Material m({ 0, 0, 0.8f }, { 0, 0, 0.5f }, { 1, 1, 1 }, 0.2f);
+
 	Scene scene(
 		{
 			new Sphere({ 0, -2, -20 }, { 0, 0, 0 }, 1, blue),
 			new Sphere({ 0, 1, -25 }, { 0, 0, 0 }, 1, red),
 			new Cube({ 2, 0, -40 }, { 0, 2, 0.5f }, 1, green),
-			new Plane({ 0, 0, -50 }, { 0, 0, 0 }, 1, m )
+			new Plane({ 0, 0, -50 }, { 0, 0, 0 }, 1, m)
 		},
 		{
 			new Light({ 0, -10, -20}, {0,1,0.5f}, { 1, 1, 1 }, { 0.6, 0.6, 0.6 })
@@ -70,7 +92,6 @@ void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char
 	path.append(filename);
 	image.save(path);
 }
-
 
 void render_callback() {
 	// PROPERTY WINDOW
@@ -101,7 +122,7 @@ void render_callback() {
 		{
 			for (int n = 0; n < IM_ARRAYSIZE(items); n++)
 			{
-				bool is_selected = (current_item == items[n]); 
+				bool is_selected = (current_item == items[n]);
 				switch (items[n])
 				{
 				case Illumination::PHONG:  name = "Phong"; break;
@@ -111,18 +132,16 @@ void render_callback() {
 					name = "Phong";
 					break;
 				}
-					if (ImGui::Selectable(name, is_selected)) {
-						current_item = items[n];
-							if (is_selected)
-								ImGui::SetItemDefaultFocus();   
+				if (ImGui::Selectable(name, is_selected)) {
+					current_item = items[n];
+					if (is_selected)
+						ImGui::SetItemDefaultFocus();
 
-					}
+				}
 
 			}
 			ImGui::EndCombo();
 		}
-
-
 
 		ImGui::ColorEdit4("Diffuse color", col); // TODO : link to object material
 		float v;
@@ -149,29 +168,16 @@ void render_callback() {
 
 	if (ImGui::Button("-- RENDER --")) render_to_jpg_func(img_width, img_height, Illumination::LAMBERT, path, name);
 	ImGui::End();
-
-
-
-
-
-
-
-
-
-};
+}
 
 
 int main()
 {
-
-
 	std::string title = "RayZ";
 	Window w(1920, 1080, title);
 	w.setBackgroundColor(0.99, 0.90, 0.94);
-	while (w.isOpen())
-	{
-		w.run(render_callback);
-	}
+	while (w.isOpen()) w.run(render_callback);
 	w.terminate();
 	return 0;
 }
+*/

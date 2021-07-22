@@ -3,7 +3,6 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-
 # Add source to this project's executable
 add_executable (Raytracing
 	"main.cpp"
@@ -12,14 +11,13 @@ add_executable (Raytracing
 	"src/texture/Color.cpp" "src/texture/Material.cpp"
 	"src/engine/Ray.cpp" "src/engine/Entity.cpp" "src/engine/Object.cpp" "src/engine/Light.cpp" "src/engine/Camera.cpp" "src/engine/Scene.cpp" "src/engine/Renderer.cpp"
 	"src/primitives/Sphere.cpp" "src/primitives/Plane.cpp" "src/primitives/Cube.cpp"
+	"src/lights/AmbientLight.cpp"
 	"src/ui/ImGUI_context.cpp" "src/ui/OpenGL_context.cpp" "src/ui/window.cpp"
-	)
-
+)
 
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw")
-
 
 target_link_libraries(Raytracing PUBLIC
 		glfw

@@ -1,76 +1,67 @@
 #include "../../headers/primitives/Cube.h"
+#include <algorithm>
 
-float Cube::interSide(const Ray& r, int dim, float offset) const
-{
-	float t = -1;
-	if (r.vector[dim]<0.00001 && r.vector[dim]>-0.00001)return -1;
-	t = (offset - r.origin[dim]) / r.vector[dim];
-	if (t < 0)return -1;
-	for (int d = 0; d < 3; d++) {
-		if (d == dim)continue;
-		float x = r.origin[d] + t * r.vector[d];
-		if (x < -1 || x > 1)return -1;
-	}
-	return t;
-}
-
-Cube::Cube(Vector position, Vector rotation, float scale, Material material) : Object(position, rotation, scale, material)
-{
-}
+Cube::Cube(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material) :
+	Object(position, rotation, scale, material)
+{}
 
 bool Cube::intersect(const Ray& ray, Point& impact) const
 {
-	Ray r = globalToLocal(ray).normalized();
+	const Ray localRay = this->globalToLocal(ray);
+	Vector invDir;
 
-	float mint = -1;
-	float offsets[] = { -1,1 };
-	for (int d = 0; d < 3; d++) {
-		for (int o = 0; o < 2; o++) {
-			float t = interSide(r, d, offsets[o]);
-			if (t >= 0 && (mint<0 || mint>t)) {
-				mint = t;
-			}
-		}
-	}
+	invDir[0] = 1 / localRay.vector[0];
+	invDir[1] = 1 / localRay.vector[1];
+	invDir[2] = 1 / localRay.vector[2];
 
-	if (mint >= 0) {
-		impact = localToGlobal(r.origin + mint * r.vector);
-		return true;
-	}
+	float t1 = (-1 - localRay.origin[0]) * invDir[0];
+	float t2 = (1 - localRay.origin[0]) * invDir[0];
+	float t3 = (-1 - localRay.origin[1]) * invDir[1];
+	float t4 = (1 - localRay.origin[1]) * invDir[1];
+	float t5 = (-1 - localRay.origin[2]) * invDir[2];
+	float t6 = (1 - localRay.origin[2]) * invDir[2];
 
-	return false;
+	float tmin = std::max(std::max(std::min(t1, t2), std::min(t3, t4)), std::min(t5, t6));
+	float tmax = std::min(std::min(std::max(t1, t2), std::max(t3, t4)), std::max(t5, t6));
+
+	if (tmax < 0 || tmax < tmin) return false;
+
+	impact[0] = localRay.origin[0] + localRay.vector[0] * tmin;
+	impact[1] = localRay.origin[1] + localRay.vector[1] * tmin;
+	impact[2] = localRay.origin[2] + localRay.vector[2] * tmin;
+
+	impact = this->localToGlobal(impact);
+
+	return true;
 }
 
 Ray Cube::getNormal(const Point& p, const Point& o) const
 {
-    Point i = globalToLocal(p);
-    Point obs = globalToLocal(o);
-    Vector n(0, 0, 0);
-    float eps = 0.01;
+	Vector normal(0, 0, 0);
+	const Point impact = this->globalToLocal(p);
+	const Point observator = this->globalToLocal(o);
+	const float limit = 1.0e-5f;
 
-    if (abs(i[0] - 1) < eps) n[0] = 1;
-    if (abs(i[1] - 1) < eps) n[1] = 1;
-    if (abs(i[2] - 1) < eps) n[2] = 1;
+	for (int i = 0; i < 3; i++)
+		if (abs(abs(impact[i]) - 1) <= limit)
+		{
+			normal[i] = impact[i] < 0 ? -1 : 1;
+			if (observator[i] < 1 && observator[i] > -1)
+				normal[i] *= -1;
+		}
 
-    if (abs(i[0] + 1) < eps) n[0] = -1;
-    if (abs(i[1] + 1) < eps) n[1] = -1;
-    if (abs(i[2] + 1) < eps) n[2] = -1;
-
-
-    if (obs[0]<1 && obs[0]>-1 && obs[1]<1 && obs[1]>-1 && obs[2]<1 && obs[2]>-1)
-    {
-        n = -1 * n;
-    }
-
-    n = localToGlobal(n).normalized();
-    return Ray(p, n);
+	return Ray(p, this->localToGlobal(normal).normalized());
 }
 
 Point Cube::getTextureCoordinates(const Point& p) const
 {
-	Point lp = globalToLocal(p);
-	if (lp[0] > 0.999 || lp[0] < -0.999)return Point(lp[2] / 2 + 0.5, lp[1] / 2 + 0.5, 0);
-	if (lp[1] > 0.999 || lp[1] < -0.999)return Point(lp[0] / 2 + 0.5, lp[2] / 2 + 0.5, 0);
-	if (lp[2] > 0.999 || lp[2] < -0.999)return Point(lp[0] / 2 + 0.5, lp[1] / 2 + 0.5, 0);
+	const Point impact = this->globalToLocal(p);
+
+	if (impact[0] > 0.999 || impact[0] < -0.999)
+		return Point(impact[2] / 2 + 0.5, impact[1] / 2 + 0.5, 0);
+	if (impact[1] > 0.999 || impact[1] < -0.999)
+		return Point(impact[0] / 2 + 0.5, impact[2] / 2 + 0.5, 0);
+	if (impact[2] > 0.999 || impact[2] < -0.999)
+		return Point(impact[0] / 2 + 0.5, impact[1] / 2 + 0.5, 0);
 	return Point(0, 0, 0);
 }

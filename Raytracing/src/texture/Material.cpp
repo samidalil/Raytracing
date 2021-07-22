@@ -22,4 +22,17 @@ void Material::copy(const Material& m) {
 	this->kd = m.kd;
 	this->ks = m.ks;
 	this->shininess = m.shininess;
+	this->texture = m.texture;
+}
+
+Material Material::getColor(float x, float y) const {
+	if (!this->texture) return (*this);
+	const Color pixel = this->texture->getColor(x, y);
+
+	return Material(
+		this->ka * pixel,
+		this->kd * pixel,
+		this->ks * pixel,
+		shininess
+	);
 }

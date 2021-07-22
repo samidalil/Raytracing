@@ -10,13 +10,12 @@ class Renderer {
 private:
 	int _width;
 	int _height;
-	Illumination _illuminationModel;
-
+	Illumination _illumination;
 public:
 	Renderer(int width, int height);
 
-	Image render(Scene s, Camera c) const;
-	void setIlluminationModel(Illumination illu);
+	Image render(const Scene& s, const Camera& c) const;
+	Renderer& setIlluminationModel(const Illumination& illu);
 };
 
 #endif

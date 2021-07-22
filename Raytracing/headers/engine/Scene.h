@@ -10,22 +10,23 @@
 
 class Scene {
 private:
-	std::list<Object*> _objects;
-	std::list<Light*> _lights;
+	std::list<std::shared_ptr<Object>> _objects;
+	std::list<std::shared_ptr<Light>> _lights;
 	Color _background;
 	Color _ambient;
 
 	void copy(const Scene& s);
 public:
-	Scene(const std::list<Object*>& objects, const std::list<Light*>& lights);
-	Scene(const std::list<Object*>& objects, const std::list<Light*>& lights, Color background, Color ambient);
+	Scene();
+	Scene(const Color& background, const Color& ambient);
 	Scene(const Scene& s);
 	Scene& operator=(const Scene& s);
 
-	Object* closestIntersected(const Ray& ray, Point& impact) const;
+	Scene& add(const std::shared_ptr<Object>& o);
+	Scene& add(const std::shared_ptr<Light>& l);
 
-	std::list<Light*> getLights() const;
-
+	std::shared_ptr<Object> closestIntersected(const Ray& ray, Point& impact) const;
+	std::list<std::shared_ptr<Light>> getLights() const;
 	Color getBackground() const;
 	Color getAmbient() const;
 };

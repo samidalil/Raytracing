@@ -1,82 +1,89 @@
 #include "../../headers/engine/Renderer.h"
 
-Renderer::Renderer(int width = 800, int height = 600) : _width(width), _height(height), _illuminationModel(Illumination::PHONG) {}
+Renderer::Renderer(int width = 800, int height = 600) : _width(width), _height(height), _illumination(Illumination::PHONG) {}
 
-Color getImpactColorLambert(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)
+Color getImpactColorPhong(const Ray& ray, const std::shared_ptr<Object>& obj, const Point& impact, const Scene& scene)
 {
-	const Material mat = obj.getMaterial(impact);
-	const Vector n = obj.getNormal(impact, ray.origin).vector;
+	const Material mat = obj->getMaterial(impact);
+	const Vector normal = obj->getNormal(impact, ray.origin).vector;
 	Color sum = mat.ka * scene.getAmbient();
 
-	for (Light* l : scene.getLights())
-	{
-		const Vector r = l->getVectorToLight(impact);
-		const float nToRAngle = Vector::dot(n, r);
-		const float rToNAngle = Vector::dot(ray.vector, Vector::reflect(r, n));
-
-		if (nToRAngle >= 0) sum += mat.kd * l->id * nToRAngle;
-		if (rToNAngle >= 0) sum += mat.ks * l->is * pow(rToNAngle, mat.shininess);
-	}
- 	return sum;
+	// TD : remplacer par un std::for_each ou autre
+	for (auto l : scene.getLights()) sum += l->getIlluminationPhong(impact, normal, ray, mat);
+	return sum;
 }
 
-Color getImpactColorPhong(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)
+Color getImpactColorLambert(const Ray& ray, const std::shared_ptr<Object>& obj, const Point& impact, const Scene& scene)
 {
-	Ray n = obj.getNormal(impact, ray.origin);
-	Color ka = obj.getMaterial(impact).ka;
-	Color kd = obj.getMaterial(impact).kd;
-	Color ks = obj.getMaterial(impact).ks;
-	Color ia = scene.getAmbient();
-	Color lambert = obj.getMaterial(impact).ka;
-	float shiny = obj.getMaterial(impact).shininess;
-	Color ambiant = ka * ia;
-	Color diffuse(0, 0, 0);
-	Color specular(0, 0, 0);
+	const Material mat = obj->getMaterial(impact);
+	const Vector normal = obj->getNormal(impact, ray.origin).vector;
+	Color sum = mat.ka * scene.getAmbient();
 
-	for (Light* l : scene.getLights())
-	{
-		Vector lightDir = l->getVectorToLight(impact);
-		float cosTheta = Vector::dot(lightDir, n.vector);
-		if (cosTheta < 0) cosTheta = 0;
-		diffuse += (kd * l->id) * cosTheta;
-
-		Vector sym = lightDir - 2 * (Vector::dot(lightDir, n.vector)) * n.vector;
-		float cosBeta = (Vector::dot(sym, ray.vector));
-		float specVal = pow(Vector::dot(ray.vector, sym), shiny);
-
-		if (specVal < 0) specVal = 0;
-		specular += (ks * l->is) * cosBeta * specVal;
-	}
-
-
-
-
-	return ambiant + diffuse + specular;
+	// TD : remplacer par un std::for_each ou autre
+	for (auto l : scene.getLights()) sum += l->getIlluminationLambert(impact, normal, ray, mat);
+	return sum;
 }
-Color getImpactColorUnlit(const Ray& ray, const Object& obj, const Point& impact, const Scene& scene)
+
+Color getImpactColorUnlit(const Ray& ray, const std::shared_ptr<Object>& obj, const Point& impact, const Scene& scene)
 {
-	const Material mat = obj.getMaterial(impact);
-	return mat.ka * scene.getAmbient();
+	return obj->getMaterial(impact).ka * scene.getAmbient();
 }
 
 
-Image Renderer::render(Scene scene, Camera camera) const {
+Image Renderer::render(const Scene& scene, const Camera& camera) const {
 	Image image(this->_width, this->_height, 3);
-	const Color& background = scene.getBackground();
+	const Color background = scene.getBackground();
 
 	const float floatedWidth = float(this->_width);
 	const float floatedHeight = float(this->_height);
 
+	const int subPixelNb = 8;
+	const int subPixelCount = subPixelNb * subPixelNb;
+	const float floatedSubPixelNb = float(subPixelNb);
+
+	Point impact;
+	Color color;
+
 	for (int y = 0; y < this->_height; ++y) {
 		const int inversedY = this->_height - y - 1;
-		const float floatedY = float(y);
+		const float floatedNormalizedY = float(y) / floatedHeight;
 
 		for (int x = 0; x < this->_width; ++x) {
-			const Ray cameraRay = camera.getRay(float(x) / floatedWidth, floatedY / floatedHeight);
-			Point impact;
-			Object* closest = scene.closestIntersected(cameraRay, impact);
+			Ray cameraRay = camera.getRay(float(x) / floatedWidth, floatedNormalizedY);
+			auto closest = scene.closestIntersected(cameraRay, impact);
 
-			if (closest) image.setColor(x, inversedY, getImpactColorLambert(cameraRay, *closest, impact, scene));
+			if (closest) {
+				color = getImpactColorPhong(cameraRay, closest, impact, scene);
+				float r = color[0];
+				float g = color[1];
+				float b = color[2];
+
+				for (int subY = 0; subY < subPixelNb; ++subY) {
+					const float floatedNormalizedSubY = floatedNormalizedY + float(subY) / floatedSubPixelNb / floatedHeight;
+
+					for (int subX = 0; subX < subPixelNb; ++subX) {
+						if (subX == 0 && subY == 0) continue;
+
+						cameraRay = camera.getRay(
+							float(x + float(subX) / floatedSubPixelNb) / floatedWidth,
+							floatedNormalizedSubY
+						);
+						closest = scene.closestIntersected(cameraRay, impact);
+
+						if (closest) {
+							color = getImpactColorPhong(cameraRay, closest, impact, scene);
+							r += color[0];
+							g += color[1];
+							b += color[2];
+						}
+					}
+				}
+
+				color[0] = r / subPixelCount;
+				color[1] = g / subPixelCount;
+				color[2] = b / subPixelCount;
+				image.setColor(x, inversedY, color);
+			}
 			else image.setColor(x, inversedY, background);
 		}
 	}
@@ -84,7 +91,8 @@ Image Renderer::render(Scene scene, Camera camera) const {
 	return image;
 }
 
-void Renderer::setIlluminationModel(Illumination illu)
+Renderer& Renderer::setIlluminationModel(const Illumination& illumination)
 {
-	_illuminationModel = illu;
+	this->_illumination = illumination;
+	return (*this);
 }

@@ -1,15 +1,11 @@
 #include "../../headers/engine/Scene.h"
 
-Scene::Scene(const std::list<Object*>& objects, const std::list<Light*>& lights) :
-	_objects(objects),
-	_lights(lights),
+Scene::Scene() :
 	_background({ 0, 0, 0 }),
 	_ambient({ 1, 1, 1 })
 {}
 
-Scene::Scene(const std::list<Object*>& objects, const std::list<Light*>& lights, Color background, Color ambient) :
-	_objects(objects),
-	_lights(lights),
+Scene::Scene(const Color& background, const Color& ambient) :
 	_background(background),
 	_ambient(ambient)
 {}
@@ -30,13 +26,23 @@ void Scene::copy(const Scene& s) {
 	this->_ambient = s._ambient;
 }
 
-Object* Scene::closestIntersected(const Ray& ray, Point& impact) const {
+Scene& Scene::add(const std::shared_ptr<Object>& o) {
+	this->_objects.push_back(o);
+	return (*this);
+}
+
+Scene& Scene::add(const std::shared_ptr<Light>& l) {
+	this->_lights.push_back(l);
+	return (*this);
+}
+
+std::shared_ptr<Object> Scene::closestIntersected(const Ray& ray, Point& impact) const {
 	float minDistance = FLT_MAX;
 	float distance;
 	Point p;
-	Object* closest = nullptr;
+	std::shared_ptr<Object> closest = nullptr;
 
-	for (Object* o : this->_objects)
+	for (auto o : this->_objects)
 		if (o->intersect(ray, p)) {
 			distance = Vector(ray.origin - p).norm();
 
@@ -50,7 +56,7 @@ Object* Scene::closestIntersected(const Ray& ray, Point& impact) const {
 	return closest;
 }
 
-std::list<Light*> Scene::getLights() const {
+std::list<std::shared_ptr<Light>> Scene::getLights() const {
 	return this->_lights;
 }
 

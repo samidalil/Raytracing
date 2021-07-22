@@ -92,9 +92,9 @@ void Entity::translate(const Vector& translation) {
 void Entity::apply(const Vector& position, const Vector& rotation, float scale) {
 	this->_trans = Matrix();
 
+	this->scale(scale);
 	this->rotate(rotation);
 	this->translate(position);
-	this->scale(scale);
 }
 
 Point Entity::localToGlobal(const Point& p) const {

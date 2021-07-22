@@ -79,18 +79,23 @@ Image& Image::setColor(int x, int y, const Color& c)
 	this->_data[index] = c[0] * 255.f;
 	this->_data[index + 1] = c[1] * 255.f;
 	this->_data[index + 2] = c[2] * 255.f;
-
 	return (*this);
 }
 
+// Coordonnées u et v entre 0 et 1
+// recalibrées par rapport à la taille de l'image
+// pour obtenir la couleur du pixel
 Color Image::getColor(float u, float v) const
 {
-	int w = int( u * this->_width ) ;
-	int h = int( v * this->_height ) ;
+	int w = u * (this->_width - 1);
+	int h = v * (this->_height - 1);
+	int index = (h + (w * this->_width)) * this->_channels;
 
-	int index = h + (w * this->_width) * this->_channels;
-
-	return Color(this->_data[index], this->_data[index + 1], this->_data[index + 2]);
+	return Color(
+		this->_data[index] / 255.f,
+		this->_data[index + 1] / 255.f,
+		this->_data[index + 2] / 255.f
+	);
 }
 
 uint8_t Image::operator()(int x, int y, int c) const

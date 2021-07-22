@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef RT_CUBE_H
+#define RT_CUBE_H
 
 #include "../engine/Object.h"
 #include "../engine/Ray.h"
@@ -8,14 +8,13 @@
 #include "../texture/Material.h"
 
 class Cube : public Object {
-private :
-	float interSide(const Ray& r, int dim, float offset) const;
 public:
 	Cube() = default;
-	Cube(Vector position, Vector rotation, float scale, Material material);
+	Cube(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material);
 
 	bool intersect(const Ray& ray, Point& impact) const override;
 	Ray getNormal(const Point& impact, const Point& observator) const override;
-	virtual Point getTextureCoordinates(const Point& p)  const override;
-
+	Point getTextureCoordinates(const Point& p) const override;
 };
+
+#endif

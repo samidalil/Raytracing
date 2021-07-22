@@ -9,10 +9,11 @@
 
 class Object : public Entity {
 private:
+	std::shared_ptr<Material> _material;
+
 	void copy(const Object& o);
-	Material _material;
 public:
-	Object(const Vector& position, const Vector& rotation, float scale, Material material);
+	Object(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material);
 	Object(const Object& o);
 	Object& operator=(const Object& o);
 

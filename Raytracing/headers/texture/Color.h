@@ -8,6 +8,12 @@ private:
 
 	void copy(const Color& p);
 public:
+	static Color black;
+	static Color white;
+	static Color red;
+	static Color green;
+	static Color blue;
+
 	Color();
 	Color(float r, float g, float b);
 	Color(const Color& c);

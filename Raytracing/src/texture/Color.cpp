@@ -7,6 +7,12 @@ T clamp(T v, T min, T max) {
 	return v;
 }
 
+Color Color::black(0, 0, 0);
+Color Color::white(1, 1, 1);
+Color Color::red(1, 0, 0);
+Color Color::green(0, 1, 0);
+Color Color::blue(0, 0, 1);
+
 Color::Color() {
 	this->_tab[0] = 0;
 	this->_tab[1] = 0;
