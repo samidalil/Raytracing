@@ -41,26 +41,38 @@
 #include "imgui_impl_opengl3.h"
 #include "headers/ui/window.h"
 
-using namespace std;
+struct DataContext {
+	RendererProperties rendererProperties;
+	Renderer renderer;
+	std::string savePath = "D:\\Raytracing\\result.jpg";
+};
 
 int main()
 {
 	auto material = std::make_shared<Material>(Color::white, Color::white, Color::white, 1);
 	auto img = std::make_shared<Image>("D:\\Raytracing\\texture.jpg");
 	material->texture = img;
-	auto cube = std::make_shared<Cube>(Vector(0, 0, -14), Vector(0.2, -0.2, 0), 1, material);
-	auto light = std::make_shared<AmbientLight>(Vector(2, 2, -4), Vector(0, 0, 0), Color::white, Color::white);
+	auto pos = Vector(-3, 0, -35);
+	auto s1 = std::make_shared<Sphere>(pos, Vector(0, 0, 0), 1.5, material);
+	auto s2 = std::make_shared<Sphere>(Vector(0, 0, -35), Vector(0.2, -0.2, 0), 1, material);
+	auto l1 = std::make_shared<AmbientLight>(Vector(15, 0, -35), Vector(0, 0, 0), Color::white, Color::white);
+	auto l2 = std::make_shared<AmbientLight>(Vector(-15, 0, -35), Vector(0, 0, 0), Color::white, Color::white);
+	auto scene = std::make_shared<Scene>(Color::blue * 0.4 + Color::red * 0.7, Color::white * 0.4);
+	auto camera = std::make_shared<Camera>(10);
 
-	Scene scene(Color::black, Color::white * 0.4);
-	Camera camera(10);
-	Renderer renderer(800, 800);
+	scene->add(s1);
+	scene->add(s2);
+	scene->add(l1);
+	scene->add(l2);
 
-	scene.add(cube);
-	scene.add(light);
+	DataContext data;
 
-	Image image = renderer.render(scene, camera);
-
-	image.save("D:\\Raytracing\\result.jpg");
+	data.rendererProperties.scene = scene;
+	data.rendererProperties.camera = camera;
+	data.renderer.setProperties(data.rendererProperties);
+	
+	Image image = data.renderer.render();
+	image.save(data.savePath);
 }
 
 /*void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char* directory, const char* filename)

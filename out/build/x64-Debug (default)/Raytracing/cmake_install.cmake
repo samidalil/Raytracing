@@ -34,9 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/glad/cmake_install.cmake")
-  include("D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/imgui/cmake_install.cmake")
-  include("D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/glfw/cmake_install.cmake")
+  include("D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/cmake_install.cmake")
 
 endif()
 

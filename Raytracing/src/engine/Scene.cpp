@@ -1,5 +1,7 @@
 #include "../../headers/engine/Scene.h"
 
+#include <algorithm>
+
 Scene::Scene() :
 	_background({ 0, 0, 0 }),
 	_ambient({ 1, 1, 1 })
@@ -42,7 +44,7 @@ std::shared_ptr<Object> Scene::closestIntersected(const Ray& ray, Point& impact)
 	Point p;
 	std::shared_ptr<Object> closest = nullptr;
 
-	for (auto o : this->_objects)
+	for (const auto o : this->_objects)
 		if (o->intersect(ray, p)) {
 			distance = Vector(ray.origin - p).norm();
 
@@ -56,6 +58,10 @@ std::shared_ptr<Object> Scene::closestIntersected(const Ray& ray, Point& impact)
 	return closest;
 }
 
+std::list<std::shared_ptr<Object>> Scene::getObjects() const {
+	return this->_objects;
+}
+
 std::list<std::shared_ptr<Light>> Scene::getLights() const {
 	return this->_lights;
 }
@@ -66,4 +72,8 @@ Color Scene::getBackground() const {
 
 Color Scene::getAmbient() const {
 	return this->_ambient;
+}
+
+std::ostream& operator<<(std::ostream& os, const Scene& s) {
+	return os;
 }

@@ -1,9 +1,5 @@
-﻿# CMakeList.txt : CMake project for ImageSubjectSequence, include source and define
-# project specific logic here.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.8)
 
-# Add source to this project's executable
 add_executable (Raytracing
 	"main.cpp"
 	"src/image/Image.cpp"
@@ -15,13 +11,10 @@ add_executable (Raytracing
 	"src/ui/ImGUI_context.cpp" "src/ui/OpenGL_context.cpp" "src/ui/window.cpp"
 )
 
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad")
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui")
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw")
+add_subdirectory("vendor")
 
 target_link_libraries(Raytracing PUBLIC
 		glfw
 		glad
         imgui
  )
-# TODO: Add tests and install targets if needed.

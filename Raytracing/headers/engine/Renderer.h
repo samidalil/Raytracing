@@ -5,17 +5,36 @@
 #include "Camera.h"
 #include "../image/Image.h"
 
-enum class Illumination{UNLIT, LAMBERT, PHONG };
+enum class Illumination {
+	UNLIT,
+	LAMBERT,
+	PHONG
+};
+
+struct RendererProperties {
+	bool enableShadows = true;
+	int width = 800;
+	int height = 800;
+	int ssaaSubdivisions = 2;
+	Illumination illumination = Illumination::PHONG;
+	std::shared_ptr<Scene> scene;
+	std::shared_ptr<Camera> camera;
+};
+
 class Renderer {
 private:
-	int _width;
-	int _height;
-	Illumination _illumination;
-public:
-	Renderer(int width, int height);
+	RendererProperties _properties;
 
-	Image render(const Scene& s, const Camera& c) const;
-	Renderer& setIlluminationModel(const Illumination& illu);
+	Color getImpactColorUnlit(const Ray& r, const std::shared_ptr<Object>& obj, const Point& impact) const;
+	Color getImpactColorLambert(const Ray& r, const std::shared_ptr<Object>& obj, const Point& impact) const;
+	Color getImpactColorPhong(const Ray& r, const std::shared_ptr<Object>& obj, const Point& impact) const;
+public:
+	Renderer() = default;
+	Renderer(const RendererProperties& properties);
+
+	Renderer& setProperties(const RendererProperties& properties);
+
+	Image render() const;
 };
 
 #endif

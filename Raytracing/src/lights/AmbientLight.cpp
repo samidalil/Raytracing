@@ -10,16 +10,17 @@ AmbientLight::AmbientLight(const Vector& position, const Vector& rotation, const
 
 Color AmbientLight::getIlluminationLambert(const Point& impact, const Vector& normal, const Ray& ray, const Material& mat) const {
 	float angle = Vector::dot(normal, this->getVectorToLight(impact));
-	return mat.kd * this->id * (angle < 0 ? 0 : angle);
+
+	return angle < 0 ? Color::black : mat.kd * this->id * angle;
 }
 
 Color AmbientLight::getIlluminationPhong(const Point& impact, const Vector& normal, const Ray& ray, const Material& mat) const {
-	const Vector r = this->getVectorToLight(impact);
-	const float nToRAngle = Vector::dot(normal, r);
-	const float rToNAngle = Vector::dot(ray.vector, Vector::reflect(r, normal));
-	Color result;
+	const float rToNAngle = Vector::dot(
+		ray.vector,
+		Vector::reflect(this->getVectorToLight(impact), normal)
+	);
+	Color result = this->getIlluminationLambert(impact, normal, ray, mat);
 
 	if (rToNAngle >= 0) result += mat.ks * this->is * pow(rToNAngle, mat.shininess);
-	if (nToRAngle >= 0) result += mat.kd * this->id * nToRAngle;
 	return result;
 }

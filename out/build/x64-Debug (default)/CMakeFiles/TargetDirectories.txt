@@ -9,6 +9,11 @@ D:/Raytracing/out/build/x64-Debug (default)/Raytracing/CMakeFiles/install.dir
 D:/Raytracing/out/build/x64-Debug (default)/Raytracing/CMakeFiles/edit_cache.dir
 D:/Raytracing/out/build/x64-Debug (default)/Raytracing/CMakeFiles/rebuild_cache.dir
 D:/Raytracing/out/build/x64-Debug (default)/Raytracing/CMakeFiles/list_install_components.dir
+D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/CMakeFiles/install/local.dir
+D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/CMakeFiles/install.dir
+D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/CMakeFiles/edit_cache.dir
+D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/CMakeFiles/rebuild_cache.dir
+D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/CMakeFiles/list_install_components.dir
 D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/glad/CMakeFiles/glad.dir
 D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/glad/CMakeFiles/install/local.dir
 D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/glad/CMakeFiles/install.dir
