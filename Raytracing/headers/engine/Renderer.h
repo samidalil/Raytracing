@@ -6,7 +6,6 @@
 #include "../image/Image.h"
 
 enum class Illumination {
-	UNLIT,
 	LAMBERT,
 	PHONG
 };
@@ -25,7 +24,6 @@ class Renderer {
 private:
 	RendererProperties _properties;
 
-	Color getImpactColorUnlit(const Ray& r, const std::shared_ptr<Object>& obj, const Point& impact) const;
 	Color getImpactColorLambert(const Ray& r, const std::shared_ptr<Object>& obj, const Point& impact) const;
 	Color getImpactColorPhong(const Ray& r, const std::shared_ptr<Object>& obj, const Point& impact) const;
 public:

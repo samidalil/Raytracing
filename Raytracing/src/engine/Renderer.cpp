@@ -1,5 +1,7 @@
 #include "../../headers/engine/Renderer.h"
 
+#include <thread>
+
 Renderer::Renderer(const RendererProperties& properties) : _properties(properties) {}
 
 Renderer& Renderer::setProperties(const RendererProperties& properties) {
@@ -25,50 +27,36 @@ Image Renderer::render() const {
 		const float floatedNormalizedY = float(y) / floatedHeight;
 
 		for (int x = 0; x < this->_properties.width; ++x) {
-			Ray cameraRay = this->_properties.camera->getRay(float(x) / floatedWidth, floatedNormalizedY);
-			closest = this->_properties.scene->closestIntersected(cameraRay, impact);
+			float r = 0;
+			float g = 0;
+			float b = 0;
 
-			if (closest) {
-				color = getImpactColorPhong(cameraRay, closest, impact);
-				float r = color[0];
-				float g = color[1];
-				float b = color[2];
+			for (int subY = 0; subY < this->_properties.ssaaSubdivisions; ++subY) {
+				const float floatedNormalizedSubY = floatedNormalizedY + float(subY) / floatedSubdivision / floatedHeight;
 
-				for (int subY = 0; subY < this->_properties.ssaaSubdivisions; ++subY) {
-					const float floatedNormalizedSubY = floatedNormalizedY + float(subY) / floatedSubdivision / floatedHeight;
+				for (int subX = 0; subX < this->_properties.ssaaSubdivisions; ++subX) {
+					const Ray cameraRay = this->_properties.camera->getRay(
+						float(x + float(subX) / floatedSubdivision) / floatedWidth,
+						floatedNormalizedSubY
+					);
 
-					for (int subX = 0; subX < this->_properties.ssaaSubdivisions; ++subX) {
-						if (subX == 0 && subY == 0) continue;
+					closest = this->_properties.scene->closestIntersected(cameraRay, impact);
+					color = closest ? getImpactColorPhong(cameraRay, closest, impact) : background;
 
-						cameraRay = this->_properties.camera->getRay(
-							float(x + float(subX) / floatedSubdivision) / floatedWidth,
-							floatedNormalizedSubY
-						);
-						closest = this->_properties.scene->closestIntersected(cameraRay, impact);
-
-						if (closest) {
-							color = getImpactColorPhong(cameraRay, closest, impact);
-							r += color[0];
-							g += color[1];
-							b += color[2];
-						}
-					}
+					r += color[0];
+					g += color[1];
+					b += color[2];
 				}
-
-				color[0] = r / totalSubdivisions;
-				color[1] = g / totalSubdivisions;
-				color[2] = b / totalSubdivisions;
-				image.setColor(x, this->_properties.height - y - 1, color);
 			}
-			else image.setColor(x, this->_properties.height - y - 1, background);
+
+			color[0] = r / totalSubdivisions;
+			color[1] = g / totalSubdivisions;
+			color[2] = b / totalSubdivisions;
+			image.setColor(x, this->_properties.height - y - 1, color);
 		}
 	}
 
 	return image;
-}
-
-Color Renderer::getImpactColorUnlit(const Ray& ray, const std::shared_ptr<Object>& obj, const Point& impact) const {
-	return obj->getMaterial(impact).ka * this->_properties.scene->getAmbient();
 }
 
 Color Renderer::getImpactColorLambert(const Ray& ray, const std::shared_ptr<Object>& obj, const Point& impact) const {

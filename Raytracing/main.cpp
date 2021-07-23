@@ -21,7 +21,6 @@
 //                                                                        \\
 //------------------------------------------------------------------------\\
 
-
 #include <iostream>
 #include <memory>
 
@@ -49,15 +48,16 @@ struct DataContext {
 
 int main()
 {
-	auto material = std::make_shared<Material>(Color::white, Color::white, Color::white, 1);
-	auto img = std::make_shared<Image>("D:\\Raytracing\\texture.jpg");
-	material->texture = img;
-	auto pos = Vector(-3, 0, -35);
-	auto s1 = std::make_shared<Sphere>(pos, Vector(0, 0, 0), 1.5, material);
-	auto s2 = std::make_shared<Sphere>(Vector(0, 0, -35), Vector(0.2, -0.2, 0), 1, material);
-	auto l1 = std::make_shared<AmbientLight>(Vector(15, 0, -35), Vector(0, 0, 0), Color::white, Color::white);
-	auto l2 = std::make_shared<AmbientLight>(Vector(-15, 0, -35), Vector(0, 0, 0), Color::white, Color::white);
-	auto scene = std::make_shared<Scene>(Color::blue * 0.4 + Color::red * 0.7, Color::white * 0.4);
+	auto material1 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.2, 1);
+	auto material2 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.2, 1);
+	material2->texture = std::make_shared<Image>("D:\\Raytracing\\texture2.jpg");;
+	auto pos = Vector(-2, 2.4, -35);
+	auto pos2 = Vector(5, 0, -10);
+	auto s1 = std::make_shared<Cube>(pos, Vector(0.2, 0.7, 0), 1.7, material2);
+	auto s2 = std::make_shared<Sphere>(pos + (pos2 - pos) / 2, Vector(), 1, material1);
+	auto l1 = std::make_shared<AmbientLight>(pos2, Vector(0, 0, 0), Color::white * 0.5, Color::white * 0.3);
+	auto l2 = std::make_shared<AmbientLight>(Vector(-15, 0, 0), Vector(0, 0, 0), Color::white * 0.15, Color::white * 0.2);
+	auto scene = std::make_shared<Scene>(Color::blue * 0.1 + Color::red * 0.15, Color::white * 0.4);
 	auto camera = std::make_shared<Camera>(10);
 
 	scene->add(s1);
@@ -69,6 +69,9 @@ int main()
 
 	data.rendererProperties.scene = scene;
 	data.rendererProperties.camera = camera;
+	data.rendererProperties.ssaaSubdivisions = 2;
+	data.rendererProperties.width = 800;
+	data.rendererProperties.height = 800;
 	data.renderer.setProperties(data.rendererProperties);
 	
 	Image image = data.renderer.render();
