@@ -1,5 +1,4 @@
 #include "../../headers/primitives/Square.h"
-#include <algorithm>
 
 Square::Square(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material) :
 	Object(position, rotation, scale, material)
