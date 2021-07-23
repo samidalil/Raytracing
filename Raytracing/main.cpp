@@ -24,7 +24,6 @@
 #include <iostream>
 #include <memory>
 
-#include "headers/Constants.h"
 #include "headers/image/Image.h"
 #include "headers/primitives/Sphere.h"
 #include "headers/engine/Camera.h"
@@ -40,17 +39,20 @@
 #include "imgui_impl_opengl3.h"
 #include "headers/ui/window.h"
 
+
 struct DataContext {
 	RendererProperties rendererProperties;
 	Renderer renderer;
-	std::string savePath = "D:\\Raytracing\\result.jpg";
+	std::string filename;
+	std::string savePath;
 };
 
-int main()
+void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumination illuminationModel, std::string savePath, std::string fileName)
 {
+	// prepare to render 
 	auto material1 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.2, 1);
-	auto material2 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.2, 1);
-	material2->texture = std::make_shared<Image>("D:\\Raytracing\\texture2.jpg");;
+	auto material2 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.5, 1);
+	material2->texture = std::make_shared<Image>("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\sample.jpg");
 	auto pos = Vector(-2, 2.4, -35);
 	auto pos2 = Vector(5, 0, -10);
 	auto s1 = std::make_shared<Cube>(pos, Vector(0.2, 0.7, 0), 1.7, material2);
@@ -69,13 +71,100 @@ int main()
 
 	data.rendererProperties.scene = scene;
 	data.rendererProperties.camera = camera;
-	data.rendererProperties.ssaaSubdivisions = 2;
-	data.rendererProperties.width = 800;
-	data.rendererProperties.height = 800;
+	data.rendererProperties.ssaaSubdivisions = ssaSub;
+	data.rendererProperties.width = w;
+	data.rendererProperties.height = h;
+	data.rendererProperties.illumination = illuminationModel;
+	data.rendererProperties.enableShadows = shadowActivated;
+	data.savePath = savePath;
+	data.filename = fileName;
 	data.renderer.setProperties(data.rendererProperties);
-	
+
+	// rendering
 	Image image = data.renderer.render();
-	image.save(data.savePath);
+	image.save(data.savePath + "\\" + data.filename);
+}
+
+void ImGUICallback()
+{
+	// RENDER WINDOW
+
+	ImGui::Begin("Render properties");
+	static int ssaaSubdivision = 2;
+	static bool shadowActivate = true;
+	static const Illumination items[] = { Illumination::PHONG, Illumination::LAMBERT };
+	Illumination current_item = items[0];
+
+
+
+	ImGui::PushItemWidth(150.0f);
+
+	const char* name = "Phong";
+
+	switch (current_item)
+	{
+	case Illumination::PHONG:  name = "Phong"; break;
+	case Illumination::LAMBERT: name = "Lambert"; break;
+	default:
+		name = "Phong";
+		break;
+	}
+
+	if (ImGui::BeginCombo("##select material", name)) // The second parameter is the label previewed before opening the combo.
+	{
+		int size = IM_ARRAYSIZE(items);
+		for (int n = 0; n < size; n++)
+		{
+			bool is_selected = (current_item == items[n]);
+			switch (items[n])
+			{
+			case Illumination::PHONG:  name = "Phong"; break;
+			case Illumination::LAMBERT: name = "Lambert"; break;
+			default:
+				name = "Phong";	break;
+			}
+			if (ImGui::Selectable(name, is_selected)) {
+				current_item = items[n];
+				if (is_selected)
+					ImGui::SetItemDefaultFocus();
+			}
+		}
+
+		ImGui::EndCombo();
+	}
+
+
+	//ImGui::Checkbox("Shadows", &shadowActivate);
+	ImGui::SliderInt("SSAA subdivisions", &ssaaSubdivision, 0, 16);
+
+
+	ImGui::End();
+
+	ImGui::Begin("Image");
+	static char filename[128] = "renderedImage.jpg";
+	static char filepath[128] = "D:\\Dev\\GPUdev\\ESGI\\Raytracing\\outputs";
+	static float img_width = 800.f;
+	static float img_height = 800.f;
+
+
+	ImGui::InputTextWithHint("Enter image name", "filename and extension", filename, IM_ARRAYSIZE(filename));
+	ImGui::InputFloat("Width", &img_width);
+	ImGui::InputFloat("height", &img_height);
+	ImGui::InputTextWithHint("Enter save path", "path", filepath, IM_ARRAYSIZE(filepath));
+
+	if (ImGui::Button("-- RENDER --")) renderCallback(img_width, img_height, ssaaSubdivision, shadowActivate, Illumination::LAMBERT, filepath, filename);
+	ImGui::End();
+}
+
+int main()
+{
+	std::string title = "RayZ - a very very very very simple raytracer";
+	Window w(1920, 1080, title);
+	w.setBackgroundColor(0.99, 0.90, 0.94);
+	while (w.isOpen()) w.run(ImGUICallback);
+	w.terminate();
+	return 0;
+
 }
 
 /*void render_to_jpg_func(int W, int H, Illumination illuminationModel, const char* directory, const char* filename)
