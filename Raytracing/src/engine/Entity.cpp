@@ -20,6 +20,18 @@ void Entity::copy(const Entity& e) {
 	this->_transInv = e._transInv;
 }
 
+void Entity::display(std::ostream& os) const
+{
+	type(os);
+	os << _trans;
+}
+
+void Entity::type(std::ostream& os) const
+{
+	os << "\"type\": \"" << typeid(*this).name() << "\"";
+}
+
+
 void Entity::rotate(const Vector& angles) {
 	this->rotateY(angles[1]);
 	this->rotateZ(angles[2]);
@@ -121,6 +133,9 @@ Ray Entity::globalToLocal(const Ray& r) const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Entity& e) {
-	os << "Transform:" << std::endl << e._trans << std::endl << "Inverse transform:" << std::endl << e._transInv;
-	return os;
+	//Debug operator << 
+	/*os << "Transform:" << std::endl << e._trans << std::endl << "Inverse transform:" << std::endl << e._transInv;
+	return os;*/
+
+
 }

@@ -20,6 +20,8 @@ private:
 	void translate(const Vector& translation);
 protected:
 	virtual void copy(const Entity& e);
+	virtual void display(std::ostream& os) const;
+	virtual void type(std::ostream& os)const;
 public:
 	Entity() = default;
 	Entity(const Vector& position, const Vector& rotation, float scale);

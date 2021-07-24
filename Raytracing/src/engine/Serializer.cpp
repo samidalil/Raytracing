@@ -22,7 +22,7 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 		file << "},";
 	}
 	file << "],";
-	file << "materials: [";
+	file << "\"materials\": [";
 	for each (auto mat in scene->getMaterials())
 	{
 		file << "{ ";
@@ -32,6 +32,16 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 		file << "\"shininess\": " << mat->shininess << ",";
 		file << "\"texture\": " <<  mat->texture<< ","; //TODO
 		file << "} ";
+	}
+	file << "],";
+	file << "\"objects:\" [";
+	for each (auto obj in scene->getObjects())
+	{
+		file << "{ ";
+		//file << "\"type\": " << mat->ka << ","; //TODO
+		file << "\"type\": " << ;
+
+
 	}
 	file.close();
 }
