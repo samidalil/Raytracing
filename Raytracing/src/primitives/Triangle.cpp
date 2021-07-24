@@ -3,8 +3,7 @@
 #include "../../headers/math/Constants.h" 
 
 Triangle::Triangle(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material) : 
-	Object(position, rotation, scale, material), _uv(Point())
-{
+	Object(position, rotation, scale, material){
 }
 
 Point Triangle::A(-1, -1, 0);
