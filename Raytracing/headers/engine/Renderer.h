@@ -1,5 +1,6 @@
 #ifndef RT_RENDERER_H
 #define RT_RENDERER_H
+#include <vector>
 
 #include "Scene.h"
 #include "Camera.h"
@@ -31,6 +32,7 @@ public:
 	Renderer(const RendererProperties& properties);
 
 	Renderer& setProperties(const RendererProperties& properties);
+
 
 	Image render() const;
 };
