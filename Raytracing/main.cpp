@@ -37,6 +37,7 @@
 #include "headers/primitives/Square.h"
 #include "headers/primitives/Cylinder.h"
 #include "headers/primitives/Triangle.h"
+#include "headers/engine/Serializer.h"
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -53,10 +54,11 @@ struct DataContext {
 
 void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumination illuminationModel, std::string savePath, std::string fileName)
 {
+	std::string texture = "E:\\dev\\Raytracing\\resources\\sample.jpg";
 	// prepare to render 
 	auto material1 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.2, 1);
 	auto material2 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.5, 1);
-	material2->texture = std::make_shared<Image>("E:\\dev\\Raytracing\\resources\\sample.jpg");
+	material2->texture = std::make_shared<Image>(texture);
 	auto pos = Vector(-2, 2.4, -35);
 	auto pos2 = Vector(1, 3.5, -25);
 	auto s1 = std::make_shared<Cube>(pos, Vector(0.2, 0.7, 0), 1.7, material2);
@@ -69,14 +71,17 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	auto scene = std::make_shared<Scene>(Color::blue * 0.1 + Color::red * 0.15, Color::white * 0.4);
 	auto camera = std::make_shared<Camera>(10);
 
+	scene->add(texture);
 	scene->add(s1);
 	scene->add(s2);
     scene->add(cy1);
 	scene->add(t1);
 	scene->add(ground);
 	scene->add(l1);
-	//scene->add(l2);
 
+	auto serializer = Serializer();
+	serializer.serializeScene(scene);
+	//scene->add(l2);
 	DataContext data;
 
 	data.rendererProperties.scene = scene;
@@ -94,6 +99,7 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	Image image = data.renderer.render();
 	image.save(data.savePath + "\\" + data.filename);
 }
+
 
 void ImGUICallback()
 {

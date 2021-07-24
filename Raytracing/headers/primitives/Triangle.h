@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef RT_TRIANGLE_H
+#define RT_TRIANGLE_H
 #include "../engine/Object.h"
 #include "../engine/Ray.h"
 #include "../math/Point.h"
@@ -18,3 +18,4 @@ public:
 	Ray getNormal(const Point& impact, const Point& observator) const override;
 	Point getTextureCoordinates(const Point& p) const override;
 };
+#endif

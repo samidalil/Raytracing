@@ -1,0 +1,3 @@
+{
+	"textures:": [
+		"E:\dev\Raytracing\resources\sample.jpg"

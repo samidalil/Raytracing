@@ -38,6 +38,11 @@ Scene& Scene::add(const std::shared_ptr<Light>& l) {
 	return (*this);
 }
 
+Scene& Scene::add(const std::string& s) {
+	this->_texturePaths.push_back(s);
+	return (*this);
+}
+
 std::shared_ptr<Object> Scene::closestIntersected(const Ray& ray, Point& impact) const {
 	float minDistance = FLT_MAX;
 	float distance;
@@ -64,6 +69,11 @@ std::list<std::shared_ptr<Object>> Scene::getObjects() const {
 
 std::list<std::shared_ptr<Light>> Scene::getLights() const {
 	return this->_lights;
+}
+
+std::list<std::string> Scene::getTexturePaths() const
+{
+	return this->_texturePaths;
 }
 
 Color Scene::getBackground() const {
