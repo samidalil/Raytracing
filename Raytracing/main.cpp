@@ -33,6 +33,8 @@
 #include "headers/primitives/Plane.h"
 #include "headers/primitives/Cube.h"
 #include "headers/lights/AmbientLight.h"
+#include "headers/primitives/Square.h"
+#include "headers/primitives/Cylinder.h"
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -57,6 +59,9 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	auto pos2 = Vector(5, 0, -10);
 	auto s1 = std::make_shared<Cube>(pos, Vector(0.2, 0.7, 0), 1.7, material2);
 	auto s2 = std::make_shared<Sphere>(pos + (pos2 - pos) / 2, Vector(), 1, material1);
+	//auto sq1 = std::make_shared<Square>(Vector(0, -2, -25), Vector(), 0.5, material2);
+	auto cy1 = std::make_shared<Cylinder>(Vector(0, -2, -25), Vector(0.,0.5,1), 0.5, material2);
+
 	auto l1 = std::make_shared<AmbientLight>(pos2, Vector(0, 0, 0), Color::white * 0.5, Color::white * 0.3);
 	auto l2 = std::make_shared<AmbientLight>(Vector(-15, 0, 0), Vector(0, 0, 0), Color::white * 0.15, Color::white * 0.2);
 	auto scene = std::make_shared<Scene>(Color::blue * 0.1 + Color::red * 0.15, Color::white * 0.4);
@@ -64,6 +69,7 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 
 	scene->add(s1);
 	scene->add(s2);
+	scene->add(cy1);
 	scene->add(l1);
 	scene->add(l2);
 
