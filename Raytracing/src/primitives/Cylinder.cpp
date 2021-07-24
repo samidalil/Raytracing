@@ -58,5 +58,5 @@ Point Cylinder::getTextureCoordinates(const Point& p) const
 	float sigma = std::acos(lp[2] / rho);
 	float x = -theta / (2 * PI) + 0.5;
 	float y = sigma / PI;
-	return Point(x, y, 0]);
+	return Point(x, y, 0);
 }
