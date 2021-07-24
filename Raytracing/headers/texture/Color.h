@@ -1,5 +1,6 @@
 #ifndef RT_COLOR_H
 #define RT_COLOR_H
+#include <iostream>
 
 class Color {
 private:
@@ -28,6 +29,9 @@ public:
 	friend Color operator+(const Color& lhs, const Color& rhs);
 	friend Color operator*(const Color& lhs, const float& rhs);
 	friend Color operator*(const float& lhs, const Color& rhs);
+
+	friend std::ostream& operator<<(std::ostream& os, const Color& c);
+
 };
 
 #endif
