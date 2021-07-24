@@ -14,10 +14,11 @@ private:
 public:
 	Color id;
 	Color is;
+	float intensity;
 
 	Light();
-	Light(const Color& diffuse, const Color& specular);
-	Light(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular);
+	Light(const Color& diffuse, const Color& specular, float intensity);
+	Light(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular, float intensity);
 	Light(const Light& l);
 	Light& operator=(const Light& l);
 	

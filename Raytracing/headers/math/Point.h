@@ -16,6 +16,7 @@ public:
 	Point& operator=(const Point& p);
 
 	static float dot(const Point& a, const Point& b);
+	static Point cross(const Point& a, const Point& b);
 
 	float& operator[](int index);
 	float operator[](int index) const;

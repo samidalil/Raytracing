@@ -30,6 +30,10 @@ float Point::dot(const Point& a, const Point& b) {
 	return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 }
 
+Point Point::cross(const Point& a, const Point& b) {
+	return Point(a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]);
+}
+
 float& Point::operator[](int index) {
 	return this->_tab[index];
 }
