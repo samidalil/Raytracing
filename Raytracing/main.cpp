@@ -71,7 +71,9 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	auto scene = std::make_shared<Scene>(Color::blue * 0.1 + Color::red * 0.15, Color::white * 0.4);
 	auto camera = std::make_shared<Camera>(10);
 
-	scene->add(texture);
+	scene->add(0,texture);
+	scene->add(material1);
+	scene->add(material2);
 	scene->add(s1);
 	scene->add(s2);
     scene->add(cy1);
@@ -81,7 +83,6 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 
 	auto serializer = Serializer();
 	serializer.serializeScene(scene);
-	//scene->add(l2);
 	DataContext data;
 
 	data.rendererProperties.scene = scene;

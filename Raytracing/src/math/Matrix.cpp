@@ -200,6 +200,8 @@ Vector operator*(const Vector& lhs, const Matrix& rhs) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Matrix& m) {
+	
+	/* Debug implementation of << operator 
 	for (int i = 0; i < 3; ++i) {
 		os << "| ";
 		for (int j = 0; j < 3; ++j) os << m(i, j) << ", ";
@@ -209,5 +211,12 @@ std::ostream& operator<<(std::ostream& os, const Matrix& m) {
 	for (int j = 0; j < 3; ++j) os << m(3, j) << ", ";
 	os << m(3, 3) << " |";
 
+	return os;*/
+	os << "[";
+	for (int i = 0; i < 16; ++i)
+	{
+			os << m._tab[i] << ",";
+	}
+	os << "]";
 	return os;
 }

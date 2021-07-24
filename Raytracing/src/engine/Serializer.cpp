@@ -11,26 +11,28 @@ Serializer::Serializer(const Scene& scene)
 void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 {
 	std::ofstream file;
-	_tabCount = 0;
 	file.open("E:\\dev\\Raytracing\\anotherTest.txt");
-	file << tabulate() <<"{" << std::endl;
-	_tabCount++;
-	file << tabulate() << "\"textures:\": [" << std::endl;
-	_tabCount++;
+	file << "{";
+	file << "\"textures:\": [";
 	for each (auto path in scene->getTexturePaths())
 	{
-		file << tabulate() << "\"" << path << "\"," << std::endl;
+		file << "{ ";
+		file << "\"path\":" << "\"" << path.second << "\", "; //remove last coma? 
+		file << "\"id\"" << path.first;
+		file << "},";
 	}
-	_tabCount--;
-	file << tabulate() << "]," << std::endl;
-	file << tabulate() << "materials: [" << std::endl;
-	_tabCount++;
-	file << tabulate() << "{" << std::endl;
-
-	/*for each (auto obj in _objects)
+	file << "],";
+	file << "materials: [";
+	for each (auto mat in scene->getMaterials())
 	{
-		file << typeid(obj).name()<<std::endl;
-	}*/
+		file << "{ ";
+		file << "\"ka\": " << mat->ka << ",";
+		file << "\"kd\": " << mat->kd << ",";
+		file << "\"ks\": " << mat->ks << ",";
+		file << "\"shininess\": " << mat->shininess << ",";
+		file << "\"texture\": " <<  mat->texture<< ","; //TODO
+		file << "} ";
+	}
 	file.close();
 }
 

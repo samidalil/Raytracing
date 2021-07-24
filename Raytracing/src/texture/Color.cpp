@@ -89,3 +89,9 @@ Color operator*(const Color& lhs, const float& rhs) {
 Color operator*(const float& lhs, const Color& rhs) {
 	return rhs * lhs;
 }
+
+std::ostream& operator<<(std::ostream& os, const Color& c)
+{
+	os << "[" << c[0] << "," << c[1] << "," << c[2] << "]";
+	return os;
+}
