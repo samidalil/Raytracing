@@ -41,8 +41,8 @@ bool Triangle::intersect(const Ray& r, Point& impact) const
 	// est égale au produit scalaire de son premier élément et du produit en vectoriel de ses deux autres.
 	
 	Vector AB = B - A;
-	Vector BC = C - B;
-	Vector p = Vector::cross(ray.vector, (BC));
+	Vector AC = C - A;
+	Vector p = Vector::cross(ray.vector, (AC));
 	float det = Vector::dot(AB, p);
 	if (det > -EPS && det < EPS) return false;    // parallel
 
@@ -55,7 +55,7 @@ bool Triangle::intersect(const Ray& r, Point& impact) const
 	float v = invDet * Vector::dot(ray.vector, q);
 	if (v < 0.0 || u + v > 1.0)	return false;
 
-	float t = invDet * Vector::dot(BC, q); // impact at t * ray.vector
+	float t = invDet * Vector::dot(AC, q); // impact at t * ray.vector
 
 	if (t > EPS) // front face
 	{
