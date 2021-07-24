@@ -1,13 +1,14 @@
 #include "../../headers/engine/Light.h"
 
-Light::Light() : Entity(), id(Color::white), is(Color::white) {}
+Light::Light() : Entity(), id(Color::white), is(Color::white), intensity(1) {}
 
-Light::Light(const Color& diffuse, const Color& specular) : Entity(), id(diffuse), is(specular) {}
+Light::Light(const Color& diffuse, const Color& specular, float i) : Entity(), id(diffuse), is(specular), intensity(i) {}
 
-Light::Light(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular) :
+Light::Light(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular, float _intensity) :
 	Entity(position, rotation, 1),
 	id(diffuse),
-	is(specular)
+	is(specular),
+	intensity(_intensity)
 {}
 
 Light::Light(const Light& l) {

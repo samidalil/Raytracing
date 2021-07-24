@@ -62,8 +62,8 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	//auto sq1 = std::make_shared<Square>(Vector(0, -2, -25), Vector(), 0.5, material2);
 	auto cy1 = std::make_shared<Cylinder>(Vector(0, -2, -25), Vector(0.,0.5,1), 0.5, material2);
 
-	auto l1 = std::make_shared<AmbientLight>(pos2, Vector(0, 0, 0), Color::white * 0.5, Color::white * 0.3);
-	auto l2 = std::make_shared<AmbientLight>(Vector(-15, 0, 0), Vector(0, 0, 0), Color::white * 0.15, Color::white * 0.2);
+	auto l1 = std::make_shared<AmbientLight>(pos2, Vector(0, 0, 0), Color::white * 0.5, Color::white * 0.3, 0.4f);
+	auto l2 = std::make_shared<AmbientLight>(Vector(-15, 0, 0), Vector(0, 0, 0), Color::white * 0.15, Color::white * 0.2, 1.f);
 	auto scene = std::make_shared<Scene>(Color::blue * 0.1 + Color::red * 0.15, Color::white * 0.4);
 	auto camera = std::make_shared<Camera>(10);
 
