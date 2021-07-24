@@ -9,7 +9,7 @@ add_executable (Raytracing
 	"src/primitives/Sphere.cpp" "src/primitives/Plane.cpp" "src/primitives/Cube.cpp"
 	"src/lights/AmbientLight.cpp"
 	"src/ui/ImGUI_context.cpp" "src/ui/OpenGL_context.cpp" "src/ui/window.cpp"
- "headers/primitives/Square.h" "src/primitives/Square.cpp" "headers/primitives/Cylinder.h" "src/primitives/Cylinder.cpp")
+    "src/primitives/Square.cpp" "src/primitives/Cylinder.cpp")
 
 add_subdirectory("vendor")
 
