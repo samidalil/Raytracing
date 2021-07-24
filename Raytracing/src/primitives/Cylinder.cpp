@@ -50,13 +50,6 @@ Ray Cylinder::getNormal(const Point& impact, const Point& observator) const
 
 Point Cylinder::getTextureCoordinates(const Point& p) const
 {
-	//TODO do real implementation (currently sphere implem)
 	Point coord = globalToLocal(p);
-	Point lp = globalToLocal(p);
-	float rho = std::sqrt(Point::dot(lp, lp));
-	float theta = std::atan2(lp[1], lp[0]);
-	float sigma = std::acos(lp[2] / rho);
-	float x = -theta / (2 * PI) + 0.5;
-	float y = sigma / PI;
-	return Point(x, y, 0);
+	return Point(1 - (atan2(coord[0], coord[2]) / (2 * PI) + 0.5), std::fmod(coord[1], 1), 0);
 }
