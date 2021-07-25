@@ -63,6 +63,22 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 		}
 	}
 	file << "],";
+	file << "\"lights\": [";
+	auto lights = scene->getLights();
+	for (auto it = lights.begin(); it != lights.end(); ++it)
+	{
+		file << "{ ";
+		file << **it;
+		if (std::next(it) != lights.end())
+		{
+			file << "},";
+		}
+		else
+		{
+			file << "}";
+		}
+	}
+	file << "],";
 	file << "\"backgroundColor\": " << scene->getBackground() << ",";
 	file << "\"ambientColor\": " << scene->getAmbient();
 	file << "}";
@@ -77,6 +93,7 @@ Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 		return Scene();
 	}
 
+	std::cout << "BONJOUR";
 	std::ifstream file;
 	file.open(sceneFilePath, std::ifstream::in);
 
@@ -87,7 +104,7 @@ Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 	{
 		scene->add(std::make_shared<Texture>(texture["path"],texture["id"]));
 	}
-
+	/*
 	auto textures = scene->getTextures();
 	for(auto& material : js["materials"])
 	{
@@ -101,7 +118,7 @@ Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 		if(texture != textures.end()) 
 			mat->texture = *texture;
 		scene->add(mat);
-	}
+	}*/
 	/*
 	for (auto& object : js["objects"])
 	{
@@ -118,10 +135,6 @@ Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 	}
 	*/
 
-	for (auto it = textures.begin(); it != textures.end();
-		++it) {
-		std::cout << "texture: " <<**it << std::endl;
-	}
 	return Scene();
 	
 }

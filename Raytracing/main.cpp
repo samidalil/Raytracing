@@ -80,6 +80,9 @@ void renderCallback(DataContext data)
 	scene->add(texture);
 	scene->add(material1);
 	scene->add(material2);
+
+	scene->add(l1);
+	scene->add(l2);
 //	scene->add(ground);
 	scene->add(s2);
 	scene->add(plane);

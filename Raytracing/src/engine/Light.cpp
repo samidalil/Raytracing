@@ -29,7 +29,8 @@ void Light::copy(const Light& l) {
 void Light::display(std::ostream& os) const
 {
 	Entity::display(os);
-	os << "\"id\": " << id;
+	os << ",";
+	os << "\"id\": " << id << ",";
 	os << "\"is\": " << is;
 }
 
