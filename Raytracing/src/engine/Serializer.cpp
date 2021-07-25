@@ -9,6 +9,7 @@ Serializer::Serializer(const std::string& write, const std::string& read)
 
 void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 {
+	std::cout << pathToWrite;
 	std::ofstream file;
 	file.open(pathToWrite);
 	file << "{";

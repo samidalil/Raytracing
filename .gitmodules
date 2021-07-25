@@ -4,3 +4,6 @@
 [submodule "Raytracing/vendor/glfw"]
 	path = Raytracing/vendor/glfw
 	url = https://github.com/glfw/glfw.git
+[submodule "Ratraycing\\vendor\\json"]
+	path = Ratraycing\\vendor\\json
+	url = https://github.com/nlohmann/json.git
