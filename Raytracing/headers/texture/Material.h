@@ -21,7 +21,8 @@ public:
 	
 
 	Material();
-	Material(Color ambient, Color diffuse, Color specular, float shininess);
+	Material(Color ambient, Color diffuse, Color specular, float shiny);
+	Material(int id, Color ambient, Color diffuse, Color specular, float shiny);
 	Material(const Material& m);
 	Material& operator=(const Material& m);
 

@@ -55,11 +55,11 @@ DataContext data;
 
 void renderCallback(DataContext data)
 {
-	auto texture = std::make_shared<Texture>("D:\\Raytracing\\resources\\sample.jpg");
+	auto texture = std::make_shared<Texture>("E:\\dev\\Raytracing\\resources\\sample.jpg");
 	// prepare to render 
 	auto material1 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.2, 1);
 	auto material2 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.5, 1);
-	//material2->texture = texture;
+	material2->texture = texture;
 	auto blue = std::make_shared<Material>(Color(0, 0, 1), Color(0, 0, 1), Color(0, 0, 1), 1);
 	auto red = std::make_shared<Material>(Color(1, 0, 0), Color(1, 0, 0), Color(1, 0, 0), 1);
 	
@@ -85,10 +85,9 @@ void renderCallback(DataContext data)
 	scene->add(plane);
 	scene->add(leftWall);
 	scene->add(rightWall);
-	scene->add(l1);
 	
-	std::string pathWrite = "D:\\Raytracing\\SerializedData.json";
-	std::string pathRead = "D:\\Raytracing\\SerializedData.json";
+	std::string pathWrite = "E:\\dev\\Raytracing\\SerializedData.json";
+	std::string pathRead = "E:\\dev\\Raytracing\\SerializedData.json";
 	Serializer serializer(pathWrite, pathRead);
 	serializer.serializeScene(scene);
 	serializer.deserializeScene(pathWrite);

@@ -11,6 +11,14 @@ Material::Material(Color ambient, Color diffuse, Color specular, float shiny) :
 	ks(specular),
 	shininess(shiny) {}
 
+Material::Material(int id, Color ambient, Color diffuse, Color specular, float shiny) :
+	id(id),
+	ka(ambient),
+	kd(diffuse),
+	ks(specular),
+	shininess(shiny) {}
+
+
 Material::Material(const Material& m) {
 	this->copy(m);
 }
@@ -46,7 +54,8 @@ std::ostream& operator<<(std::ostream& os, const Material& m)
 	os << "\"ka\": " << m.ka << ",";
 	os << "\"kd\": " << m.kd << ",";
 	os << "\"ks\": " << m.ks << ",";
-	os << "\"shininess\": " << m.shininess;
+	os << "\"shininess\": " << m.shininess << ",";
+	os << "\"id\": " << m.id;
 	if (m.texture)
 	{
 		os << ",";

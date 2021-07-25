@@ -83,13 +83,41 @@ Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 	nlohmann::json js = nlohmann::json::parse(file);
 	auto scene = std::make_shared<Scene>();
 
-	for (auto& texture : js["textures"])
+	for(auto& texture : js["textures"])
 	{
-		std::cout << "id: " << texture["id"] << std::endl;
 		scene->add(std::make_shared<Texture>(texture["path"],texture["id"]));
 	}
 
 	auto textures = scene->getTextures();
+	for(auto& material : js["materials"])
+	{
+		auto mat = std::make_shared<Material>(material["id"], material["ka"], material["kd"], material["ks"], material["shininess"]);
+		auto textureId = material["texture"];
+		auto texture = std::find_if(textures.begin(), textures.end(), [textureId] 
+		(const std::shared_ptr<Texture>& t)
+			{
+				return t->id == textureId;
+			});
+		if(texture != textures.end()) 
+			mat->texture = *texture;
+		scene->add(mat);
+	}
+	/*
+	for (auto& object : js["objects"])
+	{
+		auto obj = std::make_shared<Object>(material["id"], material["ka"], material["kd"], material["ks"], material["shininess"]);
+		auto textureId = material["texture"];
+		auto texture = std::find_if(textures.begin(), textures.end(), [textureId]
+		(const std::shared_ptr<Texture>& t)
+			{
+				return t->id == textureId;
+			});
+		if (texture != textures.end())
+			mat->texture = *texture;
+		scene->add(mat);
+	}
+	*/
+
 	for (auto it = textures.begin(); it != textures.end();
 		++it) {
 		std::cout << "texture: " <<**it << std::endl;

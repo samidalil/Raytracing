@@ -11,7 +11,10 @@ Texture::Texture(const std::string& texturePath) :
 }
 
 
-Texture::Texture(const std::string& path, int id):path(path), id(id){}
+Texture::Texture(const std::string& path, int id):path(path), id(id)
+{
+	this->texture = std::make_shared<Image>(path);
+}
 
 
 void Texture::copy(const Texture& t)
