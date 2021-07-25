@@ -16,6 +16,7 @@ struct RendererProperties {
 	int width = 800;
 	int height = 800;
 	int ssaaSubdivisions = 2;
+	int dofSamples = 1;
 	Illumination illumination = Illumination::PHONG;
 	std::shared_ptr<Scene> scene;
 	std::shared_ptr<Camera> camera;
