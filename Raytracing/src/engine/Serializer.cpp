@@ -17,11 +17,11 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 	//TODO do iterator and check if = to end()
 	
 	//						v dangling pointer 
-	for (auto it = textures.begin(); it != textures.end();
+	for(auto it = textures.begin(); it != textures.end();
 		++it) {
 		file << "{ ";
-		file << *it;
-		if (std::next(it) != scene->getTextures().end()) //checks if last element
+		file << **it;
+		if (std::next(it) != textures.end()) //checks if last element
 		{
 			file << "},";
 		}
@@ -29,30 +29,40 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 		{
 			file << "}";
 		}
-	}/*
-	for(auto texture : scene->getTextures())
-	{
-		file << "{ ";
-		file << *texture;
-		file << "},";
-	}*/
+	}
 	file << "],";
 	file << "\"materials\": [";
-	for(auto mat : scene->getMaterials())
+	auto materials = scene->getMaterials();
+	for(auto it = materials.begin(); it != materials.end(); ++it)
 	{
 		file << "{ ";
-		file << *mat;
-		file << "}, ";
+		file << **it;
+		if (std::next(it) != materials.end()) 
+		{
+			file << "},";
+		}
+		else
+		{
+			file << "}";
+		}
 	}
 	file << "],";
-	file << "\"objects:\" [";
-
-	for(auto obj : scene->getObjects())
+	file << "\"objects\": [";
+	auto objects = scene->getObjects();
+	for (auto it = objects.begin(); it != objects.end(); ++it)
 	{
 		file << "{ ";
-		file << *obj;
-		file << "},";
+		file << **it;
+		if (std::next(it) != objects.end())
+		{
+			file << "},";
+		}
+		else
+		{
+			file << "}";
+		}
 	}
+	file << "],";
 	file << "\"backgroundColor\": " << scene->getBackground() << ",";
 	file << "\"ambientColor\": " << scene->getAmbient();
 	file << "}";
@@ -61,6 +71,8 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 
 Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 {
+	std::cout << "is clean file:" << checkFileFormat(sceneFilePath);
+	return Scene();
 	//base to read a file and prints it in console
 	std::ifstream file;
 	file.open(sceneFilePath, std::ifstream::in);
@@ -76,18 +88,32 @@ Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 	return Scene();
 }
 
-bool Serializer::checkFileFormat(const std::string& sceneFilePath) const
+std::string Serializer::cleanFileContent(const std::string& sceneFilePath) const
 {
+	std::string res = "";
 	std::ifstream file;
+
 	file.open(sceneFilePath, std::ifstream::in);
 	char c = file.get();
-	std::stack<char> FILO;
-	if (!file.good()) 
-	{
-		file.close();
-		return false;
-	}
 	while (file.good())
+	{
+		if (c == '(' || c == '[' || c == '{')
+			res.push_back(c);
+		if (c == ')' || c == ']' || c == '}')
+			res.push_back(c);
+		c = file.get();
+	}
+	file.close();
+	return res;
+}
+
+bool Serializer::checkFileFormat(const std::string& sceneFilePath) const
+{
+	//appeler clenafile content ici pour récupérer une string nettoyé 
+	std::string cleanedString = cleanFileContent(sceneFilePath);
+	std::cout << "cleaned file is: " << cleanedString;
+	std::stack<char> FILO;
+	for (auto c : cleanedString)
 	{
 		switch (c) {
 		case '(':
@@ -105,9 +131,6 @@ bool Serializer::checkFileFormat(const std::string& sceneFilePath) const
 			FILO.pop();
 			break;
 		}
-		c = file.get();
 	}
-	file.close();
 	return FILO.empty();
-	return false;
 }

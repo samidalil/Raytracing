@@ -5,9 +5,14 @@
 #include <iostream>
 #include <fstream>
 #include <stack>
+
 #include "Scene.h"
 
 class Serializer {
+private:
+	std::string cleanFileContent(const std::string& sceneFilePath) const;
+	bool checkFileFormat(const std::string& sceneFilePath) const;
+
 public:
 	std::string pathToWrite;
 	std::string pathToRead;
@@ -17,7 +22,6 @@ public:
 
 	void serializeScene(const std::shared_ptr<Scene>& scene);
 	Scene deserializeScene(const std::string& sceneFilePath) const;
-	bool checkFileFormat(const std::string& sceneFilePath) const;
 };
 
 #endif
