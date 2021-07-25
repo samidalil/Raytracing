@@ -66,8 +66,11 @@ bool Cone::intersect(const Ray& ray, Point& impact) const
 
 Ray Cone::getNormal(const Point& impact, const Point& observator) const
 {
-	//TODO maybe do backface? 
-	return Ray(impact, this->localToGlobal(Vector(0, 0, this->globalToLocal(observator)[2] < 0 ? -1 : 1)));
+	Vector Va = Vector(0, 1, 0).normalized();
+	Point p = globalToLocal(impact);
+	Vector n = p * Vector::dot(Va, p) / Vector::dot(p, p) - Va;
+	n.normalized();
+	return Ray(observator, this->localToGlobal(n));
 }
 
 Point Cone::getTextureCoordinates(const Point& p) const

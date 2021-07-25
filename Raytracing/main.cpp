@@ -72,11 +72,11 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	auto leftWall = std::make_shared<Square>(Vector(-2.1, 0, -10), Vector(0, 80, 0), 3, red);
 	auto rightWall = std::make_shared<Square>(Vector(2.1, 0, -10), Vector(0, -80, 0), 3, red);
 	auto s2 = std::make_shared<Sphere>(Vector(0, 0, 0 - 11), Vector(), .4f, material2);
-	auto cone = std::make_shared<Cone>(Vector(0, 0, 0 - 30), Vector(), .1f, blue);
+	auto cone = std::make_shared<Cone>(Vector(0, 0, 0 - 15), Vector(0,90,0), .1f, blue);
 	auto cy1 = std::make_shared<Cylinder>(Vector(0, 2, -15), Vector(0., 0.5, 1), 0.5, material2);
 	auto t1 = std::make_shared<Triangle>(Vector(-1, 0, -20), Vector(90, 0, 0), 1.7, material1);
 	auto l1 = std::make_shared<PointLight>(Vector(0.2f, 0, -9), Vector(0, 0, 0), Color(1, 0, 0), Color::white * 0.4f, 1.f);
-	auto l2 = std::make_shared<PointLight>(Vector(-0.2f, -0.7, -10), Vector(0, 0, 0), Color(0, 0, 1), Color::white * 0.4f, 1.f);
+	auto l2 = std::make_shared<AmbientLight>(Vector(-0.2f, -0.7, -10), Vector(0, 0, 0), Color(0, 0, 1), Color::white * 0.4f, 1.f);
 	auto scene = std::make_shared<Scene>(Color::blue * 0.1 + Color::red * 0.15, Color::white * 0.4);
 	auto camera = std::make_shared<Camera>(10);
 
@@ -86,13 +86,17 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	scene->add(material2);
 	scene->add(s2);
 	scene->add(plane);
-	scene->add(ground);
 	scene->add(leftWall);
-	scene->add(rightWall);
+	scene->add(rightWall);*/
 	scene->add(l1);
 	std::string pathWrite = "E:\\dev\\Raytracing\\SerializedData.txt";
 	std::string pathRead = "E:\\dev\\Raytracing\\sampleScene.txt";
 	Serializer serializer(pathWrite, pathRead);
+	scene->add(l2);
+	scene->add(ground);
+
+
+	auto serializer = Serializer();
 	serializer.serializeScene(scene);
 	serializer.deserializeScene(pathWrite);
 	std::cout << "format file is: " << serializer.checkFileFormat("E:\\dev\\Raytracing\\test1.txt") << std::endl;
