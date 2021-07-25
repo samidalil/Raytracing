@@ -7,13 +7,17 @@
 #include "../texture/Material.h"
 
 class Triangle : public Object {
-
 public:
+	static const Point A;
+	static const Point B;
+	static const Point C;
+	static const Point AB;
+	static const Point AC;
+	static const Point BC;
+
 	Triangle() = default;
 	Triangle(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material);
-	static Point A;
-	static Point B;
-	static Point C;
+
 	bool intersect(const Ray& ray, Point& impact) const override;
 	Ray getNormal(const Point& impact, const Point& observator) const override;
 	Point getTextureCoordinates(const Point& p) const override;

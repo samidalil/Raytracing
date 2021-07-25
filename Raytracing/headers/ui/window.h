@@ -7,7 +7,7 @@
 class Window {
 
 public:
-	Window(int width, int height, std::string& title, GLFWmonitor* monitor = NULL, GLFWwindow* share = NULL);
+	Window(int width, int height, std::string& title, GLFWmonitor* monitor = nullptr, GLFWwindow* share = nullptr);
 	void run(void (*render_callback)());
 	bool isOpen();
 	void terminate();

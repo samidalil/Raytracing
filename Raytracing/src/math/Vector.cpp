@@ -35,3 +35,7 @@ Vector Vector::reflect(const Vector& v, const Vector& n)
 {
 	return v - n * (2 * Vector::dot(v, n));
 }
+
+Vector Vector::cross(const Vector& a, const Vector& b) {
+	return Point(a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]);
+}

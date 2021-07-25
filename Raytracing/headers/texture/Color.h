@@ -6,8 +6,6 @@ class Color {
 private:
 	// Tableau contenant les valeurs x, y et z
 	float _tab[3];
-
-	void copy(const Color& p);
 public:
 	static Color black;
 	static Color white;
@@ -17,8 +15,6 @@ public:
 
 	Color();
 	Color(float r, float g, float b);
-	Color(const Color& c);
-	Color& operator=(const Color& c);
 
 	float& operator[](int index);
 	float operator[](int index) const;
