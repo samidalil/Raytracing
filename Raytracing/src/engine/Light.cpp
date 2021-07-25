@@ -38,7 +38,7 @@ Ray Light::getRayToLight(const Point& p) const {
 }
 
 Ray Light::getRayFromLight(const Point& p) const {
-	return Ray(p, this->getVectorFromLight(p));
+	return Ray(this->localToGlobal(Point()), this->getVectorFromLight(p));
 }
 
 Vector Light::getVectorToLight(const Point& p) const {
