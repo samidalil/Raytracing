@@ -5,7 +5,6 @@
 #include <iostream>
 #include <fstream>
 #include <stack>
-
 #include "Scene.h"
 
 class Serializer {

@@ -1,8 +1,11 @@
 #include "../../headers/texture/Material.h"
 
-Material::Material() : shininess(0.5f) {}
+IdGenerator Material::idGenerator;
+
+Material::Material() : id(idGenerator.getId()), shininess(0.5f) {}
 
 Material::Material(Color ambient, Color diffuse, Color specular, float shiny) :
+	id(idGenerator.getId()),
 	ka(ambient),
 	kd(diffuse),
 	ks(specular),
@@ -18,6 +21,7 @@ Material& Material::operator=(const Material& m) {
 }
 
 void Material::copy(const Material& m) {
+	this->id = idGenerator.getId();
 	this->ka = m.ka;
 	this->kd = m.kd;
 	this->ks = m.ks;
@@ -26,8 +30,8 @@ void Material::copy(const Material& m) {
 }
 
 Material Material::getColor(float x, float y) const {
-	if (!this->texture.texture) return (*this);
-	const Color pixel = this->texture.texture->getColor(x, y);
+	if (!this->texture->texture) return (*this);
+	const Color pixel = this->texture->texture->getColor(x, y);
 
 	return Material(
 		this->ka * pixel,
@@ -43,10 +47,10 @@ std::ostream& operator<<(std::ostream& os, const Material& m)
 	os << "\"kd\": " << m.kd << ",";
 	os << "\"ks\": " << m.ks << ",";
 	os << "\"shininess\": " << m.shininess;
-	if (m.texture.path != "")
+	if (m.texture->path != "")
 	{
 		os << ",";
-		os << "\"texture\": " << m.texture.id.count();
+		os << "\"texture\": " << m.texture->id;
 	}
 	return os;
 }

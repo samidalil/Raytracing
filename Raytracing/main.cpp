@@ -55,13 +55,12 @@ DataContext data;
 
 void renderCallback(DataContext data)
 {
-	auto texture = std::make_shared<Texture>("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\sample.jpg");
+	auto texture = std::make_shared<Texture>("E:\\dev\\Raytracing\\resources\\sample.jpg");
 	// prepare to render 
-	auto material1 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.9, 1);
-	_sleep(0.000001);
+	auto material1 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.2, 1);
 	auto material2 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.5, 1);
-	material2->texture = *texture;
-	auto blue = std::make_shared<Material>(Color(0, 0, 1), Color(0, 0, 1), Color::white * 0.9, 1);
+	//material2->texture = texture;
+	auto blue = std::make_shared<Material>(Color(0, 0, 1), Color(0, 0, 1), Color(0, 0, 1), 1);
 	auto red = std::make_shared<Material>(Color(1, 0, 0), Color(1, 0, 0), Color(1, 0, 0), 1);
 	
 	auto ground = std::make_shared<Square>(Vector(0, -1.2, -11), Vector(90, 0, 0), 2, material1);
@@ -83,27 +82,25 @@ void renderCallback(DataContext data)
 	scene->add(material2);
 //	scene->add(ground);
 	scene->add(s2);
-	scene->add(s1);
-	//scene->add(l1);
-	scene->add(l2);
-	/*
-	std::string pathWrite = "D:\\Raytracing\\SerializedData.txt";
-	std::string pathRead = "D:\\Raytracing\\sampleScene.txt";
+	scene->add(plane);
+	scene->add(leftWall);
+	scene->add(rightWall);
+	scene->add(l1);
+	
+	std::string pathWrite = "E:\\dev\\Raytracing\\SerializedData.json";
+	std::string pathRead = "E:\\dev\\Raytracing\\SerializedData.json";
 	Serializer serializer(pathWrite, pathRead);
 	serializer.serializeScene(scene);
 	serializer.deserializeScene(pathWrite);
-	std::cout << "format file is: " << serializer.checkFileFormat("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\test1.txt") << std::endl;
-	std::cout << "format file is: " << serializer.checkFileFormat("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\test2.txt") << std::endl;
-	std::cout << "format file is: " << serializer.checkFileFormat(pathWrite) << std::endl;
-	*/
-
+	
+	/*
 	data.rendererProperties.scene = scene;
 	data.rendererProperties.camera = camera;
 	data.renderer.setProperties(data.rendererProperties);
 
 	// rendering
 	data.renderer.render().save(data.savePath);
-	std::cout << "finished rendering" << std::endl;
+	std::cout << "finished rendering" << std::endl;*/
 }
 
 
@@ -180,10 +177,11 @@ void ImGUICallback()
 
 int main()
 {
-	std::string title = "RayZ - a very very very very simple raytracer";
+	renderCallback(DataContext());
+	/*std::string title = "RayZ - a very very very very simple raytracer";
 	Window w(1920, 1080, title);
 	w.setBackgroundColor(0.99, 0.90, 0.94);
 	while (w.isOpen()) w.run(ImGUICallback);
-	w.terminate();
+	w.terminate();*/
 	return 0;
 }
