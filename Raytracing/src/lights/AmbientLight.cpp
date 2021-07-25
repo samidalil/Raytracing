@@ -7,14 +7,17 @@ std::string AmbientLight::type() const
 
 AmbientLight::AmbientLight() : Light() {}
 
+AmbientLight::AmbientLight(const Matrix& m, const Color& diffuse, const Color& specular, const float intensity)
+{
+}
+
 AmbientLight::AmbientLight(const Color& diffuse, const Color& specular, float intensity) : Light(diffuse, specular, intensity) {}
 
 AmbientLight::AmbientLight(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular, float intensity) :
 	Light(position, rotation, diffuse, specular, intensity)
 {}
 
-AmbientLight::AmbientLight(const Matrix& m, const Color& d, const Color& s, const float i) : Light(m, d, s, i)
-{}
+
 
 Color AmbientLight::getIlluminationLambert(const Point& impact, const Vector& normal, const Ray& ray, const Material& mat) const {
 	float angle = Vector::dot(normal, this->getVectorToLight(impact));

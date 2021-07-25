@@ -106,7 +106,7 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 	file.open(sceneFilePath, std::ifstream::in);
 
 	nlohmann::json js = nlohmann::json::parse(file);
-	auto scene = std::make_shared<Scene>();
+	auto scene = std::make_shared<Scene>(js["backgroundColor"],js["ambientColor"]);
 
 	for (auto& texture : js["textures"])
 	{
@@ -192,6 +192,10 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 		scene->add(l);
 	}
 
+
+
+
+
 	return scene;
 
 }
@@ -219,7 +223,6 @@ std::string Serializer::cleanFileContent(const std::string& sceneFilePath) const
 bool Serializer::checkFileFormat(const std::string& sceneFilePath) const
 {
 	std::string cleanedString = cleanFileContent(sceneFilePath);
-	std::cout << "cleaned file is: " << cleanedString;
 	std::stack<char> FILO;
 	for (auto c : cleanedString)
 	{

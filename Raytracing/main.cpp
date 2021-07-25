@@ -82,9 +82,9 @@ void ImGUICallback()
 
 	static const Illumination items[] = { Illumination::PHONG, Illumination::LAMBERT };
 	static char filename[128] = "renderedImage.jpg";
-	static char filepath[128] = "D:\\Raytracing";
+	static char filepath[128] = "E:\\dev\\Raytracing";
 	static char sceneName[128] = "SerializedData.json";
-	static char scenePath[128] = "D:\\Raytracing";
+	static char scenePath[128] = "E:\\dev\\Raytracing";
 
 	ImGui::PushItemWidth(150.0f);
 
