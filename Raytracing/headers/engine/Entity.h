@@ -26,6 +26,7 @@ protected:
 public:
 	Entity() = default;
 	Entity(const Vector& position, const Vector& rotation, float scale);
+	Entity(const Matrix& m);
 	Entity(const Entity& e);
 	Entity& operator=(const Entity& e);
 

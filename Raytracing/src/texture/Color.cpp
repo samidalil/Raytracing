@@ -25,6 +25,13 @@ Color::Color(float r, float g, float b) {
 	this->_tab[2] = b;
 }
 
+Color::Color(const nlohmann::json tab)
+{
+	this->_tab[0] = tab[0];
+	this->_tab[1] = tab[1];
+	this->_tab[2] = tab[2];
+}
+
 float& Color::operator[](int index) {
 	return this->_tab[index];
 }

@@ -6,6 +6,9 @@ Object::Object(const Vector& position, const Vector& rotation, float scale, cons
 	_material(material)
 {}
 
+Object::Object(const Matrix & m) : Entity(m)
+{}
+
 Object::Object(const Object& o) {
 	this->copy(o);
 }
@@ -31,4 +34,9 @@ void Object::display(std::ostream& os) const
 Material Object::getMaterial(const Point& impact) const {
 	const Point coordinates = this->getTextureCoordinates(impact);
 	return this->_material->getColor(coordinates[0], coordinates[1]);
+}
+
+void Object::setMaterial(const std::shared_ptr<Material>& m)
+{
+	this->_material = m;
 }

@@ -4,6 +4,11 @@ Matrix::Matrix() {
 	for (int i = 0; i < 16; ++i) this->_tab[i] = i % 4 == i / 4;
 }
 
+Matrix::Matrix(const nlohmann::json tab)
+{
+	for (int i = 0; i < 16; ++i) this->_tab[i] = tab[i];
+}
+
 Matrix::Matrix(const Matrix& m) {
 	copy(m);
 }

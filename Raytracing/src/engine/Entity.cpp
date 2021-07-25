@@ -7,6 +7,12 @@ Entity::Entity(const Vector& position, const Vector& rotation, float scale) {
 	this->translate(position);
 }
 
+Entity::Entity(const Matrix& m)
+{
+	this->_trans = m;
+	this->_transInv = m.inverse();
+}
+
 Entity::Entity(const Entity& e) {
 	this->copy(e);
 }

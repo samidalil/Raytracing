@@ -3,8 +3,8 @@
 #include <algorithm>
 
 Scene::Scene() :
-	_background({ 0, 0, 0 }),
-	_ambient({ 1, 1, 1 })
+	_background(Color::black),
+	_ambient(Color::white)
 {}
 
 Scene::Scene(const Color& background, const Color& ambient) :

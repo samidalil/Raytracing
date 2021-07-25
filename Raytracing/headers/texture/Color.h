@@ -1,6 +1,8 @@
 #ifndef RT_COLOR_H
 #define RT_COLOR_H
+
 #include <iostream>
+#include "../../vendor/json/single_include/nlohmann/json.hpp"
 
 class Color {
 private:
@@ -15,6 +17,7 @@ public:
 
 	Color();
 	Color(float r, float g, float b);
+	Color(const nlohmann::json tab);
 
 	float& operator[](int index);
 	float operator[](int index) const;

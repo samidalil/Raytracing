@@ -1,5 +1,12 @@
 #include "../../headers/engine/Serializer.h"
 #include "../../vendor/json/single_include/nlohmann/json.hpp"
+#include "../../headers/primitives/Cube.h"
+#include "../../headers/primitives/Sphere.h"
+#include "../../headers/primitives/Cone.h"
+#include "../../headers/primitives/Cylinder.h"
+#include "../../headers/primitives/Square.h"
+#include "../../headers/primitives/Triangle.h"
+#include "../../headers/primitives/Plane.h"
 
 Serializer::Serializer()
 {
@@ -16,8 +23,8 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 	file << "{";
 	file << "\"textures\": [";
 	auto textures = scene->getTextures();
-	
-	for(auto it = textures.begin(); it != textures.end();
+
+	for (auto it = textures.begin(); it != textures.end();
 		++it) {
 		file << "{ ";
 		file << **it;
@@ -33,11 +40,11 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 	file << "],";
 	file << "\"materials\": [";
 	auto materials = scene->getMaterials();
-	for(auto it = materials.begin(); it != materials.end(); ++it)
+	for (auto it = materials.begin(); it != materials.end(); ++it)
 	{
 		file << "{ ";
 		file << **it;
-		if (std::next(it) != materials.end()) 
+		if (std::next(it) != materials.end())
 		{
 			file << "},";
 		}
@@ -83,47 +90,73 @@ Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 	nlohmann::json js = nlohmann::json::parse(file);
 	auto scene = std::make_shared<Scene>();
 
-	for(auto& texture : js["textures"])
+	for (auto& texture : js["textures"])
 	{
-		scene->add(std::make_shared<Texture>(texture["path"],texture["id"]));
+		scene->add(std::make_shared<Texture>(
+			std::string(texture["path"]),
+			int(texture["id"])
+			));
 	}
 
 	auto textures = scene->getTextures();
-	for(auto& material : js["materials"])
+	for (auto& material : js["materials"])
 	{
-		auto mat = std::make_shared<Material>(material["id"], material["ka"], material["kd"], material["ks"], material["shininess"]);
+		auto mat = std::make_shared<Material>(
+			int(material["id"]),
+			Color(material["ka"]),
+			Color(material["kd"]),
+			Color(material["ks"]),
+			float(material["shininess"])
+			);
+
 		auto textureId = material["texture"];
-		auto texture = std::find_if(textures.begin(), textures.end(), [textureId] 
-		(const std::shared_ptr<Texture>& t)
-			{
+		auto texture = std::find_if(textures.begin(), textures.end(),
+			[textureId](const std::shared_ptr<Texture>& t) {
 				return t->id == textureId;
 			});
-		if(texture != textures.end()) 
-			mat->texture = *texture;
-		scene->add(mat);
-	}
-	/*
-	for (auto& object : js["objects"])
-	{
-		auto obj = std::make_shared<Object>(material["id"], material["ka"], material["kd"], material["ks"], material["shininess"]);
-		auto textureId = material["texture"];
-		auto texture = std::find_if(textures.begin(), textures.end(), [textureId]
-		(const std::shared_ptr<Texture>& t)
-			{
-				return t->id == textureId;
-			});
+
 		if (texture != textures.end())
 			mat->texture = *texture;
+
 		scene->add(mat);
 	}
-	*/
 
-	for (auto it = textures.begin(); it != textures.end();
-		++it) {
-		std::cout << "texture: " <<**it << std::endl;
+	auto materials = scene->getMaterials();
+	for (auto& object : js["objects"])
+	{
+		std::shared_ptr<Object> o;
+		const std::string typeStr = object["type"];
+		const char* type = typeStr.c_str();
+
+		if (std::strcmp(type, "Cube"))
+			o = std::make_shared<Cube>(Matrix(object["transform"]));
+		else if (std::strcmp(type, "Sphere"))
+			o = std::make_shared<Sphere>(Matrix(object["transform"]));
+		else if (std::strcmp(type, "Cone"))
+			o = std::make_shared<Cone>(Matrix(object["transform"]));
+		else if (std::strcmp(type, "Cylinder"))
+			o = std::make_shared<Cylinder>(Matrix(object["transform"]));
+		else if (std::strcmp(type, "Plane"))
+			o = std::make_shared<Plane>(Matrix(object["transform"]));
+		else if (std::strcmp(type, "Square"))
+			o = std::make_shared<Square>(Matrix(object["transform"]));
+		else if (std::strcmp(type, "Triangle"))
+			o = std::make_shared<Triangle>(Matrix(object["transform"]));
+
+		auto materialId = object["material"];
+		auto material = std::find_if(materials.begin(), materials.end(),
+			[materialId](const std::shared_ptr<Material>& m) {
+				return m->id == materialId;
+			});
+
+		if (material != materials.end())
+			o->setMaterial(*material);
+
+		scene->add(o);
 	}
-	return Scene();
-	
+
+	return scene;
+
 }
 
 std::string Serializer::cleanFileContent(const std::string& sceneFilePath) const

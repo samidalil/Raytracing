@@ -16,11 +16,13 @@ protected:
 	virtual void display(std::ostream& os) const override;
 public:
 	Object(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material);
+	Object(const Matrix& m);
 	Object(const Object& o);
 	Object& operator=(const Object& o);
 
 	virtual bool intersect(const Ray& ray, Point& impact) const = 0;
 	virtual Material getMaterial(const Point& impact) const;
+	void setMaterial(const std::shared_ptr<Material>& m);
 	virtual Ray getNormal(const Point& impact, const Point& observator) const = 0;
 	virtual Point getTextureCoordinates(const Point& p)  const = 0;
 };

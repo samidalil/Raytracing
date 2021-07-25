@@ -2,6 +2,7 @@
 #define RT_MATRIX_H
 
 #include <iostream>
+#include "../../vendor/json/single_include/nlohmann/json.hpp"
 #include "Point.h"
 #include "Vector.h"
 
@@ -14,6 +15,7 @@ private:
 	void copy(const Matrix& m);
 public:
 	Matrix();
+	Matrix(const nlohmann::json tab);
 	Matrix(const Matrix& m);
 	Matrix& operator=(const Matrix& m);
 
