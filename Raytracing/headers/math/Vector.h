@@ -16,6 +16,7 @@ public:
 	Vector normalized() const;
 
 	static Vector reflect(const Vector& v, const Vector& n);
+	static Vector cross(const Vector& a, const Vector& b);
 };
 
 #endif

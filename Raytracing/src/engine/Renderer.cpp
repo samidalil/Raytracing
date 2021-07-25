@@ -79,7 +79,7 @@ Color Renderer::getImpactColorPhong(const Ray& ray, const std::shared_ptr<Object
 
 	// TD : remplacer par un std::for_each ou autre
 	for (const auto l : this->_properties.scene->getLights()) {
-		const Ray r = l->getRayToLight(impact);
+		const Ray r = l->getRayFromLight(impact);
 		bool illuminated = true;
 
 		for (const auto o : this->_properties.scene->getObjects())

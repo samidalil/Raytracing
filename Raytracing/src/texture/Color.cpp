@@ -25,21 +25,6 @@ Color::Color(float r, float g, float b) {
 	this->_tab[2] = b;
 }
 
-Color::Color(const Color& c) {
-	this->copy(c);
-}
-
-Color& Color::operator=(const Color& c) {
-	this->copy(c);
-	return (*this);
-}
-
-void Color::copy(const Color& c) {
-	this->_tab[0] = c._tab[0];
-	this->_tab[1] = c._tab[1];
-	this->_tab[2] = c._tab[2];
-}
-
 float& Color::operator[](int index) {
 	return this->_tab[index];
 }

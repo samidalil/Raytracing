@@ -12,22 +12,6 @@ Scene::Scene(const Color& background, const Color& ambient) :
 	_ambient(ambient)
 {}
 
-Scene::Scene(const Scene& s) {
-	this->copy(s);
-}
-
-Scene& Scene::operator=(const Scene& s) {
-	this->copy(s);
-	return (*this);
-}
-
-void Scene::copy(const Scene& s) {
-	this->_objects = s._objects;
-	this->_lights = s._lights;
-	this->_background = s._background;
-	this->_ambient = s._ambient;
-}
-
 Scene& Scene::add(const std::shared_ptr<Object>& o) {
 	this->_objects.push_back(o);
 	return (*this);

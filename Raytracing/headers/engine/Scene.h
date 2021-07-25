@@ -21,13 +21,9 @@ private:
 
 	Color _background;
 	Color _ambient;
-
-	void copy(const Scene& s);
 public:
 	Scene();
 	Scene(const Color& background, const Color& ambient);
-	Scene(const Scene& s);
-	Scene& operator=(const Scene& s);
 
 	std::list<std::shared_ptr<Object>> getObjects() const;
 	std::list<std::shared_ptr<Light>> getLights() const;
