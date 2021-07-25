@@ -41,7 +41,7 @@ Image Renderer::render() const {
 					);
 
 					closest = this->_properties.scene->closestIntersected(cameraRay, impact);
-					color = closest ? getImpactColorPhong(cameraRay, closest, impact) : background;
+					color = closest ? getImpactColor(cameraRay, closest, impact) : background;
 
 					r += color[0];
 					g += color[1];
@@ -91,5 +91,31 @@ Color Renderer::getImpactColorPhong(const Ray& ray, const std::shared_ptr<Object
 		if (illuminated)
 			sum += l->getIlluminationPhong(impact, normal, ray, mat);
 	}
+	return sum;
+}
+
+Color Renderer::getImpactColor(const Ray& ray, const std::shared_ptr<Object>& obj, const Point& impact) const
+{
+	const Material mat = obj->getMaterial(impact);
+	const Vector normal = obj->getNormal(impact, ray.origin).vector;
+	Color sum = mat.ka * this->_properties.scene->getAmbient();
+
+	const auto ref = obj.get();
+	static Point dummy;
+
+	for (const auto l : this->_properties.scene->getLights()) {
+
+		if (!this->_properties.enableShadows || this->_properties.scene->closestIntersected(l->getRayFromLight(impact), dummy).get() == ref)
+
+			switch (this->_properties.illumination)
+			{
+			case Illumination::LAMBERT:
+				sum += l->getIlluminationLambert(impact, normal, ray, mat); break;
+			default:
+				sum += l->getIlluminationPhong(impact, normal, ray, mat); break;
+			}
+	}
+
+
 	return sum;
 }

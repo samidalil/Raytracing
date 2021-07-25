@@ -28,6 +28,7 @@ private:
 
 	Color getImpactColorLambert(const Ray& r, const std::shared_ptr<Object>& obj, const Point& impact) const;
 	Color getImpactColorPhong(const Ray& r, const std::shared_ptr<Object>& obj, const Point& impact) const;
+	Color getImpactColor(const Ray& ray, const std::shared_ptr<Object>& obj, const Point& impact) const;
 public:
 	Renderer() = default;
 	Renderer(const RendererProperties& properties);
