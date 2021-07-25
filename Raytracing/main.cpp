@@ -138,7 +138,7 @@ void ImGUICallback()
 
 	if (ImGui::Button("-- LOAD SCENE --")) loadSceneCallBack(scenePath, sceneName);
 	if (data.rendererProperties.scene) {
-		if (ImGui::Button("-- SAVE SCENE --")) saveSceneCallBack(sceneName, sceneName);
+		if (ImGui::Button("-- SAVE SCENE --")) saveSceneCallBack(scenePath, sceneName);
 		if (ImGui::Button("-- RENDER --")) renderCallback(data);
 	}
 	
