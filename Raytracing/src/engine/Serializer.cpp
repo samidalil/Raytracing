@@ -14,9 +14,7 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 	file << "{";
 	file << "\"textures\": [";
 	auto textures = scene->getTextures();
-	//TODO do iterator and check if = to end()
 	
-	//						v dangling pointer 
 	for(auto it = textures.begin(); it != textures.end();
 		++it) {
 		file << "{ ";
@@ -109,7 +107,6 @@ std::string Serializer::cleanFileContent(const std::string& sceneFilePath) const
 
 bool Serializer::checkFileFormat(const std::string& sceneFilePath) const
 {
-	//appeler clenafile content ici pour récupérer une string nettoyé 
 	std::string cleanedString = cleanFileContent(sceneFilePath);
 	std::cout << "cleaned file is: " << cleanedString;
 	std::stack<char> FILO;
