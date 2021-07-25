@@ -1,6 +1,6 @@
 #include "../../headers/texture/Material.h"
 
-Material::Material() : shininess(0.5f){}
+Material::Material() : shininess(0.5f) {}
 
 Material::Material(Color ambient, Color diffuse, Color specular, float shiny) :
 	ka(ambient),
@@ -26,8 +26,8 @@ void Material::copy(const Material& m) {
 }
 
 Material Material::getColor(float x, float y) const {
-	if (!this->texture) return (*this);
-	const Color pixel = this->texture->getColor(x, y);
+	if (!this->texture.texture) return (*this);
+	const Color pixel = this->texture.texture->getColor(x, y);
 
 	return Material(
 		this->ka * pixel,
@@ -35,4 +35,17 @@ Material Material::getColor(float x, float y) const {
 		this->ks * pixel,
 		shininess
 	);
+}
+
+std::ostream& operator<<(std::ostream& os, const Material& m)
+{
+	os << "\"ka\": " << m.ka << ",";
+	os << "\"kd\": " << m.kd << ",";
+	os << "\"ks\": " << m.ks << ",";
+	os << "\"shininess\": " << m.shininess << ",";
+	if (m.texture.path != "")
+		os << "\"texture\": " << m.texture.id.count() << ",";
+	else
+		os << "\"-1\"";
+	return os;
 }

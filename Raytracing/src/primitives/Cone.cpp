@@ -1,5 +1,10 @@
 #include "../../headers/primitives/Cone.h"
 
+std::string Cone::type() const
+{
+	return "\"Cone\"";
+}
+
 Cone::Cone(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material) :
 	Object(position, rotation, scale, material)
 {}

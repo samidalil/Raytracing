@@ -8,6 +8,8 @@
 #include "../texture/Material.h"
 
 class Cone : public Object {
+protected:
+	std::string type() const override;
 public:
 	Cone() = default;
 	Cone(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material);

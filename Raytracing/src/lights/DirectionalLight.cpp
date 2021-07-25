@@ -1,5 +1,10 @@
 #include "../../headers/lights/DirectionalLight.h"
 
+std::string DirectionalLight::type() const
+{
+	return "\"DirectionalLight\"";
+}
+
 DirectionalLight::DirectionalLight() : Light() {}
 
 DirectionalLight::DirectionalLight(const Color& diffuse, const Color& specular) : Light(diffuse, specular) {}

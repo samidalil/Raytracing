@@ -22,13 +22,8 @@ void Entity::copy(const Entity& e) {
 
 void Entity::display(std::ostream& os) const
 {
-	type(os);
-	os << _trans;
-}
-
-void Entity::type(std::ostream& os) const
-{
-	os << "\"type\": \"" << typeid(*this).name() << "\"";
+	os << "\"type\": " << this->type();
+	os << this->_trans;
 }
 
 
@@ -136,6 +131,7 @@ std::ostream& operator<<(std::ostream& os, const Entity& e) {
 	//Debug operator << 
 	/*os << "Transform:" << std::endl << e._trans << std::endl << "Inverse transform:" << std::endl << e._transInv;
 	return os;*/
-
+	e.display(os);
+	return os;
 
 }

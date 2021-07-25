@@ -12,6 +12,8 @@ private:
 	std::shared_ptr<Material> _material;
 
 	void copy(const Object& o);
+protected:
+	virtual void display(std::ostream& os) const override;
 public:
 	Object(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material);
 	Object(const Object& o);

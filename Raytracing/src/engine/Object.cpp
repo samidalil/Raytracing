@@ -19,6 +19,12 @@ void Object::copy(const Object& o) {
 	Entity::copy(o);
 }
 
+void Object::display(std::ostream& os) const
+{
+	Entity::display(os);
+	//todo add material id 
+}
+
 
 Material Object::getMaterial(const Point& impact) const {
 	const Point coordinates = this->getTextureCoordinates(impact);

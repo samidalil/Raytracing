@@ -1,5 +1,10 @@
 #include "../../headers/primitives/Plane.h"
 
+std::string Plane::type() const
+{
+    return "\"type\"";
+}
+
 Plane::Plane(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material) :
 	Object(position, rotation, scale, material)
 {}

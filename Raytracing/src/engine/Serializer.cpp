@@ -14,35 +14,33 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 	file.open("E:\\dev\\Raytracing\\anotherTest.txt");
 	file << "{";
 	file << "\"textures:\": [";
-	for each (auto path in scene->getTexturePaths())
+	
+	//TODO do iterator and check if = to end()
+	for(auto texture : scene->getTextures())
 	{
 		file << "{ ";
-		file << "\"path\":" << "\"" << path.second << "\", "; //remove last coma? 
-		file << "\"id\"" << path.first;
+		file << *texture;
 		file << "},";
 	}
 	file << "],";
 	file << "\"materials\": [";
-	for each (auto mat in scene->getMaterials())
+	for(auto mat : scene->getMaterials())
 	{
 		file << "{ ";
-		file << "\"ka\": " << mat->ka << ",";
-		file << "\"kd\": " << mat->kd << ",";
-		file << "\"ks\": " << mat->ks << ",";
-		file << "\"shininess\": " << mat->shininess << ",";
-		file << "\"texture\": " <<  mat->texture<< ","; //TODO
-		file << "} ";
+		file << *mat;
+		file << "}, ";
 	}
 	file << "],";
 	file << "\"objects:\" [";
-	for each (auto obj in scene->getObjects())
+
+	for(auto obj : scene->getObjects())
 	{
 		file << "{ ";
-		//file << "\"type\": " << mat->ka << ","; //TODO
-		file << "\"type\": " << ;
-
-
+		file << *obj;
+		file << "},";
 	}
+	file << "\"backgroundColor\": \"" << scene->getBackground() << "\"";
+	file << "\"ambientColor\": \"" << scene->getAmbient() << "\"";
 	file.close();
 }
 

@@ -4,6 +4,8 @@
 #include "../engine/Light.h"
 
 class DirectionalLight : public Light {
+protected:
+	std::string type() const override;
 public:
 	DirectionalLight();
 	DirectionalLight(const Color& diffuse, const Color& specular);

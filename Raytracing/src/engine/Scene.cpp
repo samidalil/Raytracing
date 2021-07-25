@@ -42,12 +42,11 @@ Scene& Scene::add(const std::shared_ptr<Material>& m) {
 	this->_materials.push_back(m);
 	return (*this);
 }
-
-Scene& Scene::add(const int id, const std::string& s) {
-
-	this->_texturePaths.insert(std::make_pair(id, s));
+Scene& Scene::add(const std::shared_ptr<Texture>& t) {
+	this->_textures.push_back(t);
 	return (*this);
 }
+
 
 std::shared_ptr<Object> Scene::closestIntersected(const Ray& ray, Point& impact) const {
 	float minDistance = FLT_MAX;
@@ -82,9 +81,9 @@ std::list<std::shared_ptr<Material>> Scene::getMaterials() const
 	return this->_materials;
 }
 
-std::map<int,std::string> Scene::getTexturePaths() const
+std::list<std::shared_ptr<Texture>> Scene::getTextures() const
 {
-	return this->_texturePaths;
+	return this->_textures;
 }
 
 Color Scene::getBackground() const {

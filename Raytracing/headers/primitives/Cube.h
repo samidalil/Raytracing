@@ -8,6 +8,8 @@
 #include "../texture/Material.h"
 
 class Cube : public Object {
+protected:
+	std::string type() const override;
 public:
 	Cube() = default;
 	Cube(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material);

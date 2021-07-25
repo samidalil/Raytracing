@@ -1,5 +1,10 @@
 #include "../../headers/primitives/Square.h"
 
+std::string Square::type() const
+{
+	return "\"Square\"";
+}
+
 Square::Square(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material) :
 	Object(position, rotation, scale, material)
 {}

@@ -10,6 +10,8 @@ private:
 	float _focal;
 
 	void copy(const Camera& c);
+protected:
+	std::string type() const override;
 public:
 	Camera();
 	Camera(float focal);

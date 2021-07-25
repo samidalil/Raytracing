@@ -1,6 +1,11 @@
 #define PI 3.141592
 #include "../../headers/lights/PointLight.h"
 
+std::string PointLight::type() const
+{
+	return "\"PointLight\"";
+}
+
 PointLight::PointLight() : Light() {}
 
 PointLight::PointLight(const Color& diffuse, const Color& specular, float intensity) : Light(diffuse, specular, intensity) {}
