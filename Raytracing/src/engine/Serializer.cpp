@@ -13,10 +13,11 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 	file.open(pathToWrite);
 	file << "{";
 	file << "\"textures\": [";
+	auto textures = scene->getTextures();
 	//TODO do iterator and check if = to end()
 	
 	//						v dangling pointer 
-	/*for (auto it = scene->getTextures().begin(); it != scene->getTextures().end();
+	for (auto it = textures.begin(); it != textures.end();
 		++it) {
 		file << "{ ";
 		file << *it;
@@ -28,13 +29,13 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 		{
 			file << "}";
 		}
-	}*/
+	}/*
 	for(auto texture : scene->getTextures())
 	{
 		file << "{ ";
 		file << *texture;
 		file << "},";
-	}
+	}*/
 	file << "],";
 	file << "\"materials\": [";
 	for(auto mat : scene->getMaterials())
