@@ -33,6 +33,7 @@ void Light::display(std::ostream& os) const
 {
 	Entity::display(os);
 	os << ",";
+	os << "\"intensity\": " << intensity << ",";
 	os << "\"id\": " << id << ",";
 	os << "\"is\": " << is;
 }

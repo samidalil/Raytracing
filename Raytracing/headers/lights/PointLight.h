@@ -8,6 +8,7 @@ protected:
 	std::string type() const override;
 public:
 	PointLight();
+	PointLight(const Matrix& m, const Color& diffuse, const Color& specular, const float intensity);
 	PointLight(const Color& diffuse, const Color& specular, float intensity);
 	PointLight(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular, float intensity);
 

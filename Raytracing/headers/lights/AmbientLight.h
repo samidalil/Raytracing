@@ -8,6 +8,7 @@ protected:
 	std::string type() const override;
 public:
 	AmbientLight();
+	AmbientLight(const Matrix& m, const Color& diffuse, const Color& specular, const float intensity);
 	AmbientLight(const Color& diffuse, const Color& specular, float intensity);
 	AmbientLight(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular, float intensity);
 
