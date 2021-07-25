@@ -12,7 +12,7 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 	std::ofstream file;
 	file.open(pathToWrite);
 	file << "{";
-	file << "\"textures:\": [";
+	file << "\"textures\": [";
 	//TODO do iterator and check if = to end()
 	
 	//						v dangling pointer 
@@ -52,8 +52,8 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 		file << *obj;
 		file << "},";
 	}
-	file << "\"backgroundColor\": \"" << scene->getBackground() << "\"";
-	file << "\"ambientColor\": \"" << scene->getAmbient() << "\"";
+	file << "\"backgroundColor\": " << scene->getBackground() << ",";
+	file << "\"ambientColor\": " << scene->getAmbient();
 	file << "}";
 	file.close();
 }

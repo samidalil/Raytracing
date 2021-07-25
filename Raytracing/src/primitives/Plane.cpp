@@ -2,7 +2,7 @@
 
 std::string Plane::type() const
 {
-    return "\"type\"";
+    return "\"Plane\"";
 }
 
 Plane::Plane(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material) :

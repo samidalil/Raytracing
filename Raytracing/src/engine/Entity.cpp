@@ -22,7 +22,7 @@ void Entity::copy(const Entity& e) {
 
 void Entity::display(std::ostream& os) const
 {
-	os << "\"type\": " << this->type();
+	os << "\"type\": " << this->type() << ",";
 	os << "\"transform\": " << this->_trans;
 }
 
