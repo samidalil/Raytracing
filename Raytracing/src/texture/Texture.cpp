@@ -4,7 +4,7 @@
 Texture::Texture(const std::string& texturePath):path(texturePath)
 {
 	id = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
-	//texture = std::make_shared<Image>(texture);
+	texture = std::make_shared<Image>(texturePath);
 }
 
 Texture::Texture(){
