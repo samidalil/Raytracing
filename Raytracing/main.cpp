@@ -137,9 +137,10 @@ void ImGUICallback()
 	ImGui::InputTextWithHint("Enter scene path", "scene path", scenePath, IM_ARRAYSIZE(scenePath));
 
 	if (ImGui::Button("-- LOAD SCENE --")) loadSceneCallBack(scenePath, sceneName);
-	if (ImGui::Button("-- SAVE SCENE --")) saveSceneCallBack(sceneName, sceneName);
-
-	if (ImGui::Button("-- RENDER --")) renderCallback(data);
+	if (data.rendererProperties.scene) {
+		if (ImGui::Button("-- SAVE SCENE --")) saveSceneCallBack(sceneName, sceneName);
+		if (ImGui::Button("-- RENDER --")) renderCallback(data);
+	}
 	
 	ImGui::End();
 }

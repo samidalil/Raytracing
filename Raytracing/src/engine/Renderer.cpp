@@ -59,41 +59,6 @@ Image Renderer::render() const {
 	return image;
 }
 
-Color Renderer::getImpactColorLambert(const Ray& ray, const std::shared_ptr<Object>& obj, const Point& impact) const {
-	const Material mat = obj->getMaterial(impact);
-	const Vector normal = obj->getNormal(impact, ray.origin).vector;
-	Color sum = mat.ka * this->_properties.scene->getAmbient();
-
-	// TD : remplacer par un std::for_each ou autre
-	for (const auto l : this->_properties.scene->getLights())
-		sum += l->getIlluminationLambert(impact, normal, ray, mat);
-	return sum;
-}
-
-Color Renderer::getImpactColorPhong(const Ray& ray, const std::shared_ptr<Object>& obj, const Point& impact) const {
-	const Material mat = obj->getMaterial(impact);
-	const Vector normal = obj->getNormal(impact, ray.origin).vector;
-	Color sum = mat.ka * this->_properties.scene->getAmbient();
-	auto ref = obj.get();
-	static Point dummy;
-
-	// TD : remplacer par un std::for_each ou autre
-	for (const auto l : this->_properties.scene->getLights()) {
-		const Ray r = l->getRayFromLight(impact);
-		bool illuminated = true;
-
-		for (const auto o : this->_properties.scene->getObjects())
-			if (o.get() != ref && o->intersect(r, dummy)) {
-				illuminated = false;
-				break;
-			}
-
-		if (illuminated)
-			sum += l->getIlluminationPhong(impact, normal, ray, mat);
-	}
-	return sum;
-}
-
 Color Renderer::getImpactColor(const Ray& ray, const std::shared_ptr<Object>& obj, const Point& impact) const
 {
 	const Material mat = obj->getMaterial(impact);
@@ -115,7 +80,6 @@ Color Renderer::getImpactColor(const Ray& ray, const std::shared_ptr<Object>& ob
 				sum += l->getIlluminationPhong(impact, normal, ray, mat); break;
 			}
 	}
-
 
 	return sum;
 }
