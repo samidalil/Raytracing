@@ -42,10 +42,11 @@ std::ostream& operator<<(std::ostream& os, const Material& m)
 	os << "\"ka\": " << m.ka << ",";
 	os << "\"kd\": " << m.kd << ",";
 	os << "\"ks\": " << m.ks << ",";
-	os << "\"shininess\": " << m.shininess << ",";
+	os << "\"shininess\": " << m.shininess;
 	if (m.texture.path != "")
-		os << "\"texture\": " << m.texture.id.count() << ",";
-	else
-		os << "\"-1\"";
+	{
+		os << ",";
+		os << "\"texture\": " << m.texture.id.count();
+	}
 	return os;
 }

@@ -1,5 +1,5 @@
 #include "../../headers/texture/Texture.h"
-
+#include "../../headers/helpers/Utility.h"
 
 Texture::Texture(const std::string& texturePath):path(texturePath)
 {
@@ -10,6 +10,7 @@ Texture::Texture(const std::string& texturePath):path(texturePath)
 Texture::Texture(){
 	id = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
 }
+
 
 void Texture::copy(const Texture& t)
 {
@@ -26,7 +27,7 @@ Texture& Texture::operator=(const Texture& t)
 
 std::ostream& operator<<(std::ostream& os, const Texture& t)
 {
-	os << "\"path\": " << "\"" << t.path << "\", "; 
+	os << "\"path\": " << "\"" << Utility::escape(t.path) << "\", ";
 	os << "\"id\": " << t.id.count();
 	return os;
 }
