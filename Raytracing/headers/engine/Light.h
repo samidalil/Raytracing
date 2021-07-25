@@ -11,6 +11,8 @@
 class Light : public Entity {
 private:
 	void copy(const Light& l);
+protected:
+	virtual void display(std::ostream& os) const override;
 public:
 	Color id;
 	Color is;

@@ -3,8 +3,8 @@
 
 #include <memory>
 #include "Color.h"
+#include "Texture.h"
 #include "../math/Point.h"
-#include "../image/Image.h"
 
 class Material {
 private:
@@ -14,7 +14,8 @@ public:
 	Color kd;
 	Color ks;
 	float shininess;
-	std::shared_ptr<Image> texture;
+	Texture texture;
+	
 
 	Material();
 	Material(Color ambient, Color diffuse, Color specular, float shininess);
@@ -22,6 +23,7 @@ public:
 	Material& operator=(const Material& m);
 
 	Material getColor(float x, float y) const;
+	friend std::ostream& operator<<(std::ostream& os, const Material& m);
 };
 
 #endif

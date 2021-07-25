@@ -1,8 +1,8 @@
 ﻿#include "../../headers/primitives/Triangle.h"
-#include "../../headers/math/Constants.h" 
+#include "../../headers/math/Constants.h"
 
 Triangle::Triangle(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material) :
-	Object(position, rotation, scale, material) {
+	Object(position, rotation, scale, material){
 }
 
 const Point Triangle::A(-1, -1, 0);
@@ -76,4 +76,9 @@ Ray Triangle::getNormal(const Point& impact, const Point& observator) const
 Point Triangle::getTextureCoordinates(const Point& p) const
 {
 	return Point();
+}
+
+std::string Triangle::type() const
+{
+	return "Triangle";
 }

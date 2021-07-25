@@ -7,6 +7,8 @@
 #include "../texture/Material.h"
 
 class Triangle : public Object {
+protected:
+	std::string type() const override;
 public:
 	static const Point A;
 	static const Point B;

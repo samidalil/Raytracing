@@ -26,6 +26,13 @@ void Light::copy(const Light& l) {
 	this->is = l.is;
 }
 
+void Light::display(std::ostream& os) const
+{
+	Entity::display(os);
+	os << "\"id\": " << id;
+	os << "\"is\": " << is;
+}
+
 Ray Light::getRayToLight(const Point& p) const {
 	return Ray(p, this->getVectorToLight(p));
 }

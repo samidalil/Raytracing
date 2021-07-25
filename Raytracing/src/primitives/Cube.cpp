@@ -1,6 +1,11 @@
 #include "../../headers/primitives/Cube.h"
 #include <algorithm>
 
+std::string Cube::type() const
+{
+	return "\"Cube\"";
+}
+
 Cube::Cube(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material) :
 	Object(position, rotation, scale, material)
 {}

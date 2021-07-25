@@ -1,5 +1,10 @@
 #include "../../headers/lights/AmbientLight.h"
 
+std::string AmbientLight::type() const
+{
+	return "\"AmbientLight\"";
+}
+
 AmbientLight::AmbientLight() : Light() {}
 
 AmbientLight::AmbientLight(const Color& diffuse, const Color& specular, float intensity) : Light(diffuse, specular, intensity) {}

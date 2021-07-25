@@ -1,6 +1,11 @@
 #include "../../headers/primitives/Sphere.h"
 #include "../../headers/math/Constants.h"
 
+std::string Sphere::type() const
+{
+	return "\"Sphere\"";
+}
+
 Sphere::Sphere(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material) :
 	Object(position, rotation, scale, material)
 {}

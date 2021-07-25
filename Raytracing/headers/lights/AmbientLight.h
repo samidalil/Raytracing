@@ -4,6 +4,8 @@
 #include "../engine/Light.h"
 
 class AmbientLight : public Light {
+protected:
+	std::string type() const override;
 public:
 	AmbientLight();
 	AmbientLight(const Color& diffuse, const Color& specular, float intensity);

@@ -215,7 +215,9 @@ std::ostream& operator<<(std::ostream& os, const Matrix& m) {
 	os << "[";
 	for (int i = 0; i < 16; ++i)
 	{
-			os << m._tab[i] << ",";
+		os << m._tab[i];
+		if (i != 15)
+			os << ",";
 	}
 	os << "]";
 	return os;

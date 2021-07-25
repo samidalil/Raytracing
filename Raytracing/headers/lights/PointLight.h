@@ -4,6 +4,8 @@
 #include "../engine/Light.h"
 
 class PointLight : public Light {
+protected:
+	std::string type() const override;
 public:
 	PointLight();
 	PointLight(const Color& diffuse, const Color& specular, float intensity);

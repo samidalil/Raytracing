@@ -23,6 +23,11 @@ void Camera::copy(const Camera& c) {
 	this->_focal = c._focal;
 }
 
+std::string Camera::type() const
+{
+	return "\"Camera\"";
+}
+
 Ray Camera::getRay(float x, float y) const {
 	const Point screenPos(x * 2 - 1, y * 2 - 1, 0);
 
