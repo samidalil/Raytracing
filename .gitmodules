@@ -7,3 +7,6 @@
 [submodule "Ratraycing\\vendor\\json"]
 	path = Ratraycing\\vendor\\json
 	url = https://github.com/nlohmann/json.git
+[submodule "Raytracing\\vendor\\json"]
+	path = Raytracing\\vendor\\json
+	url = https://github.com/nlohmann/json.git
