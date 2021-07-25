@@ -71,7 +71,7 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	auto leftWall = std::make_shared<Square>(Vector(-2.1, 0, -10), Vector(0, 80, 0), 3, red);
 	auto rightWall = std::make_shared<Square>(Vector(2.1, 0, -10), Vector(0, -80, 0), 3, red);
 	auto s2 = std::make_shared<Sphere>(Vector(0, 0, 0 - 11), Vector(), .4f, material2);
-	auto cone = std::make_shared<Cone>(Vector(0, 0, 0 - 30), Vector(), 1.0f, material2);
+	auto cone = std::make_shared<Cone>(Vector(0, 0, 0 - 30), Vector(), .1f, blue);
 	auto cy1 = std::make_shared<Cylinder>(Vector(0, 2, -15), Vector(0., 0.5, 1), 0.5, material2);
 	auto t1 = std::make_shared<Triangle>(Vector(-1, 0, -20), Vector(90, 0, 0), 1.7, material1);
 	auto l1 = std::make_shared<PointLight>(Vector(0.2f, 0, -9), Vector(0, 0, 0), Color(1, 0, 0), Color::white * 0.4f, 1.f);
