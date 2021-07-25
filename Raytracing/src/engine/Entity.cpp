@@ -1,4 +1,5 @@
 #include "../../headers/engine/Entity.h"
+#include "../../headers/math/Constants.h"
 
 Entity::Entity(const Vector& position, const Vector& rotation, float scale) {
 	this->scale(scale);
@@ -35,8 +36,9 @@ void Entity::rotate(const Vector& angles) {
 
 void Entity::rotateX(float deg) {
 	Matrix m;
-	float c = cos(deg);
-	float s = sin(deg);
+	const float rad = deg * DEG2RAD;
+	const float c = cos(rad);
+	const float s = sin(rad);
 	m(1, 1) = c;
 	m(1, 2) = -s;
 	m(2, 1) = s;
@@ -48,8 +50,9 @@ void Entity::rotateX(float deg) {
 
 void Entity::rotateY(float deg) {
 	Matrix m;
-	const float c = cos(deg);
-	const float s = sin(deg);
+	const float rad = deg * DEG2RAD;
+	const float c = cos(rad);
+	const float s = sin(rad);
 	m(0, 0) = c;
 	m(0, 2) = s;
 	m(2, 0) = -s;
@@ -61,8 +64,9 @@ void Entity::rotateY(float deg) {
 
 void Entity::rotateZ(float deg) {
 	Matrix m;
-	const float c = cos(deg);
-	const float s = sin(deg);
+	const float rad = deg * DEG2RAD;
+	const float c = cos(rad);
+	const float s = sin(rad);
 	m(0, 0) = c;
 	m(0, 1) = -s;
 	m(1, 0) = s;

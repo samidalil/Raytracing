@@ -138,7 +138,7 @@ CMAKE_INSTALL_SYSCONFDIR:PATH=etc
 CMAKE_LINKER:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30037/bin/Hostx64/x64/link.exe
 
 //make program
-CMAKE_MAKE_PROGRAM:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe
+CMAKE_MAKE_PROGRAM:FILEPATH=C:/PROGRA~2/MICROS~2/2019/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -314,6 +314,9 @@ USE_MSVC_RUNTIME_LIBRARY_DLL:BOOL=ON
 
 //Value Computed by CMake
 imgui_BINARY_DIR:STATIC=D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/imgui
+
+//Dependencies for the target
+imgui_LIB_DEPENDS:STATIC=general;glfw;general;glad;
 
 //Value Computed by CMake
 imgui_SOURCE_DIR:STATIC=D:/Raytracing/Raytracing/vendor/imgui

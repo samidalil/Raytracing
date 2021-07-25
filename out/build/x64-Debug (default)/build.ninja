@@ -237,7 +237,23 @@ build Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Cube.cpp.obj: CXX_COMP
   TARGET_COMPILE_PDB = Raytracing\CMakeFiles\Raytracing.dir\
   TARGET_PDB = Raytracing\Raytracing.pdb
 
+build Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Cone.cpp.obj: CXX_COMPILER__Raytracing_Debug ..\..\..\Raytracing\src\primitives\Cone.cpp || cmake_object_order_depends_target_Raytracing
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -I..\..\..\Raytracing\vendor\glfw\include -I..\..\..\Raytracing\vendor\glad\include -I..\..\..\Raytracing\vendor\imgui -I..\..\..\Raytracing\vendor\imgui\include
+  OBJECT_DIR = Raytracing\CMakeFiles\Raytracing.dir
+  OBJECT_FILE_DIR = Raytracing\CMakeFiles\Raytracing.dir\src\primitives
+  TARGET_COMPILE_PDB = Raytracing\CMakeFiles\Raytracing.dir\
+  TARGET_PDB = Raytracing\Raytracing.pdb
+
 build Raytracing\CMakeFiles\Raytracing.dir\src\lights\AmbientLight.cpp.obj: CXX_COMPILER__Raytracing_Debug ..\..\..\Raytracing\src\lights\AmbientLight.cpp || cmake_object_order_depends_target_Raytracing
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -I..\..\..\Raytracing\vendor\glfw\include -I..\..\..\Raytracing\vendor\glad\include -I..\..\..\Raytracing\vendor\imgui -I..\..\..\Raytracing\vendor\imgui\include
+  OBJECT_DIR = Raytracing\CMakeFiles\Raytracing.dir
+  OBJECT_FILE_DIR = Raytracing\CMakeFiles\Raytracing.dir\src\lights
+  TARGET_COMPILE_PDB = Raytracing\CMakeFiles\Raytracing.dir\
+  TARGET_PDB = Raytracing\Raytracing.pdb
+
+build Raytracing\CMakeFiles\Raytracing.dir\src\lights\PointLight.cpp.obj: CXX_COMPILER__Raytracing_Debug ..\..\..\Raytracing\src\lights\PointLight.cpp || cmake_object_order_depends_target_Raytracing
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -I..\..\..\Raytracing\vendor\glfw\include -I..\..\..\Raytracing\vendor\glad\include -I..\..\..\Raytracing\vendor\imgui -I..\..\..\Raytracing\vendor\imgui\include
   OBJECT_DIR = Raytracing\CMakeFiles\Raytracing.dir
@@ -269,6 +285,54 @@ build Raytracing\CMakeFiles\Raytracing.dir\src\ui\window.cpp.obj: CXX_COMPILER__
   TARGET_COMPILE_PDB = Raytracing\CMakeFiles\Raytracing.dir\
   TARGET_PDB = Raytracing\Raytracing.pdb
 
+build Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Square.cpp.obj: CXX_COMPILER__Raytracing_Debug ..\..\..\Raytracing\src\primitives\Square.cpp || cmake_object_order_depends_target_Raytracing
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -I..\..\..\Raytracing\vendor\glfw\include -I..\..\..\Raytracing\vendor\glad\include -I..\..\..\Raytracing\vendor\imgui -I..\..\..\Raytracing\vendor\imgui\include
+  OBJECT_DIR = Raytracing\CMakeFiles\Raytracing.dir
+  OBJECT_FILE_DIR = Raytracing\CMakeFiles\Raytracing.dir\src\primitives
+  TARGET_COMPILE_PDB = Raytracing\CMakeFiles\Raytracing.dir\
+  TARGET_PDB = Raytracing\Raytracing.pdb
+
+build Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Cylinder.cpp.obj: CXX_COMPILER__Raytracing_Debug ..\..\..\Raytracing\src\primitives\Cylinder.cpp || cmake_object_order_depends_target_Raytracing
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -I..\..\..\Raytracing\vendor\glfw\include -I..\..\..\Raytracing\vendor\glad\include -I..\..\..\Raytracing\vendor\imgui -I..\..\..\Raytracing\vendor\imgui\include
+  OBJECT_DIR = Raytracing\CMakeFiles\Raytracing.dir
+  OBJECT_FILE_DIR = Raytracing\CMakeFiles\Raytracing.dir\src\primitives
+  TARGET_COMPILE_PDB = Raytracing\CMakeFiles\Raytracing.dir\
+  TARGET_PDB = Raytracing\Raytracing.pdb
+
+build Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Triangle.cpp.obj: CXX_COMPILER__Raytracing_Debug ..\..\..\Raytracing\src\primitives\Triangle.cpp || cmake_object_order_depends_target_Raytracing
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -I..\..\..\Raytracing\vendor\glfw\include -I..\..\..\Raytracing\vendor\glad\include -I..\..\..\Raytracing\vendor\imgui -I..\..\..\Raytracing\vendor\imgui\include
+  OBJECT_DIR = Raytracing\CMakeFiles\Raytracing.dir
+  OBJECT_FILE_DIR = Raytracing\CMakeFiles\Raytracing.dir\src\primitives
+  TARGET_COMPILE_PDB = Raytracing\CMakeFiles\Raytracing.dir\
+  TARGET_PDB = Raytracing\Raytracing.pdb
+
+build Raytracing\CMakeFiles\Raytracing.dir\src\engine\Serializer.cpp.obj: CXX_COMPILER__Raytracing_Debug ..\..\..\Raytracing\src\engine\Serializer.cpp || cmake_object_order_depends_target_Raytracing
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -I..\..\..\Raytracing\vendor\glfw\include -I..\..\..\Raytracing\vendor\glad\include -I..\..\..\Raytracing\vendor\imgui -I..\..\..\Raytracing\vendor\imgui\include
+  OBJECT_DIR = Raytracing\CMakeFiles\Raytracing.dir
+  OBJECT_FILE_DIR = Raytracing\CMakeFiles\Raytracing.dir\src\engine
+  TARGET_COMPILE_PDB = Raytracing\CMakeFiles\Raytracing.dir\
+  TARGET_PDB = Raytracing\Raytracing.pdb
+
+build Raytracing\CMakeFiles\Raytracing.dir\src\texture\Texture.cpp.obj: CXX_COMPILER__Raytracing_Debug ..\..\..\Raytracing\src\texture\Texture.cpp || cmake_object_order_depends_target_Raytracing
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -I..\..\..\Raytracing\vendor\glfw\include -I..\..\..\Raytracing\vendor\glad\include -I..\..\..\Raytracing\vendor\imgui -I..\..\..\Raytracing\vendor\imgui\include
+  OBJECT_DIR = Raytracing\CMakeFiles\Raytracing.dir
+  OBJECT_FILE_DIR = Raytracing\CMakeFiles\Raytracing.dir\src\texture
+  TARGET_COMPILE_PDB = Raytracing\CMakeFiles\Raytracing.dir\
+  TARGET_PDB = Raytracing\Raytracing.pdb
+
+build Raytracing\CMakeFiles\Raytracing.dir\src\helpers\Utility.cpp.obj: CXX_COMPILER__Raytracing_Debug ..\..\..\Raytracing\src\helpers\Utility.cpp || cmake_object_order_depends_target_Raytracing
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -I..\..\..\Raytracing\vendor\glfw\include -I..\..\..\Raytracing\vendor\glad\include -I..\..\..\Raytracing\vendor\imgui -I..\..\..\Raytracing\vendor\imgui\include
+  OBJECT_DIR = Raytracing\CMakeFiles\Raytracing.dir
+  OBJECT_FILE_DIR = Raytracing\CMakeFiles\Raytracing.dir\src\helpers
+  TARGET_COMPILE_PDB = Raytracing\CMakeFiles\Raytracing.dir\
+  TARGET_PDB = Raytracing\Raytracing.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Raytracing
@@ -277,7 +341,7 @@ build Raytracing\CMakeFiles\Raytracing.dir\src\ui\window.cpp.obj: CXX_COMPILER__
 #############################################
 # Link the executable Raytracing\Raytracing.exe
 
-build Raytracing\Raytracing.exe: CXX_EXECUTABLE_LINKER__Raytracing_Debug Raytracing\CMakeFiles\Raytracing.dir\main.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\image\Image.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\math\Point.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\math\Vector.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\math\Matrix.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\texture\Color.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\texture\Material.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Ray.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Entity.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Object.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Light.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Camera.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Scene.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Renderer.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Sphere.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Plane.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Cube.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\lights\AmbientLight.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\ui\ImGUI_context.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\ui\OpenGL_context.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\ui\window.cpp.obj | Raytracing\vendor\glfw\src\glfw3.lib Raytracing\vendor\glad\glad.lib Raytracing\vendor\imgui\imgui.lib Raytracing\vendor\glfw\src\glfw3.lib Raytracing\vendor\glad\glad.lib || Raytracing\vendor\glad\glad.lib Raytracing\vendor\glfw\src\glfw3.lib Raytracing\vendor\imgui\imgui.lib
+build Raytracing\Raytracing.exe: CXX_EXECUTABLE_LINKER__Raytracing_Debug Raytracing\CMakeFiles\Raytracing.dir\main.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\image\Image.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\math\Point.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\math\Vector.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\math\Matrix.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\texture\Color.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\texture\Material.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Ray.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Entity.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Object.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Light.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Camera.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Scene.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Renderer.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Sphere.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Plane.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Cube.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Cone.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\lights\AmbientLight.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\lights\PointLight.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\ui\ImGUI_context.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\ui\OpenGL_context.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\ui\window.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Square.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Cylinder.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\primitives\Triangle.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\engine\Serializer.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\texture\Texture.cpp.obj Raytracing\CMakeFiles\Raytracing.dir\src\helpers\Utility.cpp.obj | Raytracing\vendor\glfw\src\glfw3.lib Raytracing\vendor\glad\glad.lib Raytracing\vendor\imgui\imgui.lib Raytracing\vendor\glfw\src\glfw3.lib Raytracing\vendor\glad\glad.lib || Raytracing\vendor\glad\glad.lib Raytracing\vendor\glfw\src\glfw3.lib Raytracing\vendor\imgui\imgui.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = Raytracing\vendor\glfw\src\glfw3.lib  Raytracing\vendor\glad\glad.lib  Raytracing\vendor\imgui\imgui.lib  Raytracing\vendor\glfw\src\glfw3.lib  Raytracing\vendor\glad\glad.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

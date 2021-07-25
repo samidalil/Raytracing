@@ -1,5 +1,4 @@
-﻿#define EPS 0.001f
-#include "../../headers/primitives/Cone.h"
+﻿#include "../../headers/primitives/Cone.h"
 #include "../../headers/math/Constants.h"
 
 std::string Cone::type() const
@@ -36,10 +35,10 @@ bool Cone::intersect(const Ray& ray, Point& impact) const
 
 	*/
 
-	Ray r = globalToLocal(ray).normalized();
+	const Ray r = this->globalToLocal(ray);
 
-	Vector Va = Vector(0, 1, 0).normalized();
-	float const cos2Alpha = cos(0.9f) * cos(0.9f);
+	const Vector Va(0, 1, 0);
+	static const float cos2Alpha = cos(0.9f) * cos(0.9f);
 	float A = Vector::dot(r.vector, Va) * Vector::dot(r.vector, Va) - cos2Alpha;
 	float B = 2 * (Vector::dot(r.vector, Va) * Vector::dot(r.origin, Va) - Vector::dot(r.vector, r.origin) * cos2Alpha);
 	float C = Vector::dot(r.origin, Va) * Vector::dot(r.origin, Va) - Vector::dot(r.origin, r.origin) * cos2Alpha;
@@ -49,7 +48,7 @@ bool Cone::intersect(const Ray& ray, Point& impact) const
 
 	float t;
 	const float sqrtDelta = sqrt(delta);
-	if (delta < 0.001f) {
+	if (delta < FLT_EPSILON) {
 		t = -B / (2 * A);
 	}
 	else {
