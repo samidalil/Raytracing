@@ -8,6 +8,11 @@ std::string PointLight::type() const
 
 PointLight::PointLight() : Light() {}
 
+PointLight::PointLight(const Matrix& m, const Color& diffuse, const Color& specular, const float intensity)
+{
+
+}
+
 PointLight::PointLight(const Color& diffuse, const Color& specular, float intensity) : Light(diffuse, specular, intensity) {}
 
 PointLight::PointLight(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular, float intensity) :
