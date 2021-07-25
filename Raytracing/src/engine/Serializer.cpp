@@ -20,7 +20,7 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 	for (auto it = textures.begin(); it != textures.end();
 		++it) {
 		file << "{ ";
-		file << *it;
+		file << **it;
 		if (std::next(it) != scene->getTextures().end()) //checks if last element
 		{
 			file << "},";
