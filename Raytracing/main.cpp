@@ -62,6 +62,8 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	_sleep(1);
 	auto material2 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.5, 1);
 	material2->texture = *texture;
+	auto blue = std::make_shared<Material>(Color(0, 0, 1), Color(0, 0, 1), Color(0, 0, 1), 1);
+	auto red = std::make_shared<Material>(Color(1, 0, 0), Color(1, 0, 0), Color(1, 0, 0), 1);
 	auto pos = Vector(-2, 2.4, -35);
 	auto pos2 = Vector(1, 3.5, -25);
 	//auto s1 = std::make_shared<Cube>(pos, Vector(0.2, 0.7, 0), 1.7, material2);
