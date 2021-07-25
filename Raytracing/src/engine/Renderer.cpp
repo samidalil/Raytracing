@@ -105,7 +105,7 @@ Color Renderer::getImpactColor(const Ray& ray, const std::shared_ptr<Object>& ob
 
 	for (const auto l : this->_properties.scene->getLights()) {
 
-		if (this->_properties.scene->closestIntersected(l->getRayFromLight(impact), dummy).get() == ref)
+		if (!this->_properties.enableShadows || this->_properties.scene->closestIntersected(l->getRayFromLight(impact), dummy).get() == ref)
 
 			switch (this->_properties.illumination)
 			{
