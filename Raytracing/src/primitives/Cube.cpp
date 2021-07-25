@@ -10,6 +10,9 @@ Cube::Cube(const Vector& position, const Vector& rotation, float scale, const st
 	Object(position, rotation, scale, material)
 {}
 
+Cube::Cube(const Matrix & m) : Object(m)
+{}
+
 bool Cube::intersect(const Ray& ray, Point& impact) const
 {
 	const Ray localRay = this->globalToLocal(ray);

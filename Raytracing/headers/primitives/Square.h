@@ -13,6 +13,7 @@ protected:
 public:
     Square() = default;
     Square(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material);
+    Square(const Matrix& m);
 
     bool intersect(const Ray& ray, Point& impact) const override;
     Ray getNormal(const Point& impact, const Point& observator) const override;

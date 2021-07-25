@@ -20,7 +20,7 @@ public:
 	Serializer(const std::string& writePath, const std::string& readPath);
 
 	void serializeScene(const std::shared_ptr<Scene>& scene);
-	Scene deserializeScene(const std::string& sceneFilePath) const;
+	std::shared_ptr<Scene> deserializeScene(const std::string& sceneFilePath) const;
 };
 
 #endif

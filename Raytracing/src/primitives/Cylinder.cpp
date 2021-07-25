@@ -10,6 +10,9 @@ Cylinder::Cylinder(const Vector& position, const Vector& rotation, float scale, 
 	Object(position, rotation, scale, material)
 {}
 
+Cylinder::Cylinder(const Matrix & m) : Object(m)
+{}
+
 bool Cylinder::intersect(const Ray& ray, Point& impact) const
 {
 	Ray r = globalToLocal(ray).normalized();

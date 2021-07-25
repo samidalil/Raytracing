@@ -10,6 +10,9 @@ Sphere::Sphere(const Vector& position, const Vector& rotation, float scale, cons
 	Object(position, rotation, scale, material)
 {}
 
+Sphere::Sphere(const Matrix & m) : Object(m)
+{}
+
 bool Sphere::intersect(const Ray& ray, Point& impact) const {
 	const Ray localRay = this->globalToLocal(ray);
 

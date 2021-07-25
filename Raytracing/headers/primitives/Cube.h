@@ -13,6 +13,7 @@ protected:
 public:
 	Cube() = default;
 	Cube(const Vector& position, const Vector& rotation, float scale, const std::shared_ptr<Material>& material);
+	Cube(const Matrix& m);
 
 	bool intersect(const Ray& ray, Point& impact) const override;
 	Ray getNormal(const Point& impact, const Point& observator) const override;

@@ -9,6 +9,9 @@ Square::Square(const Vector& position, const Vector& rotation, float scale, cons
 	Object(position, rotation, scale, material)
 {}
 
+Square::Square(const Matrix & m) : Object(m)
+{}
+
 bool Square::intersect(const Ray& ray, Point& impact) const
 {
 	Ray lr = globalToLocal(ray).normalized();

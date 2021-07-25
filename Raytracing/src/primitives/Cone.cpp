@@ -10,6 +10,9 @@ Cone::Cone(const Vector& position, const Vector& rotation, float scale, const st
 	Object(position, rotation, scale, material)
 {}
 
+Cone::Cone(const Matrix & m) : Object(m)
+{}
+
 bool Cone::intersect(const Ray& ray, Point& impact) const
 {
 	/* Cone Infini :

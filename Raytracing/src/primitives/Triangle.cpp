@@ -5,6 +5,9 @@ Triangle::Triangle(const Vector& position, const Vector& rotation, float scale, 
 	Object(position, rotation, scale, material){
 }
 
+Triangle::Triangle(const Matrix& m) : Object(m)
+{}
+
 const Point Triangle::A(-1, -1, 0);
 const Point Triangle::B(0, 1, 0);
 const Point Triangle::C(1, -1, 0);

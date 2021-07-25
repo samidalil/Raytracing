@@ -9,6 +9,9 @@ Plane::Plane(const Vector& position, const Vector& rotation, float scale, const 
 	Object(position, rotation, scale, material)
 {}
 
+Plane::Plane(const Matrix & m) : Object(m)
+{}
+
 bool Plane::intersect(const Ray& ray, Point& impact) const
 {
     const Ray localRay = this->globalToLocal(ray);

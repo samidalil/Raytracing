@@ -70,18 +70,34 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 		}
 	}
 	file << "],";
+	file << "\"lights\": [";
+	auto lights = scene->getLights();
+	for (auto it = lights.begin(); it != lights.end(); ++it)
+	{
+		file << "{ ";
+		file << **it;
+		if (std::next(it) != lights.end())
+		{
+			file << "},";
+		}
+		else
+		{
+			file << "}";
+		}
+	}
+	file << "],";
 	file << "\"backgroundColor\": " << scene->getBackground() << ",";
 	file << "\"ambientColor\": " << scene->getAmbient();
 	file << "}";
 	file.close();
 }
 
-Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
+std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFilePath) const
 {
 	bool isFormated = checkFileFormat(sceneFilePath);
 	if (!isFormated)
 	{
-		return Scene();
+		return nullptr;
 	}
 
 	std::ifstream file;
@@ -97,7 +113,7 @@ Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 			int(texture["id"])
 			));
 	}
-
+	
 	auto textures = scene->getTextures();
 	for (auto& material : js["materials"])
 	{
