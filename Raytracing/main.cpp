@@ -84,9 +84,14 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	scene->add(t1);
 	scene->add(ground);
 	scene->add(l1);
-
-	auto serializer = Serializer();
+	std::string pathWrite = "E:\\dev\\Raytracing\\SerializedData.txt";
+	std::string pathRead = "E:\\dev\\Raytracing\\sampleScene.txt";
+	Serializer serializer(pathWrite, pathRead);
 	serializer.serializeScene(scene);
+	serializer.deserializeScene(pathWrite);
+	std::cout << "format file is: " << serializer.checkFileFormat("E:\\dev\\Raytracing\\test1.txt") << std::endl;
+	std::cout << "format file is: " << serializer.checkFileFormat("E:\\dev\\Raytracing\\test2.txt") << std::endl;
+	std::cout << "format file is: " << serializer.checkFileFormat(pathWrite) << std::endl;
 	DataContext data;
 
 	data.rendererProperties.scene = scene;

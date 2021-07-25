@@ -3,19 +3,21 @@
 
 #include <list>
 #include <iostream>
-#include "Scene.h"
 #include <fstream>
+#include <stack>
+#include "Scene.h"
 
 class Serializer {
-private:
-	int _tabCount;
 public:
+	std::string pathToWrite;
+	std::string pathToRead;
+
 	Serializer();
-	Serializer(const Scene& scene);
+	Serializer(const std::string& writePath, const std::string& readPath);
 
 	void serializeScene(const std::shared_ptr<Scene>& scene);
 	Scene deserializeScene(const std::string& sceneFilePath) const;
-	std::string tabulate() const;
+	bool checkFileFormat(const std::string& sceneFilePath) const;
 };
 
 #endif

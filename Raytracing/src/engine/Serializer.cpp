@@ -4,18 +4,31 @@ Serializer::Serializer()
 {
 }
 
-Serializer::Serializer(const Scene& scene)
-{
-}
+Serializer::Serializer(const std::string& write, const std::string& read)
+	: pathToWrite(write), pathToRead(read) {}
 
 void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 {
 	std::ofstream file;
-	file.open("E:\\dev\\Raytracing\\anotherTest.txt");
+	file.open(pathToWrite);
 	file << "{";
 	file << "\"textures:\": [";
-	
 	//TODO do iterator and check if = to end()
+	
+	//						v dangling pointer 
+	/*for (auto it = scene->getTextures().begin(); it != scene->getTextures().end();
+		++it) {
+		file << "{ ";
+		file << *it;
+		if (std::next(it) != scene->getTextures().end()) //checks if last element
+		{
+			file << "},";
+		}
+		else
+		{
+			file << "}";
+		}
+	}*/
 	for(auto texture : scene->getTextures())
 	{
 		file << "{ ";
@@ -41,16 +54,57 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 	}
 	file << "\"backgroundColor\": \"" << scene->getBackground() << "\"";
 	file << "\"ambientColor\": \"" << scene->getAmbient() << "\"";
+	file << "}";
 	file.close();
 }
 
-std::string Serializer::tabulate() const
+Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 {
-	std::string res = "";
-	for (int i = 0; i < _tabCount; i++)
+	//base to read a file and prints it in console
+	std::ifstream file;
+	file.open(sceneFilePath, std::ifstream::in);
+	
+	char c = file.get();
+	while (file.good())
 	{
-		res += "\t";
+		std::cout << c;
+		c = file.get();
 	}
+	file.close();
 
-	return res;
+	return Scene();
+}
+
+
+
+bool Serializer::checkFileFormat(const std::string& sceneFilePath) const
+{
+	std::ifstream file;
+	file.open(sceneFilePath, std::ifstream::in);
+	char c = file.get();
+	std::stack<char> FILO;
+
+	while (file.good())
+	{
+		switch (c) {
+		case '(':
+			FILO.push(')');
+			break;
+		case '[':
+			FILO.push(']');
+			break;
+		case '{':
+			FILO.push('}');
+			break;
+		default:
+			if (FILO.empty())return false;
+			if (FILO.top() != c)return false;
+			FILO.pop();
+			break;
+		}
+		c = file.get();
+	}
+	file.close();
+	return FILO.empty();
+	return false;
 }
