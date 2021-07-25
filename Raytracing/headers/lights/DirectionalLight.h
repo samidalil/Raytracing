@@ -10,6 +10,7 @@ public:
 	DirectionalLight();
 	DirectionalLight(const Color& diffuse, const Color& specular);
 	DirectionalLight(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular);
+	DirectionalLight(const Matrix& m, const Color& d, const Color& s);
 
 	Color getIlluminationLambert(const Point& impact, const Vector& normal, const Ray& ray, const Material& mat) const override;
 	Color getIlluminationPhong(const Point& impact, const Vector& normal, const Ray& ray, const Material& mat) const override;

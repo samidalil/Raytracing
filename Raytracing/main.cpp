@@ -119,7 +119,6 @@ void ImGUICallback()
 		ImGui::EndCombo();
 	}
 
-
 	ImGui::Checkbox("Enable shadows", &data.rendererProperties.enableShadows);
 	ImGui::SliderInt("SSAA subdivisions", &data.rendererProperties.ssaaSubdivisions, 1, 16);
 	ImGui::SliderInt("DOF samples", &data.rendererProperties.dofSamples, 1, 500);

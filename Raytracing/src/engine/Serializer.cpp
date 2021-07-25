@@ -7,6 +7,9 @@
 #include "../../headers/primitives/Square.h"
 #include "../../headers/primitives/Triangle.h"
 #include "../../headers/primitives/Plane.h"
+#include "../../headers/lights/AmbientLight.h"
+#include "../../headers/lights/PointLight.h"
+#include "../../headers/lights/DirectionalLight.h"
 
 Serializer::Serializer()
 {
@@ -174,6 +177,22 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 		}
 
 		scene->add(o);
+	}
+
+	for (auto& light : js["lights"])
+	{
+		std::shared_ptr<Light> l;
+		const std::string typeStr = light["type"];
+		const char* type = typeStr.c_str();
+
+		if (std::strcmp(type, "AmbientLight") == 0)
+			l = std::make_shared<AmbientLight>(Color(light["id"]), Color(light["id"]), float(light["intensity"]));
+		else if (std::strcmp(type, "PointLight") == 0)
+			l = std::make_shared<PointLight>(Color(light["id"]), Color(light["id"]), float(light["intensity"]));
+		else if (std::strcmp(type, "DirectionalLight") == 0)
+			l = std::make_shared<DirectionalLight>(Color(light["id"]), Color(light["id"]));
+
+		scene->add(l);
 	}
 
 	return scene;
