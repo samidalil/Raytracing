@@ -5,16 +5,19 @@
 #include "Color.h"
 #include "Texture.h"
 #include "../math/Point.h"
+#include "../helpers/IdGenerator.h"
 
 class Material {
 private:
 	void copy(const Material& m);
+	static IdGenerator idGenerator;
 public:
+	int id;
 	Color ka;
 	Color kd;
 	Color ks;
 	float shininess;
-	Texture texture;
+	std::shared_ptr<Texture> texture;
 	
 
 	Material();

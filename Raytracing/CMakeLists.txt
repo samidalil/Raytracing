@@ -9,7 +9,7 @@ add_executable (Raytracing
 	"src/primitives/Sphere.cpp" "src/primitives/Plane.cpp" "src/primitives/Cube.cpp" "src/primitives/Cone.cpp"
 	"src/lights/AmbientLight.cpp" "src/lights/PointLight.cpp"
 	"src/ui/ImGUI_context.cpp" "src/ui/OpenGL_context.cpp" "src/ui/window.cpp"
-    "src/primitives/Square.cpp" "src/primitives/Cylinder.cpp" "src/primitives/Triangle.cpp" "src/engine/Serializer.cpp"  "src/texture/Texture.cpp" "src/helpers/Utility.cpp")
+    "src/primitives/Square.cpp" "src/primitives/Cylinder.cpp" "src/primitives/Triangle.cpp" "src/engine/Serializer.cpp"  "src/texture/Texture.cpp" "src/helpers/Utility.cpp" "headers/helpers/IdGenerator.h" "src/helpers/IdGenerator.cpp")
 
 add_subdirectory("vendor")
 
@@ -17,4 +17,9 @@ target_link_libraries(Raytracing PUBLIC
 		glfw
 		glad
         imgui
+		
  )
+
+ target_include_directories(Raytracing PRIVATE
+        "vendor/nlohmann"
+)

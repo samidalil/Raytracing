@@ -6,17 +6,19 @@
 #include <memory>
 
 #include "../image/Image.h"
-
+#include "../helpers/IdGenerator.h"
 class Texture {
 private:
 	void copy(const Texture& t);
+	static IdGenerator idGenerator;
 public:
-	std::chrono::milliseconds id;
+	int id;
 	std::shared_ptr<Image> texture;
 	std::string path;
 
-	Texture();
+	Texture() = delete;
 	Texture(const std::string& path);
+	Texture(const std::string& path, int id);
 	Texture& operator=(const Texture& t);
 
 	friend std::ostream& operator<<(std::ostream& os, const Texture& t);

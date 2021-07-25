@@ -1,4 +1,5 @@
 #include "../../headers/engine/Serializer.h"
+#include "../../vendor/json/single_include/nlohmann/json.hpp"
 
 Serializer::Serializer()
 {
@@ -70,21 +71,31 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 
 Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 {
-	std::cout << "is clean file:" << checkFileFormat(sceneFilePath);
-	return Scene();
-	//base to read a file and prints it in console
+	bool isFormated = checkFileFormat(sceneFilePath);
+	if (!isFormated)
+	{
+		return Scene();
+	}
+
 	std::ifstream file;
 	file.open(sceneFilePath, std::ifstream::in);
-	
-	char c = file.get();
-	while (file.good())
-	{
-		std::cout << c;
-		c = file.get();
-	}
-	file.close();
 
+	nlohmann::json js = nlohmann::json::parse(file);
+	auto scene = std::make_shared<Scene>();
+
+	for (auto& texture : js["textures"])
+	{
+		std::cout << "id: " << texture["id"] << std::endl;
+		scene->add(std::make_shared<Texture>(texture["path"],texture["id"]));
+	}
+
+	auto textures = scene->getTextures();
+	for (auto it = textures.begin(); it != textures.end();
+		++it) {
+		std::cout << "texture: " <<**it << std::endl;
+	}
 	return Scene();
+	
 }
 
 std::string Serializer::cleanFileContent(const std::string& sceneFilePath) const
@@ -100,6 +111,7 @@ std::string Serializer::cleanFileContent(const std::string& sceneFilePath) const
 			res.push_back(c);
 		if (c == ')' || c == ']' || c == '}')
 			res.push_back(c);
+
 		c = file.get();
 	}
 	file.close();
