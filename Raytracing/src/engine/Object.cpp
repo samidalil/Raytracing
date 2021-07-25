@@ -23,7 +23,7 @@ void Object::display(std::ostream& os) const
 {
 	Entity::display(os);
 	os << ","; // add coma after entity implementation
-	os << "\"material\": " << _material->texture->id;
+	os << "\"material\": " << _material->id;
 	//todo add material id 
 }
 

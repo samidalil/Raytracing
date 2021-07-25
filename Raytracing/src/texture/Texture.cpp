@@ -3,11 +3,12 @@
 
 IdGenerator Texture::idGenerator;
 
-Texture::Texture(const std::string& texturePath) : 
-	id(idGenerator.getId()), 
-	path(texturePath), 
-	texture(std::make_shared<Image>(path))
-{}
+Texture::Texture(const std::string& texturePath) :
+	id(idGenerator.getId()),
+	path(texturePath)
+{
+	this->texture = std::make_shared<Image>(path);
+}
 
 
 Texture::Texture(const std::string& path, int id):path(path), id(id){}
@@ -15,8 +16,8 @@ Texture::Texture(const std::string& path, int id):path(path), id(id){}
 
 void Texture::copy(const Texture& t)
 {
+	this->id = Texture::idGenerator.getId();
 	this->path = t.path;
-	this->id = t.id;
 	this->texture = t.texture;
 }
 

@@ -55,7 +55,7 @@ DataContext data;
 
 void renderCallback(DataContext data)
 {
-	auto texture = std::make_shared<Texture>("E:\\dev\\Raytracing\\resources\\sample.jpg");
+	auto texture = std::make_shared<Texture>("D:\\Raytracing\\resources\\sample.jpg");
 	// prepare to render 
 	auto material1 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.2, 1);
 	auto material2 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.5, 1);
@@ -72,7 +72,7 @@ void renderCallback(DataContext data)
 	/*auto cone = std::make_shared<Cone>(Vector(0, 0, 0 - 11), Vector(), .1f, material2);
 	auto cy1 = std::make_shared<Cylinder>(Vector(0, 0, 0 - 11), Vector(0., 0.5, 1), 0.5, material2);*/
 	auto t1 = std::make_shared<Triangle>(Vector(-1, 0, -20), Vector(90, 0, 0), 1.7, material1);
-//	auto l1 = std::make_shared<PointLight>(Vector(0.2f, 0, -9), Vector(0, 0, 0), Color(1, 0, 0), Color::white * 0.4f, 1.f);
+	auto l1 = std::make_shared<PointLight>(Vector(0.2f, 0, -9), Vector(0, 0, 0), Color(1, 0, 0), Color::white * 0.4f, 1.f);
 	auto l2 = std::make_shared<AmbientLight>(Vector(10, 0, -11), Vector(0, 0, 0), Color::white, Color::white * 0.8f, 1.f);
 	auto scene = std::make_shared<Scene>(Color::blue * 0.1 + Color::red * 0.15, Color::white * 0.4);
 	auto camera = std::make_shared<Camera>(10);
@@ -87,8 +87,8 @@ void renderCallback(DataContext data)
 	scene->add(rightWall);
 	scene->add(l1);
 	
-	std::string pathWrite = "E:\\dev\\Raytracing\\SerializedData.json";
-	std::string pathRead = "E:\\dev\\Raytracing\\SerializedData.json";
+	std::string pathWrite = "D:\\Raytracing\\SerializedData.json";
+	std::string pathRead = "D:\\Raytracing\\SerializedData.json";
 	Serializer serializer(pathWrite, pathRead);
 	serializer.serializeScene(scene);
 	serializer.deserializeScene(pathWrite);

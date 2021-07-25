@@ -47,7 +47,7 @@ std::ostream& operator<<(std::ostream& os, const Material& m)
 	os << "\"kd\": " << m.kd << ",";
 	os << "\"ks\": " << m.ks << ",";
 	os << "\"shininess\": " << m.shininess;
-	if (m.texture->path != "")
+	if (m.texture)
 	{
 		os << ",";
 		os << "\"texture\": " << m.texture->id;
