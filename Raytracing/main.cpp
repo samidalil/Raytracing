@@ -83,8 +83,8 @@ void ImGUICallback()
 	static const Illumination items[] = { Illumination::PHONG, Illumination::LAMBERT };
 	static char filename[128] = "renderedImage.jpg";
 	static char filepath[128] = "D:\\Raytracing";
-	static char sceneName[128] = "scene1.json";
-	static char scenePath[128] = "D:\\Dev\\GPUdev\\ESGI\\Raytracing\\outputs";
+	static char sceneName[128] = "SerializedData.json";
+	static char scenePath[128] = "D:\\Raytracing";
 
 	ImGui::PushItemWidth(150.0f);
 
@@ -137,8 +137,8 @@ void ImGUICallback()
 	ImGui::InputTextWithHint("Enter scene name", "scene name", sceneName, IM_ARRAYSIZE(sceneName));
 	ImGui::InputTextWithHint("Enter scene path", "scene path", scenePath, IM_ARRAYSIZE(scenePath));
 
-	if (ImGui::Button("-- LOAD SCENE --")) loadSceneCallBack(sceneName, scenePath);
-	if (ImGui::Button("-- SAVE SCENE --")) saveSceneCallBack(sceneName, scenePath);
+	if (ImGui::Button("-- LOAD SCENE --")) loadSceneCallBack(scenePath, sceneName);
+	if (ImGui::Button("-- SAVE SCENE --")) saveSceneCallBack(sceneName, sceneName);
 
 	if (ImGui::Button("-- RENDER --")) renderCallback(data);
 	

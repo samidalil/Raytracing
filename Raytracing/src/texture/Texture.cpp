@@ -7,13 +7,13 @@ Texture::Texture(const std::string& texturePath) :
 	id(idGenerator.getId()),
 	path(texturePath)
 {
-	this->texture = std::make_shared<Image>(path);
+	this->image = std::make_shared<Image>(path);
 }
 
 
 Texture::Texture(const std::string& path, int id):path(path), id(id)
 {
-	this->texture = std::make_shared<Image>(path);
+	this->image = std::make_shared<Image>(path);
 }
 
 
@@ -21,7 +21,7 @@ void Texture::copy(const Texture& t)
 {
 	this->id = Texture::idGenerator.getId();
 	this->path = t.path;
-	this->texture = t.texture;
+	this->image = t.image;
 }
 
 Texture& Texture::operator=(const Texture& t)

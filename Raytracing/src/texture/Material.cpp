@@ -38,8 +38,8 @@ void Material::copy(const Material& m) {
 }
 
 Material Material::getColor(float x, float y) const {
-	if (!this->texture->texture) return (*this);
-	const Color pixel = this->texture->texture->getColor(x, y);
+	if (!this->texture) return (*this);
+	const Color pixel = this->texture->image->getColor(x, y);
 
 	return Material(
 		this->ka * pixel,

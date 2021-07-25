@@ -125,14 +125,17 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 			float(material["shininess"])
 			);
 
-		auto textureId = material["texture"];
-		auto texture = std::find_if(textures.begin(), textures.end(),
-			[textureId](const std::shared_ptr<Texture>& t) {
-				return t->id == textureId;
-			});
+		if (material.find("texture") != material.end()) {
+			auto textureId = int(material["texture"]);
+			auto texture = std::find_if(textures.begin(), textures.end(),
+				[textureId](const std::shared_ptr<Texture>& t) {
+					return t->id == textureId;
+				});
 
-		if (texture != textures.end())
-			mat->texture = *texture;
+
+			if (texture != textures.end())
+				mat->texture = *texture;
+		}
 
 		scene->add(mat);
 	}
@@ -144,29 +147,31 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 		const std::string typeStr = object["type"];
 		const char* type = typeStr.c_str();
 
-		if (std::strcmp(type, "Cube"))
+		if (std::strcmp(type, "Cube") == 0)
 			o = std::make_shared<Cube>(Matrix(object["transform"]));
-		else if (std::strcmp(type, "Sphere"))
+		else if (std::strcmp(type, "Sphere") == 0)
 			o = std::make_shared<Sphere>(Matrix(object["transform"]));
-		else if (std::strcmp(type, "Cone"))
+		else if (std::strcmp(type, "Cone") == 0)
 			o = std::make_shared<Cone>(Matrix(object["transform"]));
-		else if (std::strcmp(type, "Cylinder"))
+		else if (std::strcmp(type, "Cylinder") == 0)
 			o = std::make_shared<Cylinder>(Matrix(object["transform"]));
-		else if (std::strcmp(type, "Plane"))
+		else if (std::strcmp(type, "Plane") == 0)
 			o = std::make_shared<Plane>(Matrix(object["transform"]));
-		else if (std::strcmp(type, "Square"))
+		else if (std::strcmp(type, "Square") == 0)
 			o = std::make_shared<Square>(Matrix(object["transform"]));
-		else if (std::strcmp(type, "Triangle"))
+		else if (std::strcmp(type, "Triangle") == 0)
 			o = std::make_shared<Triangle>(Matrix(object["transform"]));
 
-		auto materialId = object["material"];
-		auto material = std::find_if(materials.begin(), materials.end(),
-			[materialId](const std::shared_ptr<Material>& m) {
-				return m->id == materialId;
-			});
+		if (object.find("material") != object.end()) {
+			auto materialId = int(object["material"]);
+			auto material = std::find_if(materials.begin(), materials.end(),
+				[materialId](const std::shared_ptr<Material>& m) {
+					return m->id == materialId;
+				});
 
-		if (material != materials.end())
-			o->setMaterial(*material);
+			if (material != materials.end())
+				o->setMaterial(*material);
+		}
 
 		scene->add(o);
 	}

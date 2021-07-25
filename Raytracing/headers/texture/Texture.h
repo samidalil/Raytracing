@@ -13,7 +13,7 @@ private:
 	static IdGenerator idGenerator;
 public:
 	int id;
-	std::shared_ptr<Image> texture;
+	std::shared_ptr<Image> image;
 	std::string path;
 
 	Texture() = delete;

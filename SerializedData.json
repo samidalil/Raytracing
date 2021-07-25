@@ -1,7 +1,7 @@
 {
   "textures": [
     {
-      "path": "E:\\dev\\Raytracing\\resources\\sample.jpg",
+      "path": "D:\\Raytracing\\resources\\sample.jpg",
       "id": 1
     }
   ],
@@ -26,22 +26,7 @@
     {
       "type": "Sphere",
       "transform": [ 0.4, 0, 0, 0.5, 0, 0.4, 0, 0, 0, 0, 0.4, -11, 0, 0, 0, 1 ],
-      "material": 1
-    },
-    {
-      "type": "Plane",
-      "transform": [ 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, -50, 0, 0, 0, 1 ],
-      "material": 3
-    },
-    {
-      "type": "Square",
-      "transform": [ 0.520945, 0, 2.95442, -2.1, 0, 3, 0, 0, -2.95442, 0, 0.520945, -10, 0, 0, 0, 1 ],
-      "material": 4
-    },
-    {
-      "type": "Square",
-      "transform": [ 0.520945, 0, -2.95442, 2.1, 0, 3, 0, 0, 2.95442, 0, 0.520945, -10, 0, 0, 0, 1 ],
-      "material": 4
+      "material": 2
     }
   ],
   "lights": [
