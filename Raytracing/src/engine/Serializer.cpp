@@ -9,7 +9,6 @@
 #include "../../headers/primitives/Plane.h"
 #include "../../headers/lights/AmbientLight.h"
 #include "../../headers/lights/PointLight.h"
-#include "../../headers/lights/DirectionalLight.h"
 
 Serializer::Serializer()
 {
@@ -186,11 +185,9 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 		const char* type = typeStr.c_str();
 
 		if (std::strcmp(type, "AmbientLight") == 0)
-			l = std::make_shared<AmbientLight>(Color(light["id"]), Color(light["id"]), float(light["intensity"]));
+			l = std::make_shared<AmbientLight>(Matrix(light["transform"]), Color(light["id"]), Color(light["is"]), float(light["intensity"]));
 		else if (std::strcmp(type, "PointLight") == 0)
-			l = std::make_shared<PointLight>(Color(light["id"]), Color(light["id"]), float(light["intensity"]));
-		else if (std::strcmp(type, "DirectionalLight") == 0)
-			l = std::make_shared<DirectionalLight>(Color(light["id"]), Color(light["id"]));
+			l = std::make_shared<PointLight>(Matrix(light["transform"]), Color(light["id"]), Color(light["is"]), float(light["intensity"]));
 
 		scene->add(l);
 	}

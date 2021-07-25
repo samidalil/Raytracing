@@ -8,22 +8,20 @@ std::string PointLight::type() const
 
 PointLight::PointLight() : Light() {}
 
-PointLight::PointLight(const Matrix& m, const Color& diffuse, const Color& specular, const float intensity)
-{
+PointLight::PointLight(const Color& diffuse, const Color& specular, const float intensity) : Light(diffuse, specular, intensity) {}
 
-}
-
-PointLight::PointLight(const Color& diffuse, const Color& specular, float intensity) : Light(diffuse, specular, intensity) {}
-
-PointLight::PointLight(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular, float intensity) :
+PointLight::PointLight(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular, const float intensity) :
 	Light(position, rotation, diffuse, specular, intensity)
+{}
+
+PointLight::PointLight(const Matrix & m, const Color & d, const Color & s, const float i) : Light(m, d, s, i)
 {}
 
 Color PointLight::getIlluminationLambert(const Point& impact, const Vector& normal, const Ray& ray, const Material& mat) const {
 
 	Vector dir = this->localToGlobal(Point()) - impact;
 	float distToHit = dir.norm();
-	dir.normalized(); // /!\ normalize before calculate dot product
+	dir = dir.normalized(); // /!\ normalize before calculate dot product
 	dir /= sqrtf(distToHit);
 	float angle = Vector::dot(normal, dir);
 	Color c = (angle < 0 ? Color::black : mat.kd * this->id * angle);

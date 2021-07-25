@@ -13,6 +13,9 @@ AmbientLight::AmbientLight(const Vector& position, const Vector& rotation, const
 	Light(position, rotation, diffuse, specular, intensity)
 {}
 
+AmbientLight::AmbientLight(const Matrix& m, const Color& d, const Color& s, const float i) : Light(m, d, s, i)
+{}
+
 Color AmbientLight::getIlluminationLambert(const Point& impact, const Vector& normal, const Ray& ray, const Material& mat) const {
 	float angle = Vector::dot(normal, this->getVectorToLight(impact));
 

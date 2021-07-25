@@ -21,7 +21,7 @@ public:
 	Light();
 	Light(const Color& diffuse, const Color& specular, float intensity);
 	Light(const Vector& position, const Vector& rotation, const Color& diffuse, const Color& specular, float intensity);
-	Light(const Matrix& m, const Color& d, const Color& s, float i);
+	Light(const Matrix& m, const Color& d, const Color& s, const float i);
 	Light(const Light& l);
 	Light& operator=(const Light& l);
 	

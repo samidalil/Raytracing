@@ -11,7 +11,7 @@ Light::Light(const Vector& position, const Vector& rotation, const Color& diffus
 	intensity(_intensity)
 {}
 
-Light::Light(const Matrix & m, const Color & d, const Color & s, float i) : Entity(m), id(d), is(s), intensity(i)
+Light::Light(const Matrix & m, const Color & d, const Color & s, const float i) : Entity(m), id(d), is(s), intensity(i)
 {}
 
 Light::Light(const Light& l) {
