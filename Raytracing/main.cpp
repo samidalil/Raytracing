@@ -87,20 +87,20 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	scene->add(s2);
 	scene->add(plane);
 	scene->add(leftWall);
-	scene->add(rightWall);*/
+	scene->add(rightWall);
 	scene->add(l1);
-	std::string pathWrite = "E:\\dev\\Raytracing\\SerializedData.txt";
-	std::string pathRead = "E:\\dev\\Raytracing\\sampleScene.txt";
-	Serializer serializer(pathWrite, pathRead);
+	
 	scene->add(l2);
 	scene->add(ground);
 
 
-	auto serializer = Serializer();
+	std::string pathWrite = "D:\\Dev\\GPUdev\\ESGI\\Raytracing\\SerializedData.txt";
+	std::string pathRead = "D:\\Dev\\GPUdev\\ESGI\\Raytracing\\sampleScene.txt";
+	Serializer serializer(pathWrite, pathRead);
 	serializer.serializeScene(scene);
 	serializer.deserializeScene(pathWrite);
-	std::cout << "format file is: " << serializer.checkFileFormat("E:\\dev\\Raytracing\\test1.txt") << std::endl;
-	std::cout << "format file is: " << serializer.checkFileFormat("E:\\dev\\Raytracing\\test2.txt") << std::endl;
+	std::cout << "format file is: " << serializer.checkFileFormat("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\test1.txt") << std::endl;
+	std::cout << "format file is: " << serializer.checkFileFormat("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\test2.txt") << std::endl;
 	std::cout << "format file is: " << serializer.checkFileFormat(pathWrite) << std::endl;
 	DataContext data;
 

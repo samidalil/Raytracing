@@ -1,5 +1,6 @@
 ﻿#define EPS 0.001f
 #include "../../headers/primitives/Cone.h"
+#include "../../headers/math/Constants.h"
 
 std::string Cone::type() const
 {
@@ -66,15 +67,21 @@ bool Cone::intersect(const Ray& ray, Point& impact) const
 
 Ray Cone::getNormal(const Point& impact, const Point& observator) const
 {
-	Vector Va = Vector(0, 1, 0).normalized();
-	Point p = globalToLocal(impact);
-	Vector n = p * Vector::dot(Va, p) / Vector::dot(p, p) - Va;
-	n.normalized();
-	return Ray(observator, this->localToGlobal(n));
+	Point imp = globalToLocal(impact);
+	Point obs = globalToLocal(observator);
+
+	float distance = sqrt(pow(obs[0], 2) + pow(obs[2], 2));
+
+	Vector dir(imp[0], 0, imp[2]);
+
+	if (distance < 1) dir = -1 * dir;
+
+	Ray res(impact, localToGlobal(dir));
+	return res;
 }
 
 Point Cone::getTextureCoordinates(const Point& p) const
 {
-	Point lp = globalToLocal(p);
-	return Point(lp[0] / 2 + 0.5, lp[1] / 2 + 0.5, 0.0);
+	Point coord = globalToLocal(p);
+	return Point(1 - (atan2(coord[0], coord[2]) / (2 * PI) + 0.5), std::fmod(coord[1], 1), 0);
 }
