@@ -3,13 +3,11 @@
 
 Texture::Texture(const std::string& texturePath):path(texturePath)
 {
-	_sleep(1);
 	id = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
 	//texture = std::make_shared<Image>(texture);
 }
 
 Texture::Texture(){
-	_sleep(1);
 	id = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
 }
 

@@ -75,15 +75,17 @@ Scene Serializer::deserializeScene(const std::string& sceneFilePath) const
 	return Scene();
 }
 
-
-
 bool Serializer::checkFileFormat(const std::string& sceneFilePath) const
 {
 	std::ifstream file;
 	file.open(sceneFilePath, std::ifstream::in);
 	char c = file.get();
 	std::stack<char> FILO;
-
+	if (!file.good()) 
+	{
+		file.close();
+		return false;
+	}
 	while (file.good())
 	{
 		switch (c) {

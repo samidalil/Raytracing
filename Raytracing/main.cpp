@@ -22,7 +22,6 @@
 //------------------------------------------------------------------------\\
 
 #include <iostream>
-#include <memory>
 #include <algorithm>
 
 #include "headers/image/Image.h"
@@ -60,6 +59,7 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	auto texture = std::make_shared<Texture>("E:\\dev\\Raytracing\\resources\\sample.jpg");
 	// prepare to render 
 	auto material1 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.2, 1);
+	_sleep(0.000001);
 	auto material2 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.5, 1);
 	material2->texture = *texture;
 	auto blue = std::make_shared<Material>(Color(0, 0, 1), Color(0, 0, 1), Color(0, 0, 1), 1);
@@ -118,6 +118,7 @@ void renderCallback(float w, float h, int ssaSub, bool shadowActivated, Illumina
 	// rendering
 	Image image = data.renderer.render();
 	image.save(data.savePath + "\\" + data.filename);
+	std::cout << "finished rendering" << std::endl;
 }
 
 
