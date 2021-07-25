@@ -1,8 +1,8 @@
-# Install script for directory: E:/dev/Raytracing/Raytracing
+# Install script for directory: D:/Raytracing/Raytracing
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "E:/dev/Raytracing/out/install/x64-Debug (default)")
+  set(CMAKE_INSTALL_PREFIX "D:/Raytracing/out/install/x64-Debug (default)")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("E:/dev/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/cmake_install.cmake")
+  include("D:/Raytracing/out/build/x64-Debug (default)/Raytracing/vendor/cmake_install.cmake")
 
 endif()
 
