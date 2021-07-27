@@ -10,7 +10,7 @@
 class Camera : public Entity {
 private:
 	float _focal;
-	Skybox* _skybox;
+	std::shared_ptr<Sphere> _skybox;
 	void copy(const Camera& c);
 protected:
 	std::string type() const override;
@@ -23,7 +23,8 @@ public:
 	Camera& operator=(const Camera& c);
 
 	Ray getRay(float x, float y) const;
-	void setSkybox(std::shared_ptr<Material> material);
+	void setSkybox(const std::shared_ptr<Material>& material);
+	Color getSkyboxColor(const Ray& ray);
 };
 
 #endif

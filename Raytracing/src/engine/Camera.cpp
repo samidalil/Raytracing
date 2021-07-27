@@ -1,7 +1,10 @@
 #include "../../headers/engine/Camera.h"
 #include "../../headers/math/Point.h"
 
-Camera::Camera() : Entity(), _focal(3), _skybox(NULL) {}
+Camera::Camera() : Entity(), _focal(3) 
+{
+	this->_skybox = std::make_shared<Sphere>(this->localToGlobal(Point()), Vector(), 1., nullptr );
+}
 
 Camera::Camera(float focal) : Entity(), _focal(focal), _skybox(NULL) {}
 
@@ -34,7 +37,14 @@ Ray Camera::getRay(float x, float y) const {
 	return this->localToGlobal(Ray(screenPos, screenPos - Point(0, 0, this->_focal))).normalized();
 }
 
-void Camera::setSkybox(std::shared_ptr<Material> material)
+void Camera::setSkybox(const std::shared_ptr<Material>& material)
 {
-	this->_skybox = &Skybox(localToGlobal(Point()), 10.f, material);
+	this->_skybox->setMaterial(material);
+}
+
+Color Camera::getSkyboxColor(const Ray& ray)
+{
+	Point impact;
+	this->_skybox->intersect(ray, impact);
+	return 	this->_skybox->getMaterial(impact).kd;
 }

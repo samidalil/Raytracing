@@ -12,7 +12,6 @@ Renderer& Renderer::setProperties(const RendererProperties& properties) {
 Image Renderer::render() const {
 	Image image(this->_properties.width, this->_properties.height, 3);
 	const Color background = this->_properties.scene->getBackground();
-
 	const float floatedWidth = float(this->_properties.width);
 	const float floatedHeight = float(this->_properties.height);
 
@@ -41,7 +40,7 @@ Image Renderer::render() const {
 					);
 
 					closest = this->_properties.scene->closestIntersected(cameraRay, impact);
-					color = closest ? getImpactColor(cameraRay, closest, impact) : background;
+					color = closest ? getImpactColor(cameraRay, closest, impact) : this->_properties.camera->getSkyboxColor(cameraRay);
 
 					r += color[0];
 					g += color[1];
