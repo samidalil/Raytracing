@@ -11,7 +11,7 @@ Renderer& Renderer::setProperties(const RendererProperties& properties) {
 
 Image Renderer::render() const {
 	Image image(this->_properties.width, this->_properties.height, 3);
-	const Color background = this->_properties.scene->getBackground();
+//	const Color background = this->_properties.scene->getBackground();
 	const float floatedWidth = float(this->_properties.width);
 	const float floatedHeight = float(this->_properties.height);
 

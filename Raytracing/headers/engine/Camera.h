@@ -4,8 +4,8 @@
 #include "Entity.h"
 #include "Ray.h"
 #include "../math/Vector.h"
-#include "../engine/Skybox.h"
 #include "../texture/Material.h"
+#include "../../headers/primitives/Sphere.h"
 
 class Camera : public Entity {
 private:

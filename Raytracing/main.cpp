@@ -54,8 +54,9 @@ struct DataContext {
 DataContext data;
 
 void renderCallback(DataContext data)
-{	
+{		
 	data.rendererProperties.camera = std::make_shared<Camera>(10);
+	data.rendererProperties.camera->setSkybox(data.rendererProperties.scene->skyboxMaterial);
 	data.renderer.setProperties(data.rendererProperties);
 
 	data.renderer.render().save(data.savePath);
@@ -65,7 +66,44 @@ void renderCallback(DataContext data)
 void loadSceneCallBack(const std::string& path, const std::string& name) {
 	Serializer serializer;
 
-	data.rendererProperties.scene = serializer.deserializeScene(path + "\\" + name);
+
+	auto mat = std::make_shared<Material>(Color::white, Color::white, Color::white, 0.5);
+	mat->texture = std::make_shared<Texture>("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\skybox.jpg");
+
+
+	//prepare to render 
+	auto material1 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.2, 1);
+	auto material2 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.5, 1);
+	material2->texture = std::make_shared<Texture>("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\sample.jpg");
+	auto pos = Vector(-2, 2.4, -35);
+	auto pos2 = Vector(1, 3.5, -25);
+	auto s1 = std::make_shared<Cube>(pos, Vector(0.2, 0.7, 0), 1.7, material2);
+	auto ground = std::make_shared<Square>(Vector(0, 0, -20), Vector(90, 0, 0), 1.7, material1);
+	auto s2 = std::make_shared<Sphere>(pos2, Vector(), 1, material1);
+	auto cy1 = std::make_shared<Cylinder>(Vector(0, -2, -25), Vector(0., 0.5, 1), 0.5, material2);
+	auto t1 = std::make_shared<Triangle>(Vector(2.5, 0, -30), Vector(0, 0, 0), 1.7, material1);
+	auto l1 = std::make_shared<PointLight>(Vector(0, 0.5, -20), Vector(0, 0, 0), Color(1, 0, 0), Color::white, 1.f);
+	//auto l2 = std::make_shared<AmbientLight>(Vector(-15, 0, 50), Vector(0, 0, 0), Color::white, Color::white * 0.2, .2f);
+	auto scene = std::make_shared<Scene>(Color::blue * 0.1 + Color::red * 0.15, Color::white * 0.4);
+	auto camera = std::make_shared<Camera>(10);
+
+
+	scene->add(mat);
+	scene->add(material1);
+	scene->add(material2);
+	scene->add(material2->texture);
+	scene->add(mat->texture);
+	scene->add(s1);
+	scene->add(s2);
+	scene->add(cy1);
+	scene->add(t1);
+	scene->add(ground);
+	scene->add(l1);
+	scene->skyboxMaterial = mat;
+
+	data.rendererProperties.scene = scene;
+
+	//data.rendererProperties.scene = serializer.deserializeScene(path + "\\" + name);
 }
 
 void saveSceneCallBack(const std::string& path, const std::string& name) {
