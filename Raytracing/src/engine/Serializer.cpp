@@ -88,7 +88,7 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 		}
 	}
 	file << "],";
-	file << "\"skyboxMaterial\": { " << *scene->skyboxMaterial << " },";
+	file << "\"skyboxMaterial\": " << scene->skyboxMaterial->id << ",";
 	file << "\"backgroundColor\": " << scene->getBackground() << ",";
 	file << "\"ambientColor\": " << scene->getAmbient();
 	file << "}";
@@ -193,30 +193,14 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 		scene->add(l);
 	}
 
-	auto& skyboxMaterial = js["skyboxMaterial"];
+	auto& skyboxMaterialId = js["skyboxMaterial"];
 
-	auto mat = std::make_shared<Material>(
-		int(skyboxMaterial["id"]),
-		Color(skyboxMaterial["ka"]),
-		Color(skyboxMaterial["kd"]),
-		Color(skyboxMaterial["ks"]),
-		float(skyboxMaterial["shininess"])
-		);
+	auto mat = std::find_if(materials.begin(), materials.end(),
+		[skyboxMaterialId](const std::shared_ptr<Material>& m) {
+			return m->id == skyboxMaterialId;
+		});
 
-	if (skyboxMaterial.find("texture") != skyboxMaterial.end()) {
-		auto textureId = int(skyboxMaterial["texture"]);
-		auto texture = std::find_if(textures.begin(), textures.end(),
-			[textureId](const std::shared_ptr<Texture>& t) {
-				return t->id == textureId;
-			});
-
-
-		if (texture != textures.end())
-			mat->texture = *texture;
-
-		scene->add(mat);
-
-	}
+	scene->add(*mat);
 
 	return scene;
 

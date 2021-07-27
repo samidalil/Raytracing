@@ -70,14 +70,7 @@
             "is": [ 1, 1, 1 ]
         }
     ],
-    "skyboxMaterial": {
-        "ka": [ 1, 1, 1 ],
-        "kd": [ 1, 1, 1 ],
-        "ks": [ 1, 1, 1 ],
-        "shininess": 0.5,
-        "id": 1,
-        "texture": 1
-    },
+    "skyboxMaterial": 1,
     "backgroundColor": [ 0.15, 0, 0.1 ],
     "ambientColor": [ 0.4, 0.4, 0.4 ]
 }
