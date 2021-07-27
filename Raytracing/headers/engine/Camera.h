@@ -19,8 +19,6 @@ public:
 	Camera(float focal);
 	Camera(Vector position, Vector rotation);
 	Camera(float focal, Vector position, Vector rotation);
-	Camera(const Camera& c);
-	Camera& operator=(const Camera& c);
 
 	Ray getRay(float x, float y) const;
 	void setSkybox(const std::shared_ptr<Material>& material);

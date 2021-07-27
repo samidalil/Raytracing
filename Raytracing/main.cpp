@@ -68,13 +68,13 @@ void loadSceneCallBack(const std::string& path, const std::string& name) {
 
 
 	auto mat = std::make_shared<Material>(Color::white, Color::white, Color::white, 0.5);
-	mat->texture = std::make_shared<Texture>("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\skybox.jpg");
+	mat->texture = std::make_shared<Texture>("D:\\Raytracing\\resources\\skybox.jpg");
 
 
 	//prepare to render 
 	auto material1 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.2, 1);
 	auto material2 = std::make_shared<Material>(Color::white, Color::white, Color::white * 0.5, 1);
-	material2->texture = std::make_shared<Texture>("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\sample.jpg");
+	material2->texture = std::make_shared<Texture>("D:\\Raytracing\\resources\\sample.jpg");
 	auto pos = Vector(-2, 2.4, -35);
 	auto pos2 = Vector(1, 3.5, -25);
 	auto s1 = std::make_shared<Cube>(pos, Vector(0.2, 0.7, 0), 1.7, material2);
