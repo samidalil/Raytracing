@@ -23,9 +23,9 @@ Image::Image(const std::string& fileName) : _loaded(true)
 	if ((_data = stbi_load(fileName.c_str(), &_width, &_height, &_channels, 0)) == NULL)
 		std::cout << stbi_failure_reason() << std::endl;
 	_size = _width * _height * _channels;
-	if(_loaded) this->sRGB2Linear();
+	if (_loaded) this->sRGB2Linear();
 
-	
+
 }
 
 // Constructeur d'image vide ÅEdes dimensions et nombre de canaux donnÈs
@@ -103,33 +103,33 @@ Color Image::getColor(float u, float v) const
 	);
 }
 
-void Image::linear2sRGB()
-{
-	/*for (int j = 0; j < this->_height; j++)
-	{
-		for (int i = 0; i < this->_width; i++)
-		{
-			int index = (i + (j * this->_width)) * this->_channels;
-
-			this->_data[index] = (uint8_t)(255.999f * pow(this->_data[index] / 255.999f, GAMMA));
-			this->_data[index + 1] = (uint8_t)(255.999f * pow(this->_data[index + 1] / 255.999f, GAMMA));
-			this->_data[index + 2] = (uint8_t)(255.999f * pow(this->_data[index + 2] / 255.999f, GAMMA));
-		}
-	}*/
-}
-
 void Image::sRGB2Linear()
 {
-	/*for (int j = 0; j < this->_height; j++)
+	for (int j = 0; j < this->_height; j++)
 	{
 		for (int i = 0; i < this->_width; i++)
 		{
 			int index = (i + (j * this->_width)) * this->_channels;
-			this->_data[index] = (uint8_t)(pow(this->_data[index], 1.f / GAMMA));
-			this->_data[index + 1] = (uint8_t)(pow(this->_data[index + 1], 1.f / GAMMA));
-			this->_data[index + 2] = (uint8_t)(pow(this->_data[index + 2], 1.f / GAMMA));
+
+			this->_data[index] = (uint8_t)(255.999f * pow(this->_data[index] / 255.999f, 1.0f / 2.2f));
+			this->_data[index + 1] = (uint8_t)(255.999f * pow(this->_data[index + 1] / 255.999f, 1.0f / 2.2f));
+			this->_data[index + 2] = (uint8_t)(255.999f * pow(this->_data[index + 2] / 255.999f, 1.0f / 2.2f));
 		}
-	}*/
+	}
+}
+
+void Image::linear2sRGB()
+{
+	for (int j = 0; j < this->_height; j++)
+	{
+		for (int i = 0; i < this->_width; i++)
+		{
+			int index = (i + (j * this->_width)) * this->_channels;
+			this->_data[index] = (uint8_t)(pow(this->_data[index] / 255.999f, 2.2f) * 255.999f);
+			this->_data[index + 1] = (uint8_t)(pow(this->_data[index + 1] / 255.999f, 2.2f) * 255.999f);
+			this->_data[index + 2] = (uint8_t)(pow(this->_data[index + 2] / 255.999f, 2.2f) * 255.999f);
+		}
+	}
 }
 
 uint8_t Image::operator()(int x, int y, int c) const
