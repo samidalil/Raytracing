@@ -55,7 +55,7 @@ DataContext data;
 
 void renderCallback(DataContext data)
 {		
-	data.rendererProperties.camera = std::make_shared<Camera>(10,Vector(0,0,0),Vector(0,90,0));
+	data.rendererProperties.camera = std::make_shared<Camera>(10);
 	data.rendererProperties.camera->setSkybox(data.rendererProperties.scene->skyboxMaterial);
 	data.renderer.setProperties(data.rendererProperties);
 
