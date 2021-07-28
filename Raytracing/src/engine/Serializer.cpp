@@ -109,6 +109,7 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 	nlohmann::json js = nlohmann::json::parse(file);
 	auto scene = std::make_shared<Scene>(js["backgroundColor"], js["ambientColor"]);
 
+
 	for (auto& texture : js["textures"])
 	{
 		scene->add(std::make_shared<Texture>(
@@ -116,6 +117,7 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 			int(texture["id"])
 			));
 	}
+
 
 	auto textures = scene->getTextures();
 	for (auto& material : js["materials"])
@@ -201,6 +203,7 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 		});
 
 	scene->add(*mat);
+	scene->skyboxMaterial = *mat;
 
 	return scene;
 

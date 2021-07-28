@@ -83,5 +83,5 @@ Point Triangle::getTextureCoordinates(const Point& p) const
 
 std::string Triangle::type() const
 {
-	return "Triangle";
+	return "\"Triangle\"";
 }
