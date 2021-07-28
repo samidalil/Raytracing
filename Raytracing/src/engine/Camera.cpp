@@ -3,22 +3,22 @@
 
 Camera::Camera() : Entity(), _focal(3)
 {
-	this->_skybox = std::make_shared<Sphere>(this->localToGlobal(Point(0, 0, this->_focal)), Vector(), abs(this->_focal) * 20.0f, nullptr);
+	this->_skybox = std::make_shared<Sphere>(this->localToGlobal(Point(0, 0, 0)), Vector(-90, 0, 0),2.f , nullptr);
 }
 
 Camera::Camera(float focal) : Entity(), _focal(focal)
 {
-	this->_skybox = std::make_shared<Sphere>(this->localToGlobal(Point(0, 0, this->_focal)), Vector(), abs(this->_focal) * 20.0f, nullptr);
+	this->_skybox = std::make_shared<Sphere>(this->localToGlobal(Point(0, 0,0)), Vector(-90, 0, 0), 2.f, nullptr);
 }
 
 Camera::Camera(Vector position, Vector rotation) : Entity(position, rotation, 1), _focal(3)
 {
-	this->_skybox = std::make_shared<Sphere>(this->localToGlobal(Point(0, 0, this->_focal)), Vector(), abs(this->_focal) * 20.0f, nullptr);
+	this->_skybox = std::make_shared<Sphere>(this->localToGlobal(Point(0, 0, 0)), Vector(-90, 0, 0), 2.f, nullptr);
 }
 
 Camera::Camera(float focal, Vector position, Vector rotation) : Entity(position, rotation, 1), _focal(focal)
 {
-	this->_skybox = std::make_shared<Sphere>(this->localToGlobal(Point(0, 0, this->_focal)), Vector(), abs(this->_focal) * 20.0f, nullptr);
+	this->_skybox = std::make_shared<Sphere>(this->localToGlobal(Point(0, 0, 0)), Vector(-90, 0, 0), 2.f, nullptr);
 }
 
 std::string Camera::type() const

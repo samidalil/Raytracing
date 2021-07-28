@@ -55,7 +55,7 @@ DataContext data;
 
 void renderCallback(DataContext data)
 {		
-	data.rendererProperties.camera = std::make_shared<Camera>(10);
+	data.rendererProperties.camera = std::make_shared<Camera>(10,Vector(0,0,0),Vector(0,90,0));
 	data.rendererProperties.camera->setSkybox(data.rendererProperties.scene->skyboxMaterial);
 	data.renderer.setProperties(data.rendererProperties);
 
@@ -68,7 +68,7 @@ void loadSceneCallBack(const std::string& path, const std::string& name) {
 
 
 	auto mat = std::make_shared<Material>(Color::white, Color::white, Color::white, 0.5);
-	mat->texture = std::make_shared<Texture>("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\texture1.jpg");
+	mat->texture = std::make_shared<Texture>("D:\\Dev\\GPUdev\\ESGI\\Raytracing\\resources\\skybox.jpg");
 
 
 	//prepare to render 

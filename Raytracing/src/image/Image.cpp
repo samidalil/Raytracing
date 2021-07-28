@@ -89,12 +89,12 @@ Color Image::getColor(float u, float v) const
 {
 	int w = u * (this->_width - 1);
 	int h = v * (this->_height - 1);
-	int index = (h + (w * this->_width)) * this->_channels;
+	int index = (w + (h * this->_width)) * this->_channels;
 
 	return Color(
-		this->_data[index] / 255.f,
-		this->_data[index + 1] / 255.f,
-		this->_data[index + 2] / 255.f
+		this->_data[index] / 256.f,
+		this->_data[index + 1] / 256.f,
+		this->_data[index + 2] / 256.f
 	);
 }
 
