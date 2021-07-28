@@ -23,6 +23,8 @@ Image::Image(const std::string& fileName) : _loaded(true)
 	if ((_data = stbi_load(fileName.c_str(), &_width, &_height, &_channels, 0)) == NULL)
 		std::cout << stbi_failure_reason() << std::endl;
 	_size = _width * _height * _channels;
+
+	this->sRGB2Linear();
 }
 
 // Constructeur d'image vide Edes dimensions et nombre de canaux donnés
@@ -33,6 +35,8 @@ Image::Image(int width, int height, int channels) :
 	_size(_width* _height* _channels)
 {
 	_data = new uint8_t[_size];
+	this->sRGB2Linear();
+
 }
 
 // Constructeur par copie
@@ -105,7 +109,7 @@ void Image::linear2sRGB()
 	{
 		for (int i = 0; i < this->_width; i++)
 		{
-			int index = (j * this->_height + i) * this->_channels;
+			int index = (i + (j * this->_width)) * this->_channels;
 
 			this->_data[index] = (uint8_t)(255.999f * pow(this->_data[index] / 255.999f, GAMMA));
 			this->_data[index + 1] = (uint8_t)(255.999f * pow(this->_data[index + 1] / 255.999f, GAMMA));
@@ -138,5 +142,6 @@ uint8_t& Image::operator()(int x, int y, int c)
 
 bool Image::save(const std::string& fileName)
 {
+	this->linear2sRGB();
 	return stbi_write_jpg(fileName.c_str(), _width, _height, _channels, _data, 100) != 0;
 }
