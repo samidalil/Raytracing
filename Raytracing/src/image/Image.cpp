@@ -23,6 +23,7 @@ Image::Image(const std::string& fileName) : _loaded(true)
 	if ((_data = stbi_load(fileName.c_str(), &_width, &_height, &_channels, 0)) == NULL)
 		std::cout << stbi_failure_reason() << std::endl;
 	_size = _width * _height * _channels;
+	if(_loaded) this->sRGB2Linear();
 
 	
 }
@@ -123,8 +124,11 @@ void Image::sRGB2Linear()
 	{
 		for (int i = 0; i < this->_width; i++)
 		{
-			Color c = this->getColor(i, j);
-			this->setColor(i,j,Color(pow(c[0],1.f/GAMMA),pow(c[1], 1.f / GAMMA),pow(c[2], 1.f / GAMMA)));
+			int index = (i + (j * this->_width)) * this->_channels;
+=
+			this->_data[index] = (uint8_t)(pow(this->_data[index], 1.f / GAMMA));
+			this->_data[index + 1] = (uint8_t)(pow(this->_data[index + 1], 1.f / GAMMA));
+			this->_data[index + 2] = (uint8_t)(pow(this->_data[index + 2], 1.f / GAMMA));
 		}
 	}
 }
