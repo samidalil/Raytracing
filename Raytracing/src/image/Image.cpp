@@ -96,15 +96,15 @@ Color Image::getColor(float u, float v) const
 	int index = (w + (h * this->_width)) * this->_channels;
 
 	return Color(
-		this->_data[index] / 256.f,
-		this->_data[index + 1] / 256.f,
-		this->_data[index + 2] / 256.f
+		this->_data[index] / 255.f,
+		this->_data[index + 1] / 255.f,
+		this->_data[index + 2] / 255.f
 	);
 }
 
 void Image::linear2sRGB()
 {
-	/*for (int j = 0; j < this->_height; j++)
+	for (int j = 0; j < this->_height; j++)
 	{
 		for (int i = 0; i < this->_width; i++)
 		{
@@ -114,7 +114,7 @@ void Image::linear2sRGB()
 			this->_data[index + 1] = (uint8_t)(255.999f * pow(this->_data[index + 1] / 255.999f, GAMMA));
 			this->_data[index + 2] = (uint8_t)(255.999f * pow(this->_data[index + 2] / 255.999f, GAMMA));
 		}
-	}*/
+	}
 }
 
 void Image::sRGB2Linear()
