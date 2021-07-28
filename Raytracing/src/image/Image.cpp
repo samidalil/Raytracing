@@ -4,6 +4,7 @@
 #include "../../headers/image/Image.h"
 #include "../../headers/image/stb_image.h"
 #include "../../headers/image/stb_image_write.h"
+#include "../../headers/math/Constants.h"
 
 #include <iostream>
 
@@ -96,6 +97,33 @@ Color Image::getColor(float u, float v) const
 		this->_data[index + 1] / 256.f,
 		this->_data[index + 2] / 256.f
 	);
+}
+
+void Image::linear2sRGB()
+{
+	for (int j = 0; j < this->_height; j++)
+	{
+		for (int i = 0; i < this->_width; i++)
+		{
+			int index = (j * this->_height + i) * this->_channels;
+
+			this->_data[index] = (uint8_t)(255.999f * pow(this->_data[index] / 255.999f, GAMMA));
+			this->_data[index + 1] = (uint8_t)(255.999f * pow(this->_data[index + 1] / 255.999f, GAMMA));
+			this->_data[index + 2] = (uint8_t)(255.999f * pow(this->_data[index + 2] / 255.999f, GAMMA));
+		}
+	}
+}
+
+void Image::sRGB2Linear()
+{
+	for (int j = 0; j < this->_height; j++)
+	{
+		for (int i = 0; i < this->_width; i++)
+		{
+			Color c = this->getColor(i, j);
+			this->setColor(i,j,Color(pow(c[0],1.f/GAMMA),pow(c[1], 1.f / GAMMA),pow(c[2], 1.f / GAMMA)));
+		}
+	}
 }
 
 uint8_t Image::operator()(int x, int y, int c) const

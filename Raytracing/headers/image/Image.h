@@ -43,6 +43,9 @@ public:
 	Image& setColor(int x, int y, const Color& c);
 	Color getColor(float u, float v) const;
 
+	void linear2sRGB();
+	void sRGB2Linear();
+
 	uint8_t operator()(int x, int y, int c) const;
 	uint8_t& operator()(int x, int y, int c);
 
