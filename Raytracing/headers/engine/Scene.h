@@ -24,6 +24,7 @@ private:
 public:
 	Scene();
 	Scene(const Color& background, const Color& ambient);
+	std::shared_ptr<Material> skyboxMaterial;
 
 	std::list<std::shared_ptr<Object>> getObjects() const;
 	std::list<std::shared_ptr<Light>> getLights() const;

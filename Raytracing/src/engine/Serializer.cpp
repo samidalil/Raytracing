@@ -88,6 +88,7 @@ void Serializer::serializeScene(const std::shared_ptr<Scene>& scene)
 		}
 	}
 	file << "],";
+	file << "\"skyboxMaterial\": " << scene->skyboxMaterial->id << ",";
 	file << "\"backgroundColor\": " << scene->getBackground() << ",";
 	file << "\"ambientColor\": " << scene->getAmbient();
 	file << "}";
@@ -106,7 +107,8 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 	file.open(sceneFilePath, std::ifstream::in);
 
 	nlohmann::json js = nlohmann::json::parse(file);
-	auto scene = std::make_shared<Scene>(js["backgroundColor"],js["ambientColor"]);
+	auto scene = std::make_shared<Scene>(js["backgroundColor"], js["ambientColor"]);
+
 
 	for (auto& texture : js["textures"])
 	{
@@ -115,7 +117,8 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 			int(texture["id"])
 			));
 	}
-	
+
+
 	auto textures = scene->getTextures();
 	for (auto& material : js["materials"])
 	{
@@ -192,9 +195,15 @@ std::shared_ptr<Scene> Serializer::deserializeScene(const std::string& sceneFile
 		scene->add(l);
 	}
 
+	auto& skyboxMaterialId = js["skyboxMaterial"];
 
+	auto mat = std::find_if(materials.begin(), materials.end(),
+		[skyboxMaterialId](const std::shared_ptr<Material>& m) {
+			return m->id == skyboxMaterialId;
+		});
 
-
+	scene->add(*mat);
+	scene->skyboxMaterial = *mat;
 
 	return scene;
 

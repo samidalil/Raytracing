@@ -4,5 +4,6 @@
 constexpr auto PI = 3.14159265359;
 constexpr auto DEG2RAD = PI / 180;
 constexpr auto EPSILON = 0.0000001;
+constexpr auto GAMMA = 1.0/2.2;
 
 #endif
